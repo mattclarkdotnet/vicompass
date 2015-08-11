@@ -45,11 +45,11 @@
 		C9BBB6601B77786B00D57D3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C9BBB6621B77786B00D57D3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C9BBB6671B77786C00D57D3F /* VICompass.temp_caseinsensitive_rename.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VICompass.temp_caseinsensitive_rename.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C9BBB66B1B77786C00D57D3F /* VICompassTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VICompassTests.swift; path = ../VICompassTests/VICompassTests.swift; sourceTree = "<group>"; };
-		C9BBB66D1B77786C00D57D3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../VICompassTests/Info.plist; sourceTree = "<group>"; };
+		C9BBB66B1B77786C00D57D3F /* VICompassTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VICompassTests.swift; path = VICompassTests/VICompassTests.swift; sourceTree = "<group>"; };
+		C9BBB66D1B77786C00D57D3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = VICompassTests/Info.plist; sourceTree = "<group>"; };
 		C9BBB6721B77786C00D57D3F /* VICompass.temp_caseinsensitive_rename.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VICompass.temp_caseinsensitive_rename.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C9BBB6761B77786C00D57D3F /* VICompassUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VICompassUITests.swift; path = ../VICompassUITests/VICompassUITests.swift; sourceTree = "<group>"; };
-		C9BBB6781B77786C00D57D3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../VICompassUITests/Info.plist; sourceTree = "<group>"; };
+		C9BBB6761B77786C00D57D3F /* VICompassUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VICompassUITests.swift; path = VICompassUITests/VICompassUITests.swift; sourceTree = "<group>"; };
+		C9BBB6781B77786C00D57D3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = VICompassUITests/Info.plist; sourceTree = "<group>"; };
 		C9BBB6881B78CC2700D57D3F /* 2000.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 2000.wav; sourceTree = "<group>"; };
 		C9BBB68A1B78CC2F00D57D3F /* 300.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 300.wav; sourceTree = "<group>"; };
 		C9CCA4FF1B7A1CAA00CB2431 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
