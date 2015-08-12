@@ -17,16 +17,6 @@ func createSound(fileName: String, fileExt: String) -> SystemSoundID {
     return soundID
 }
 
-struct Platform {
-    static let isSimulator: Bool = {
-        var isSim = false
-        #if arch(i386) || arch(x86_64)
-            isSim = true
-        #endif
-        return isSim
-    }()
-}
-
 class ViewController: UIViewController,CLLocationManagerDelegate {
 
     @IBOutlet weak var txtDifference: UILabel!
