@@ -35,35 +35,35 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     @IBOutlet weak var sldrHeadingOverride: UISlider!
     @IBOutlet weak var txtHeadingOverrideLabel: UILabel!
     
-    var locationManager: CLLocationManager!
-    var headingFilter: CLLocationDegrees!
-    var headingTarget: Int?;
-    var headingCurrent: Int = 150;
-    
-    let sndHigh: SystemSoundID = createSound("2000", fileExt: "wav");
-    let sndLow: SystemSoundID = createSound("300", fileExt: "wav");
-    
-    var diffTolerance: Int = 5
-    var beepTimer: NSTimer?;
-    var beepSound: SystemSoundID?
-    let slowest_interval_secs = 2.0;
-    let fastest_interval_secs = 0.1;
-    
+    let sndHigh: SystemSoundID = createSound("2000", fileExt: "wav")
+    let sndLow: SystemSoundID = createSound("300", fileExt: "wav")
     let noDataText = "---"
+    let slowest_interval_secs = 2.0
+    let fastest_interval_secs = 0.1
+    let diffTolerance: CLLocationDegrees = 5
+    let headingFilter: CLLocationDegrees = 5
     
+    var locationManager: CLLocationManager!
+    var headingTarget: CLLocationDegrees?
+    var headingCurrent: CLLocationDegrees = 150
+    var beepTimer: NSTimer?
+    var beepSound: SystemSoundID?
     
     override func viewDidLoad() {
-        locationManager = CLLocationManager();
+        locationManager = CLLocationManager()
         if CLLocationManager.headingAvailable() {
-            locationManager.delegate = self;
-            locationManager.headingFilter = 5;
-            locationManager.startUpdatingHeading();
+            log.debug("Requesting heading updates with headingFilter of \(headingFilter)")
+            locationManager.delegate = self
+            locationManager.headingFilter = headingFilter
+            locationManager.startUpdatingHeading()
             // hide the manual heading slider
-            sldrHeadingOverride.hidden = true;
-            txtHeadingOverrideLabel.hidden = true;
+            sldrHeadingOverride.hidden = true
+            txtHeadingOverrideLabel.hidden = true
+        } else {
+            log.debug("Heading information not available on this device")
         }
         super.viewDidLoad()
-        somethingChanged()
+        updateUI()
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -72,83 +72,98 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         // Dispose of any resources that can be recreated.
     }
 
-    //CLLocationManagerDelegate
-    func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        headingCurrent = Int(newHeading.magneticHeading)
-        somethingChanged();
-    }
-    
     func beep() {
         if beepSound != nil {
             AudioServicesPlaySystemSound(beepSound!)
         }
     }
     
-    func beepInterval(degrees: Int) -> NSTimeInterval {
-        let degrees = Double(abs(degrees));
-        let numerator = Double(diffTolerance) * slowest_interval_secs;
-        let intervalSecs: NSTimeInterval = max(fastest_interval_secs, numerator/degrees);
+    func beepInterval(degrees: CLLocationDegrees) -> NSTimeInterval {
+        let degrees = Double(abs(degrees))
+        let numerator = Double(diffTolerance) * slowest_interval_secs
+        let intervalSecs: NSTimeInterval = max(fastest_interval_secs, numerator/degrees)
         return intervalSecs
     }
     
-    func somethingChanged() {
-        txtHeading.text = String(headingCurrent);
-        sldrHeadingOverride.value = Float(headingCurrent);
-        if headingTarget == nil {
+    func updateUI() {
+        var difference: CLLocationDegrees?
+        if headingTarget != nil {
+            difference = headingCurrent - headingTarget!
+        } else {
+            difference = nil
+        }
+        updateScreenUI(difference)
+        updateBeepUI(difference)
+    }
+    
+    func updateScreenUI(difference: CLLocationDegrees?) {
+        txtHeading.text = String(Int(headingCurrent))
+        sldrHeadingOverride.value = Float(headingCurrent)
+        if difference == nil {
             // no target set, so no difference to process
-            txtTarget.text = noDataText;
-            txtDifference.text = noDataText;
-            return;
+            txtTarget.text = noDataText
+            txtDifference.text = noDataText
         }
         else {
-            txtTarget.text = String(headingTarget!);
-            let difference = headingCurrent - headingTarget!;
-            updateDifference(difference);
-            updateBeepTimer(difference);
+            txtTarget.text = String(Int(headingTarget!))
+            txtDifference.text = String(Int(difference!))
+            txtDifference.textColor = differenceUIColor(difference!, tolerance: diffTolerance)
         }
     }
     
-    func updateDifference(difference: Int) {
-        txtDifference.text = String(difference);
-        if abs(difference) < diffTolerance {
-            txtDifference.textColor = UIColor.whiteColor();
-        }
-        else if difference < -diffTolerance {
-            txtDifference.textColor = UIColor.redColor();
-        }
-        else if difference > diffTolerance {
-            txtDifference.textColor = UIColor.greenColor();
+    func differenceUIColor(difference: CLLocationDegrees, tolerance: CLLocationDegrees) -> UIColor {
+        if difference < -tolerance {
+            return UIColor.redColor()
+        } else if difference > tolerance {
+            return UIColor.greenColor()
+        } else {
+            return UIColor.whiteColor()
         }
     }
     
-    func updateBeepTimer(difference: Int) {
+    func updateBeepUI(difference: CLLocationDegrees?) {
         if beepTimer != nil {
             // always invalidate the current timer
-            beepTimer!.invalidate();
+            beepTimer!.invalidate()
         }
-        if abs(difference) < diffTolerance {
-            // don't set up a new beep timer
-            beepSound = nil;
+        if difference != nil {
+            if abs(difference!) < diffTolerance {
+                // don't set up a new beep timer
+                beepSound = nil
+            }
+            else if difference! < -diffTolerance {
+                beepSound = sndHigh
+            }
+            else if difference! > diffTolerance {
+                beepSound = sndLow
+            }
+            if beepSound != nil {
+                beepTimer = NSTimer.scheduledTimerWithTimeInterval(beepInterval(difference!), target: self, selector: "beep", userInfo: nil, repeats: true)
+            }
         }
-        else if difference < -diffTolerance {
-            beepSound = sndHigh;
-        }
-        else if difference > diffTolerance {
-            beepSound = sndLow;
-        }
-        if beepSound != nil {
-            beepTimer = NSTimer.scheduledTimerWithTimeInterval(beepInterval(difference), target: self, selector: "beep", userInfo: nil, repeats: true)
-        }
+    }
+    
+    //
+    // Functions that mutate heading and target state
+    //
+    
+    //CLLocationManagerDelegate
+    func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        log.debug("headingCurrent set to new magnetic heading from CLLocationManager: \(newHeading.magneticHeading)")
+        headingCurrent = newHeading.magneticHeading
+        updateUI()
     }
     
     @IBAction func sldrHeadingOverrideValueChanged(sender: AnyObject) {
-        headingCurrent = Int(round(sldrHeadingOverride.value))
-        somethingChanged()
+        log.debug("headingCurrent set to new heading from manual slider: \(sldrHeadingOverride.value)")
+        headingCurrent = CLLocationDegrees(round(sldrHeadingOverride.value))
+        updateUI()
     }
     
     @IBAction func setTarget(sender: UIButton) {
-        headingTarget = Int(round(sldrHeadingOverride.value))
-        somethingChanged()
+        log.debug("headingTarget set to current heading: \(headingCurrent)")
+        headingTarget = headingCurrent
+        updateUI()
     }
 }
 
