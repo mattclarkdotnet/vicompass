@@ -24,13 +24,15 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     @IBOutlet weak var txtHeading: UILabel!
     @IBOutlet weak var sldrHeadingOverride: UISlider!
     @IBOutlet weak var txtHeadingOverrideLabel: UILabel!
+    @IBOutlet weak var txtDiffTolerance: UILabel!
+    @IBOutlet weak var stepDiffTolerance: UIStepper!
+    @IBOutlet weak var stepTargetHeading: UIStepper!
     
     let sndHigh: SystemSoundID = createSound("2000", fileExt: "wav")
     let sndLow: SystemSoundID = createSound("300", fileExt: "wav")
     let noDataText = "---"
     let slowest_interval_secs = 2.0
     let fastest_interval_secs = 0.1
-    let diffTolerance: CLLocationDegrees = 5
     let headingFilter: CLLocationDegrees = 1
     
     var locationManager: CLLocationManager!
@@ -38,6 +40,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     var headingCurrent: CLLocationDegrees = 150
     var beepTimer: NSTimer?
     var beepSound: SystemSoundID?
+    var diffTolerance: CLLocationDegrees = 5
     
     //
     // ViewController overrides
@@ -117,16 +120,20 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     }
     
     func updateScreenUI(difference: CLLocationDegrees?) {
-        txtHeading.text = String(Int(headingCurrent))
+        txtHeading.text = Int(headingCurrent).description
+        txtDiffTolerance.text = Int(diffTolerance).description
         sldrHeadingOverride.value = Float(headingCurrent)
+        if headingTarget != nil {
+            stepTargetHeading.value = Double(headingTarget!)
+        }
         if difference == nil {
             // no target set, so no difference to process
             txtTarget.text = noDataText
             txtDifference.text = noDataText
         }
         else {
-            txtTarget.text = String(Int(headingTarget!))
-            txtDifference.text = String(Int(difference!))
+            txtTarget.text = Int(headingTarget!).description
+            txtDifference.text = Int(difference!).description
             txtDifference.textColor = differenceUIColor(difference!, tolerance: diffTolerance)
         }
     }
@@ -173,6 +180,26 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     @IBAction func setTarget(sender: UIButton) {
         log.debug("headingTarget set to current heading: \(headingCurrent)")
         headingTarget = headingCurrent
+        updateUI()
+    }
+    
+    @IBAction func unsetTarget(sender: UIButton) {
+        log.debug("headingTarget unset")
+        headingTarget = nil
+        updateUI()
+    }
+    
+    @IBAction func stepDiffToleranceChanged(sender: UIStepper) {
+        log.debug("stepDiffTolerance changed to \(sender.value)")
+        diffTolerance = CLLocationDegrees(sender.value)
+        updateUI()
+    }
+    
+    @IBAction func stepTargetChanged(sender: UIStepper) {
+        log.debug("stepTarget changed to \(sender.value)")
+        if headingTarget != nil {
+            headingTarget = CLLocationDegrees(sender.value)
+        }
         updateUI()
     }
 }
