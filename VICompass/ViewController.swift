@@ -31,7 +31,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     let slowest_interval_secs = 2.0
     let fastest_interval_secs = 0.1
     let diffTolerance: CLLocationDegrees = 5
-    let headingFilter: CLLocationDegrees = 5
+    let headingFilter: CLLocationDegrees = 1
     
     var locationManager: CLLocationManager!
     var headingTarget: CLLocationDegrees?
