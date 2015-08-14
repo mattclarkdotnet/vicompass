@@ -39,6 +39,10 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     var beepTimer: NSTimer?
     var beepSound: SystemSoundID?
     
+    //
+    // ViewController overrides
+    //
+    
     override func viewDidLoad() {
         locationManager = CLLocationManager()
         if CLLocationManager.headingAvailable() {
@@ -62,6 +66,20 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         // Dispose of any resources that can be recreated.
     }
 
+    //
+    // Static methods
+    //
+    
+    func differenceUIColor(difference: CLLocationDegrees, tolerance: CLLocationDegrees) -> UIColor {
+        if difference < -tolerance {
+            return UIColor.redColor()
+        } else if difference > tolerance {
+            return UIColor.greenColor()
+        } else {
+            return UIColor.whiteColor()
+        }
+    }
+    
     func beep() {
         if beepSound != nil {
             AudioServicesPlaySystemSound(beepSound!)
@@ -75,13 +93,25 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         return intervalSecs
     }
     
-    func updateUI() {
-        var difference: CLLocationDegrees?
-        if headingTarget != nil {
-            difference = headingCurrent - headingTarget!
+    func calcDifference(current: CLLocationDegrees, target: CLLocationDegrees?) -> CLLocationDegrees? {
+        if target == nil {
+            return nil
         } else {
-            difference = nil
+            let difference = current - target!
+            if difference > 180 {
+                return difference - 180
+            } else {
+                return difference
+            }
         }
+    }
+    
+    //
+    // UI management
+    //
+    
+    func updateUI() {
+        let difference = calcDifference(headingCurrent, target: headingTarget)
         updateScreenUI(difference)
         updateBeepUI(difference)
     }
@@ -98,16 +128,6 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             txtTarget.text = String(Int(headingTarget!))
             txtDifference.text = String(Int(difference!))
             txtDifference.textColor = differenceUIColor(difference!, tolerance: diffTolerance)
-        }
-    }
-    
-    func differenceUIColor(difference: CLLocationDegrees, tolerance: CLLocationDegrees) -> UIColor {
-        if difference < -tolerance {
-            return UIColor.redColor()
-        } else if difference > tolerance {
-            return UIColor.greenColor()
-        } else {
-            return UIColor.whiteColor()
         }
     }
     
