@@ -17,21 +17,6 @@ func createSound(fileName: String, fileExt: String) -> SystemSoundID {
     return soundID
 }
 
-func calcDifference(current: CLLocationDegrees, target: CLLocationDegrees?) -> CLLocationDegrees? {
-    if target == nil {
-        return nil
-    } else {
-        let difference = current - target!
-        if difference == -180 {
-            return 180
-        } else if difference > 180 {
-            return difference - 360
-        } else {
-            return difference
-        }
-    }
-}
-
 class ViewController: UIViewController,CLLocationManagerDelegate {
 
     @IBOutlet weak var txtDifference: UILabel!
@@ -88,10 +73,27 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     // Static methods
     //
     
-    func differenceUIColor(difference: CLLocationDegrees, tolerance: CLLocationDegrees) -> UIColor {
-        if difference < -tolerance {
+    func calcCorrection(current: CLLocationDegrees, target: CLLocationDegrees?) -> CLLocationDegrees? {
+        if target == nil {
+            return nil
+        } else {
+            let difference = target! - current
+            if difference == -180 {
+                return 180
+            } else if difference > 180 {
+                return difference - 360
+            } else if difference < -180 {
+                return difference + 360
+            } else {
+                return difference
+            }
+        }
+    }
+    
+    func correctionUIColor(correction: CLLocationDegrees, tolerance: CLLocationDegrees) -> UIColor {
+        if correction < -tolerance {
             return UIColor.redColor()
-        } else if difference > tolerance {
+        } else if correction > tolerance {
             return UIColor.greenColor()
         } else {
             return UIColor.whiteColor()
@@ -117,48 +119,49 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     //
     
     func updateUI() {
-        let difference = calcDifference(headingCurrent, target: headingTarget)
-        updateScreenUI(difference)
-        updateBeepUI(difference)
+        updateScreenUI()
+        updateBeepUI()
     }
     
-    func updateScreenUI(difference: CLLocationDegrees?) {
+    func updateScreenUI() {
         txtHeading.text = Int(headingCurrent).description
         txtDiffTolerance.text = Int(diffTolerance).description
         sldrHeadingOverride.value = Float(headingCurrent)
         if headingTarget != nil {
             stepTargetHeading.value = Double(headingTarget!)
         }
-        if difference == nil {
+        let correction = calcCorrection(headingCurrent, target: headingTarget)
+        if correction == nil {
             // no target set, so no difference to process
             txtTarget.text = noDataText
             txtDifference.text = noDataText
         }
         else {
             txtTarget.text = Int(headingTarget!).description
-            txtDifference.text = Int(difference!).description
-            txtDifference.textColor = differenceUIColor(difference!, tolerance: diffTolerance)
+            txtDifference.text = Int(correction!).description
+            txtDifference.textColor = correctionUIColor(correction!, tolerance: diffTolerance)
         }
     }
     
-    func updateBeepUI(difference: CLLocationDegrees?) {
+    func updateBeepUI() {
         if beepTimer != nil {
             // always invalidate the current timer
             beepTimer!.invalidate()
         }
-        if difference != nil {
-            if abs(difference!) < diffTolerance {
+        let correction = calcCorrection(headingCurrent, target: headingTarget)
+        if correction != nil {
+            if abs(correction!) < diffTolerance {
                 // don't set up a new beep timer
                 beepSound = nil
             }
-            else if difference! < -diffTolerance {
+            else if correction! > -diffTolerance {
                 beepSound = sndHigh
             }
-            else if difference! > diffTolerance {
+            else if correction! < diffTolerance {
                 beepSound = sndLow
             }
             if beepSound != nil {
-                beepTimer = NSTimer.scheduledTimerWithTimeInterval(beepInterval(difference!), target: self, selector: "beep", userInfo: nil, repeats: true)
+                beepTimer = NSTimer.scheduledTimerWithTimeInterval(beepInterval(correction!), target: self, selector: "beep", userInfo: nil, repeats: true)
             }
         }
     }
