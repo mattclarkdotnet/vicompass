@@ -26,14 +26,14 @@
 			containerPortal = C9BBB64B1B77786B00D57D3F /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = C9BBB6521B77786B00D57D3F;
-			remoteInfo = "Blind Sailing";
+			remoteInfo = "VICompass";
 		};
 		C9BBB6731B77786C00D57D3F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C9BBB64B1B77786B00D57D3F /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = C9BBB6521B77786B00D57D3F;
-			remoteInfo = "Blind Sailing";
+			remoteInfo = "VICompass";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -46,11 +46,11 @@
 		C9BBB6601B77786B00D57D3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C9BBB6621B77786B00D57D3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C9BBB6671B77786C00D57D3F /* VICompass.temp_caseinsensitive_rename.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VICompass.temp_caseinsensitive_rename.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C9BBB66B1B77786C00D57D3F /* VICompassTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VICompassTests.swift; path = VICompassTests/VICompassTests.swift; sourceTree = "<group>"; };
-		C9BBB66D1B77786C00D57D3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = VICompassTests/Info.plist; sourceTree = "<group>"; };
+		C9BBB66B1B77786C00D57D3F /* VICompassTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VICompassTests.swift; sourceTree = "<group>"; };
+		C9BBB66D1B77786C00D57D3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C9BBB6721B77786C00D57D3F /* VICompass.temp_caseinsensitive_rename.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VICompass.temp_caseinsensitive_rename.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C9BBB6761B77786C00D57D3F /* VICompassUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VICompassUITests.swift; path = VICompassUITests/VICompassUITests.swift; sourceTree = "<group>"; };
-		C9BBB6781B77786C00D57D3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = VICompassUITests/Info.plist; sourceTree = "<group>"; };
+		C9BBB6761B77786C00D57D3F /* VICompassUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VICompassUITests.swift; sourceTree = "<group>"; };
+		C9BBB6781B77786C00D57D3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C9BBB6881B78CC2700D57D3F /* 2000.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 2000.wav; sourceTree = "<group>"; };
 		C9BBB68A1B78CC2F00D57D3F /* 300.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 300.wav; sourceTree = "<group>"; };
 		C9CCA4FF1B7A1CAA00CB2431 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -125,8 +125,7 @@
 				C9BBB66B1B77786C00D57D3F /* VICompassTests.swift */,
 				C9BBB66D1B77786C00D57D3F /* Info.plist */,
 			);
-			name = VICompassTests;
-			path = "Blind SailingTests";
+			path = VICompassTests;
 			sourceTree = "<group>";
 		};
 		C9BBB6751B77786C00D57D3F /* VICompassUITests */ = {
@@ -135,8 +134,7 @@
 				C9BBB6761B77786C00D57D3F /* VICompassUITests.swift */,
 				C9BBB6781B77786C00D57D3F /* Info.plist */,
 			);
-			name = VICompassUITests;
-			path = "Blind SailingUITests";
+			path = VICompassUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,7 +153,7 @@
 			dependencies = (
 			);
 			name = ivcompass;
-			productName = "Blind Sailing";
+			productName = "VICompass";
 			productReference = C9BBB6531B77786B00D57D3F /* VICompass.temp_caseinsensitive_rename.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -173,7 +171,7 @@
 				C9BBB6691B77786C00D57D3F /* PBXTargetDependency */,
 			);
 			name = ivcompassTests;
-			productName = "Blind SailingTests";
+			productName = "VICompassTests";
 			productReference = C9BBB6671B77786C00D57D3F /* VICompass.temp_caseinsensitive_rename.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
@@ -191,7 +189,7 @@
 				C9BBB6741B77786C00D57D3F /* PBXTargetDependency */,
 			);
 			name = ivcompassUITests;
-			productName = "Blind SailingUITests";
+			productName = "VICompassUITests";
 			productReference = C9BBB6721B77786C00D57D3F /* VICompass.temp_caseinsensitive_rename.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
@@ -201,6 +199,7 @@
 		C9BBB64B1B77786B00D57D3F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = mattclark.net;
 				TargetAttributes = {
@@ -443,7 +442,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "Blind SailingTests/Info.plist";
+				INFOPLIST_FILE = "VICompassTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "mattclark.net.Blind-SailingTests";
 				PRODUCT_NAME = VICompass.temp_caseinsensitive_rename;
@@ -455,7 +454,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "Blind SailingTests/Info.plist";
+				INFOPLIST_FILE = "VICompassTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "mattclark.net.Blind-SailingTests";
 				PRODUCT_NAME = VICompass.temp_caseinsensitive_rename;
@@ -466,11 +465,11 @@
 		C9BBB6821B77786C00D57D3F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "Blind SailingUITests/Info.plist";
+				INFOPLIST_FILE = "VICompassUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "mattclark.net.Blind-SailingUITests";
 				PRODUCT_NAME = VICompass.temp_caseinsensitive_rename;
-				TEST_TARGET_NAME = "Blind Sailing";
+				TEST_TARGET_NAME = "VICompass";
 				USES_XCTRUNNER = YES;
 			};
 			name = Debug;
@@ -478,11 +477,11 @@
 		C9BBB6831B77786C00D57D3F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "Blind SailingUITests/Info.plist";
+				INFOPLIST_FILE = "VICompassUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "mattclark.net.Blind-SailingUITests";
 				PRODUCT_NAME = VICompass.temp_caseinsensitive_rename;
-				TEST_TARGET_NAME = "Blind Sailing";
+				TEST_TARGET_NAME = "VICompass";
 				USES_XCTRUNNER = YES;
 			};
 			name = Release;
