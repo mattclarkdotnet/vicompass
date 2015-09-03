@@ -17,6 +17,21 @@ func createSound(fileName: String, fileExt: String) -> SystemSoundID {
     return soundID
 }
 
+func calcDifference(current: CLLocationDegrees, target: CLLocationDegrees?) -> CLLocationDegrees? {
+    if target == nil {
+        return nil
+    } else {
+        let difference = current - target!
+        if difference == -180 {
+            return 180
+        } else if difference > 180 {
+            return difference - 360
+        } else {
+            return difference
+        }
+    }
+}
+
 class ViewController: UIViewController,CLLocationManagerDelegate {
 
     @IBOutlet weak var txtDifference: UILabel!
@@ -96,18 +111,6 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         return intervalSecs
     }
     
-    func calcDifference(current: CLLocationDegrees, target: CLLocationDegrees?) -> CLLocationDegrees? {
-        if target == nil {
-            return nil
-        } else {
-            let difference = current - target!
-            if difference > 180 {
-                return difference - 180
-            } else {
-                return difference
-            }
-        }
-    }
     
     //
     // UI management

@@ -32,4 +32,20 @@ class VICompassTests: XCTestCase {
         }
     }
     
+    func testDifferenceCalculation() {
+        XCTAssertEqual(calcDifference(10, target: nil), nil)
+        XCTAssertEqual(calcDifference(10, target: 10), 0)
+        XCTAssertEqual(calcDifference(180, target: 180), 0)
+        XCTAssertEqual(calcDifference(10, target: 20), -10)
+        XCTAssertEqual(calcDifference(20, target: 10), 10)
+        XCTAssertEqual(calcDifference(350, target: 20), -30)
+        XCTAssertEqual(calcDifference(20, target: 350), 30)
+        XCTAssertEqual(calcDifference(190, target: 0), -170)
+        XCTAssertEqual(calcDifference(0, target: 190), 170)
+        XCTAssertEqual(calcDifference(170, target: 190), -20)
+        XCTAssertEqual(calcDifference(190, target: 170), 20)
+        XCTAssertEqual(calcDifference(90, target: 270), 180)
+        XCTAssertEqual(calcDifference(270, target: 90), 180)
+    }
+    
 }
