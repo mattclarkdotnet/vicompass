@@ -1,5 +1,5 @@
 # VISCompass
-A smartphone compass app with audio feedback for visually impaired sailors
+A smartphone compass app with audio feedback for visually impaired sailors.
 
 ## Background
 
