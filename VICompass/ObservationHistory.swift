@@ -79,11 +79,11 @@ class ObservationHistory {
     }
 
     func smoothed(reftime: NSDate) -> Double? {
-        let iseries = interval_series(reftime)
+        var iseries = interval_series(reftime)
         if iseries.count == 0 {
             return nil
         }
-        var sv = mostRecentObservation!.v
+        var sv = iseries.removeFirst()
         for (i, v) in iseries.enumerate() {
             let delta_t = Double((i + 1)) * interval
             let delta_v = weight(delta_t) * deltaFunc(sv, v)

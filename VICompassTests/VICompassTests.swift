@@ -126,8 +126,8 @@ class ObservationTests: XCTestCase {
         oh.add_observation(o2)
         XCTAssertEqualWithAccuracy(oh.smoothed(now.dateByAddingTimeInterval(oh.window * 2))!, 10, accuracy: 0.01)
         XCTAssertEqualWithAccuracy(oh.smoothed(now.dateByAddingTimeInterval(oh.window))!, 10, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(oh.smoothed(now.dateByAddingTimeInterval(oh.window / 10))!, 14.9, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(oh.smoothed(now.dateByAddingTimeInterval(oh.window / 2))!, 10.9, accuracy: 0.01)
+        XCTAssertEqualWithAccuracy(oh.smoothed(now.dateByAddingTimeInterval(oh.window / 10))!, 16.4, accuracy: 0.01)
+        XCTAssertEqualWithAccuracy(oh.smoothed(now.dateByAddingTimeInterval(oh.window / 2))!, 11.6, accuracy: 0.01)
     }
 }
 
