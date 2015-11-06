@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C960885E1B986D2B00F500A4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB6581B77786B00D57D3F /* ViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		C960885F1B986D9C00F500A4 /* XCGLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FD13491B7B7BDA0095563F /* XCGLogger.swift */; settings = {ASSET_TAGS = (); }; };
-		C96088601B986D9F00F500A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB6561B77786B00D57D3F /* AppDelegate.swift */; settings = {ASSET_TAGS = (); }; };
+		C90602F21BECC56E004BBD66 /* ObservationHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90602F11BECC56E004BBD66 /* ObservationHistory.swift */; };
+		C90602F31BECC56E004BBD66 /* ObservationHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90602F11BECC56E004BBD66 /* ObservationHistory.swift */; };
+		C960885E1B986D2B00F500A4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB6581B77786B00D57D3F /* ViewController.swift */; };
+		C960885F1B986D9C00F500A4 /* XCGLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FD13491B7B7BDA0095563F /* XCGLogger.swift */; };
+		C96088601B986D9F00F500A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB6561B77786B00D57D3F /* AppDelegate.swift */; };
 		C9BBB6571B77786B00D57D3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB6561B77786B00D57D3F /* AppDelegate.swift */; };
 		C9BBB6591B77786B00D57D3F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB6581B77786B00D57D3F /* ViewController.swift */; };
 		C9BBB65C1B77786B00D57D3F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9BBB65A1B77786B00D57D3F /* Main.storyboard */; };
@@ -41,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C90602F11BECC56E004BBD66 /* ObservationHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservationHistory.swift; sourceTree = "<group>"; };
 		C9BBB6531B77786B00D57D3F /* VICompass.temp_caseinsensitive_rename.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VICompass.temp_caseinsensitive_rename.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9BBB6561B77786B00D57D3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9BBB6581B77786B00D57D3F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +121,7 @@
 				C9BBB65D1B77786B00D57D3F /* Assets.xcassets */,
 				C9BBB65F1B77786B00D57D3F /* LaunchScreen.storyboard */,
 				C9BBB6621B77786B00D57D3F /* Info.plist */,
+				C90602F11BECC56E004BBD66 /* ObservationHistory.swift */,
 			);
 			path = VICompass;
 			sourceTree = "<group>";
@@ -276,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9BBB6591B77786B00D57D3F /* ViewController.swift in Sources */,
+				C90602F21BECC56E004BBD66 /* ObservationHistory.swift in Sources */,
 				C9BBB6571B77786B00D57D3F /* AppDelegate.swift in Sources */,
 				C9FD134A1B7B7BDA0095563F /* XCGLogger.swift in Sources */,
 			);
@@ -285,6 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C90602F31BECC56E004BBD66 /* ObservationHistory.swift in Sources */,
 				C96088601B986D9F00F500A4 /* AppDelegate.swift in Sources */,
 				C960885E1B986D2B00F500A4 /* ViewController.swift in Sources */,
 				C9BBB66C1B77786C00D57D3F /* VICompassTests.swift in Sources */,
@@ -371,7 +377,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -409,7 +415,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -423,6 +429,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/VICompass/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mattclark.net.vicompass;
 				PRODUCT_NAME = VICompass.temp_caseinsensitive_rename;
@@ -437,6 +444,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/VICompass/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mattclark.net.vicompass;
 				PRODUCT_NAME = VICompass.temp_caseinsensitive_rename;

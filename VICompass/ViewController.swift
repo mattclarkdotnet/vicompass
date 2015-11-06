@@ -40,7 +40,12 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     var headingCurrent: CLLocationDegrees = 150
     var beepTimer: NSTimer?
     var beepSound: SystemSoundID?
+    var beepInterval: NSTimeInterval?
+    var lastBeepTime: NSDate?
     var diffTolerance: CLLocationDegrees = 5
+    
+    // var headingUpdates: [(CLLocationDegrees, NSDate)] = []
+    var headingUpdates: ObservationHistory = ObservationHistory(deltaFunc: ViewController.calcCorrection)
     
     //
     // ViewController overrides
@@ -60,7 +65,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             log.debug("Heading information not available on this device")
         }
         super.viewDidLoad()
-        updateUI()
+        let _ = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateUI", userInfo: nil, repeats: true)
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -73,24 +78,20 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     // Static methods
     //
     
-    func calcCorrection(current: CLLocationDegrees, target: CLLocationDegrees?) -> CLLocationDegrees? {
-        if target == nil {
-            return nil
+    static func calcCorrection(current: CLLocationDegrees, target: CLLocationDegrees) -> CLLocationDegrees {
+        let difference = target - current
+        if difference == -180 {
+            return 180
+        } else if difference > 180 {
+            return difference - 360
+        } else if difference < -180 {
+            return difference + 360
         } else {
-            let difference = target! - current
-            if difference == -180 {
-                return 180
-            } else if difference > 180 {
-                return difference - 360
-            } else if difference < -180 {
-                return difference + 360
-            } else {
-                return difference
-            }
+            return difference
         }
     }
     
-    func correctionUIColor(correction: CLLocationDegrees, tolerance: CLLocationDegrees) -> UIColor {
+    static func correctionUIColor(correction: CLLocationDegrees, tolerance: CLLocationDegrees) -> UIColor {
         if correction < -tolerance {
             return UIColor.redColor()
         } else if correction > tolerance {
@@ -100,25 +101,16 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         }
     }
     
-    func beep() {
-        if beepSound != nil {
-            AudioServicesPlaySystemSound(beepSound!)
-        }
-    }
-    
-    func beepInterval(degrees: CLLocationDegrees) -> NSTimeInterval {
-        let degrees = Double(abs(degrees))
-        let numerator = Double(diffTolerance) * slowest_interval_secs
-        let intervalSecs: NSTimeInterval = max(fastest_interval_secs, numerator/degrees)
-        return intervalSecs
-    }
-    
-    
     //
     // UI management
     //
     
     func updateUI() {
+        let h = headingUpdates.smoothed(NSDate())
+        if h != nil {
+            log.debug("Latest heading: \(headingUpdates.mostRecentObservation!.v), Smoothed heading value \(h!)")
+            headingCurrent = h! % 360
+        }
         updateScreenUI()
         updateBeepUI()
     }
@@ -126,79 +118,63 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     func updateScreenUI() {
         txtHeading.text = Int(headingCurrent).description
         txtDiffTolerance.text = Int(diffTolerance).description
-        sldrHeadingOverride.value = Float(headingCurrent)
-        if headingTarget != nil {
-            stepTargetHeading.value = Double(headingTarget!)
-        }
-        let correction = calcCorrection(headingCurrent, target: headingTarget)
-        if correction == nil {
+        if headingTarget == nil {
             // no target set, so no difference to process
             txtTarget.text = noDataText
             txtDifference.text = noDataText
         }
         else {
+            stepTargetHeading.value = Double(headingTarget!)
+            let correction = ViewController.calcCorrection(headingCurrent, target: headingTarget!)
             txtTarget.text = Int(headingTarget!).description
-            txtDifference.text = Int(correction!).description
-            txtDifference.textColor = correctionUIColor(correction!, tolerance: diffTolerance)
+            txtDifference.text = Int(correction).description
+            txtDifference.textColor = ViewController.correctionUIColor(correction, tolerance: diffTolerance)
         }
     }
     
     func updateBeepUI() {
-        if beepTimer != nil {
-            // always invalidate the current timer
-            beepTimer!.invalidate()
+        if headingTarget == nil {
+            beepInterval = nil
+            beepSound = nil
         }
-        let correction = calcCorrection(headingCurrent, target: headingTarget)
-        if correction != nil {
-            if abs(correction!) < diffTolerance {
-                // don't set up a new beep timer
-                beepSound = nil
-            }
-            else if correction! > -diffTolerance {
-                beepSound = sndHigh
-            }
-            else if correction! < diffTolerance {
-                beepSound = sndLow
-            }
-            if beepSound != nil {
-                beepTimer = NSTimer.scheduledTimerWithTimeInterval(beepInterval(correction!), target: self, selector: "beep", userInfo: nil, repeats: true)
-            }
+        else {
+            let correction = ViewController.calcCorrection(headingCurrent, target: headingTarget!)
+            setBeepInterval(correction)
+            beepMaybe()
         }
     }
     
     //
-    // Functions that mutate heading and target state
+    // Functions that mutate model state
     //
     
     //CLLocationManagerDelegate
     func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        log.debug("headingCurrent set to new magnetic heading from CLLocationManager: \(newHeading.magneticHeading)")
-        headingCurrent = newHeading.magneticHeading
-        updateUI()
+        updateCurrentHeading(newHeading.magneticHeading)
     }
     
     @IBAction func sldrHeadingOverrideValueChanged(sender: AnyObject) {
-        log.debug("headingCurrent set to new heading from manual slider: \(sldrHeadingOverride.value)")
-        headingCurrent = CLLocationDegrees(round(sldrHeadingOverride.value))
-        updateUI()
+        updateCurrentHeading(CLLocationDegrees(round(sldrHeadingOverride.value)))
+    }
+    
+    func updateCurrentHeading(newheading: CLLocationDegrees) {
+        log.debug("updateCurrentHeading got: \(newheading)")
+        headingUpdates.add_observation(Observation(v: newheading, t: NSDate()))
     }
     
     @IBAction func setTarget(sender: UIButton) {
         log.debug("headingTarget set to current heading: \(headingCurrent)")
         headingTarget = headingCurrent
-        updateUI()
     }
     
     @IBAction func unsetTarget(sender: UIButton) {
         log.debug("headingTarget unset")
         headingTarget = nil
-        updateUI()
     }
     
     @IBAction func stepDiffToleranceChanged(sender: UIStepper) {
         log.debug("stepDiffTolerance changed to \(sender.value)")
         diffTolerance = CLLocationDegrees(sender.value)
-        updateUI()
     }
     
     @IBAction func stepTargetChanged(sender: UIStepper) {
@@ -206,7 +182,63 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         if headingTarget != nil {
             headingTarget = CLLocationDegrees(sender.value)
         }
-        updateUI()
+    }
+    
+    func setBeepInterval(correction: CLLocationDegrees) {
+        if abs(correction) < diffTolerance {
+            beepInterval = nil
+            beepSound = nil
+        }
+        else {
+            let degrees = Double(abs(correction))
+            let numerator = Double(diffTolerance) * slowest_interval_secs
+            var intervalSecs: NSTimeInterval = max(fastest_interval_secs, numerator/degrees)
+            if intervalSecs < 0.05 {
+                intervalSecs = 0.05
+            }
+            beepInterval = intervalSecs
+            if correction > -diffTolerance {
+                beepSound = sndLow
+            }
+            else if correction < diffTolerance {
+                beepSound = sndHigh
+            }
+        }
+    }
+    
+    func beepMaybe() {
+        //
+        // This method really should be reentrant but is not, so races certainly exist.  Implement locking ASAP.
+        //
+        if beepInterval == nil || beepSound == nil {
+            return
+        }
+        if beepTimer == nil || !beepTimer!.valid || lastBeepTime == nil {
+            // No timer exists, or one exists but it is invalidated, or no last beep time is recorded, so go ahead and emit
+            // our beep then schedule another beep in beepInterval seconds
+            lastBeepTime = NSDate()
+            beepTimer = NSTimer.scheduledTimerWithTimeInterval(beepInterval!, target: self, selector: "beepMaybe", userInfo: nil, repeats: false)
+            AudioServicesPlaySystemSound(beepSound!) // ??? double check this is async
+        }
+        else {
+            // A timer exists and is valid, and we know when the last beep happened, so we need to decide whether to adjust
+            // the timer and whether to emit a sound now
+            let timeSinceLastBeep = abs(lastBeepTime!.timeIntervalSinceNow)
+            if beepInterval! <= timeSinceLastBeep {
+                // The new beep interval must be less than the old one so hurry up and beep now, then schedule another one in
+                // beepInterval seconds
+                beepTimer!.invalidate()
+                lastBeepTime = NSDate()
+                beepTimer = NSTimer.scheduledTimerWithTimeInterval(beepInterval!, target: self, selector: "beepMaybe", userInfo: nil, repeats: false)
+                AudioServicesPlaySystemSound(beepSound!)
+            }
+            else {
+                // The new beep interval is longer then the time since the last beep.  We need to wait a bit before beeping
+                // so schedule a new timer for beepInterval - timeSinceLastBeep seconds
+                beepTimer!.invalidate()
+                beepTimer = NSTimer.scheduledTimerWithTimeInterval(beepInterval! - timeSinceLastBeep, target: self, selector: "beepMaybe", userInfo: nil, repeats: false)
+            }
+        }
     }
 }
 

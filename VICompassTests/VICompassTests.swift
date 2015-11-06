@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import CoreLocation
 
 class VICompassTests: XCTestCase {
     
@@ -33,41 +34,100 @@ class VICompassTests: XCTestCase {
     }
     
     func testCorrectionCalculation() {
-        let vc = ViewController()
-        XCTAssertEqual(vc.calcCorrection(10, target: nil), nil)
-        XCTAssertEqual(vc.calcCorrection(0, target: 0), 0)
-        XCTAssertEqual(vc.calcCorrection(90, target: 90), 0)
-        XCTAssertEqual(vc.calcCorrection(180, target: 180), 0)
-        XCTAssertEqual(vc.calcCorrection(270, target: 270), 0)
-        XCTAssertEqual(vc.calcCorrection(359, target: 359), 0)
-        XCTAssertEqual(vc.calcCorrection(1, target: 1), 0)
-        XCTAssertEqual(vc.calcCorrection(10, target: 20), 10)
-        XCTAssertEqual(vc.calcCorrection(20, target: 10), -10)
-        XCTAssertEqual(vc.calcCorrection(350, target: 20), 30)
-        XCTAssertEqual(vc.calcCorrection(20, target: 350), -30)
-        XCTAssertEqual(vc.calcCorrection(350, target: 320), -30)
-        XCTAssertEqual(vc.calcCorrection(320, target: 350), 30)
-        XCTAssertEqual(vc.calcCorrection(190, target: 0), 170)
-        XCTAssertEqual(vc.calcCorrection(0, target: 190), -170)
-        XCTAssertEqual(vc.calcCorrection(170, target: 190), 20)
-        XCTAssertEqual(vc.calcCorrection(190, target: 170), -20)
-        XCTAssertEqual(vc.calcCorrection(90, target: 270), 180)
-        XCTAssertEqual(vc.calcCorrection(270, target: 90), 180)
+        XCTAssertEqual(ViewController.calcCorrection(0, target: 0), 0)
+        XCTAssertEqual(ViewController.calcCorrection(90, target: 90), 0)
+        XCTAssertEqual(ViewController.calcCorrection(180, target: 180), 0)
+        XCTAssertEqual(ViewController.calcCorrection(270, target: 270), 0)
+        XCTAssertEqual(ViewController.calcCorrection(359, target: 359), 0)
+        XCTAssertEqual(ViewController.calcCorrection(1, target: 1), 0)
+        XCTAssertEqual(ViewController.calcCorrection(10, target: 20), 10)
+        XCTAssertEqual(ViewController.calcCorrection(20, target: 10), -10)
+        XCTAssertEqual(ViewController.calcCorrection(350, target: 20), 30)
+        XCTAssertEqual(ViewController.calcCorrection(20, target: 350), -30)
+        XCTAssertEqual(ViewController.calcCorrection(350, target: 320), -30)
+        XCTAssertEqual(ViewController.calcCorrection(320, target: 350), 30)
+        XCTAssertEqual(ViewController.calcCorrection(190, target: 0), 170)
+        XCTAssertEqual(ViewController.calcCorrection(0, target: 190), -170)
+        XCTAssertEqual(ViewController.calcCorrection(170, target: 190), 20)
+        XCTAssertEqual(ViewController.calcCorrection(190, target: 170), -20)
+        XCTAssertEqual(ViewController.calcCorrection(90, target: 270), 180)
+        XCTAssertEqual(ViewController.calcCorrection(270, target: 90), 180)
     }
     
     func testCorrectionUIColor() {
-        let vc = ViewController()
-        XCTAssertEqual(vc.correctionUIColor(0, tolerance: 5), UIColor.whiteColor())
-        XCTAssertEqual(vc.correctionUIColor(5, tolerance: 5), UIColor.whiteColor())
-        XCTAssertEqual(vc.correctionUIColor(-5, tolerance: 5), UIColor.whiteColor())
-        XCTAssertEqual(vc.correctionUIColor(5, tolerance: 4), UIColor.greenColor())
-        XCTAssertEqual(vc.correctionUIColor(-5, tolerance: 4), UIColor.redColor())
+        XCTAssertEqual(ViewController.correctionUIColor(0, tolerance: 5), UIColor.whiteColor())
+        XCTAssertEqual(ViewController.correctionUIColor(5, tolerance: 5), UIColor.whiteColor())
+        XCTAssertEqual(ViewController.correctionUIColor(-5, tolerance: 5), UIColor.whiteColor())
+        XCTAssertEqual(ViewController.correctionUIColor(5, tolerance: 4), UIColor.greenColor())
+        XCTAssertEqual(ViewController.correctionUIColor(-5, tolerance: 4), UIColor.redColor())
     }
     
     func testBeepInterval() {
         let vc = ViewController()
-        XCTAssertEqual(vc.beepInterval(5), 2)
-        XCTAssertEqual(vc.beepInterval(-5), 2)
+        vc.setBeepInterval(5)
+        XCTAssertEqual(vc.beepInterval, 2)
+        vc.setBeepInterval(-5)
+        XCTAssertEqual(vc.beepInterval, 2)
+    }
+}
+
+class ObservationTests: XCTestCase {
+    func testOneObservation() {
+        let now = NSDate()
+        // If we have one observation within the window, then that is the only value in the interval series
+        let oh = ObservationHistory(deltaFunc: ViewController.calcCorrection)
+        oh.add_observation(Observation(v: 20, t: now))
+        XCTAssertEqual(oh.interval_series(now), [20.0])
+        XCTAssertEqual(oh.interval_series(NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate + oh.interval)), [20.0, 20.0])
+        XCTAssertEqual(oh.interval_series(NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate + oh.interval * 2)), [20.0, 20.0, 20.0])
+    }
+
+    func testTwoObservations() {
+        let now = NSDate()
+        let oh = ObservationHistory(deltaFunc: ViewController.calcCorrection)
+        let o1 = Observation(v: 20, t: NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate - oh.interval))
+        let o2 = Observation(v: 10, t: now)
+        oh.add_observation(o1)
+        oh.add_observation(o2)
+        let obs = oh.observations()
+        XCTAssertEqual(obs.count, 2)
+        XCTAssertEqual(obs[0].v, o2.v)
+        XCTAssertEqual(obs[1].v, o1.v)
+        XCTAssertEqual(oh.interval_series(now), [10.0, 20.0])
+        XCTAssertEqual(oh.interval_series(NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate + oh.interval)), [10.0, 10.0, 20.0])
+        XCTAssertEqual(oh.interval_series(NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate + oh.interval * 2)), [10.0, 10.0, 10.0, 20.0])
     }
     
+    func testThreeObservations() {
+        let now = NSDate()
+        let oh = ObservationHistory(deltaFunc: ViewController.calcCorrection)
+        let o1 = Observation(v: 30, t: NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate - oh.interval * 2))
+        let o2 = Observation(v: 20, t: NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate - oh.interval ))
+        let o3 = Observation(v: 10, t: now)
+        oh.add_observation(o1)
+        oh.add_observation(o2)
+        oh.add_observation(o3)
+        let obs = oh.observations()
+        XCTAssertEqual(obs.count, 3)
+        XCTAssertEqual(obs[0].v, o3.v)
+        XCTAssertEqual(obs[1].v, o2.v)
+        XCTAssertEqual(obs[2].v, o1.v)
+        XCTAssertEqual(oh.interval_series(now), [10.0, 20.0, 30.0])
+        XCTAssertEqual(oh.interval_series(NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate + oh.interval)), [10.0, 10.0, 20.0, 30.0])
+        XCTAssertEqual(oh.interval_series(NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate + oh.interval * 2)), [10.0, 10.0, 10.0, 20.0, 30.0])
+    }
+    
+    func testSmoothing() {
+        let now = NSDate()
+        let oh = ObservationHistory(deltaFunc: ViewController.calcCorrection)
+        let o1 = Observation(v: 20, t: NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate - oh.interval))
+        let o2 = Observation(v: 10, t: now)
+        oh.add_observation(o1)
+        oh.add_observation(o2)
+        XCTAssertEqualWithAccuracy(oh.smoothed(now.dateByAddingTimeInterval(oh.window * 2))!, 10, accuracy: 0.01)
+        XCTAssertEqualWithAccuracy(oh.smoothed(now.dateByAddingTimeInterval(oh.window))!, 10, accuracy: 0.01)
+        XCTAssertEqualWithAccuracy(oh.smoothed(now.dateByAddingTimeInterval(oh.window / 10))!, 14.9, accuracy: 0.01)
+        XCTAssertEqualWithAccuracy(oh.smoothed(now.dateByAddingTimeInterval(oh.window / 2))!, 10.9, accuracy: 0.01)
+    }
 }
+
