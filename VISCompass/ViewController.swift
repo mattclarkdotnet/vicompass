@@ -131,6 +131,10 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         }
     }
     
+    //
+    // Manage the audio UI
+    //
+    
     func updateBeepUI() {
         if headingTarget == nil {
             beepInterval = nil
@@ -140,46 +144,6 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             let correction = ViewController.calcCorrection(headingCurrent, target: headingTarget!)
             setBeepInterval(correction)
             beepMaybe()
-        }
-    }
-    
-    //
-    // Functions that mutate model state
-    //
-    
-    //CLLocationManagerDelegate
-    func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        updateCurrentHeading(newHeading.magneticHeading)
-    }
-    
-    @IBAction func sldrHeadingOverrideValueChanged(sender: AnyObject) {
-        updateCurrentHeading(CLLocationDegrees(round(sldrHeadingOverride.value)))
-    }
-    
-    func updateCurrentHeading(newheading: CLLocationDegrees) {
-        log.debug("updateCurrentHeading got: \(newheading)")
-        headingUpdates.add_observation(Observation(v: newheading, t: NSDate()))
-    }
-    
-    @IBAction func setTarget(sender: UIButton) {
-        log.debug("headingTarget set to current heading: \(headingCurrent)")
-        headingTarget = headingCurrent
-    }
-    
-    @IBAction func unsetTarget(sender: UIButton) {
-        log.debug("headingTarget unset")
-        headingTarget = nil
-    }
-    
-    @IBAction func stepDiffToleranceChanged(sender: UIStepper) {
-        log.debug("stepDiffTolerance changed to \(sender.value)")
-        diffTolerance = CLLocationDegrees(sender.value)
-    }
-    
-    @IBAction func stepTargetChanged(sender: UIStepper) {
-        log.debug("stepTarget changed to \(sender.value)")
-        if headingTarget != nil {
-            headingTarget = CLLocationDegrees(sender.value)
         }
     }
     
@@ -238,6 +202,51 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
                 beepTimer = NSTimer.scheduledTimerWithTimeInterval(beepInterval! - timeSinceLastBeep, target: self, selector: "beepMaybe", userInfo: nil, repeats: false)
             }
         }
+    }
+    
+    //
+    // Functions that mutate model state
+    //
+    
+    //CLLocationManagerDelegate
+    func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        updateCurrentHeading(newHeading.magneticHeading)
+    }
+    
+    @IBAction func sldrHeadingOverrideValueChanged(sender: AnyObject) {
+        updateCurrentHeading(CLLocationDegrees(round(sldrHeadingOverride.value)))
+    }
+    
+    func updateCurrentHeading(newheading: CLLocationDegrees) {
+        log.debug("updateCurrentHeading got: \(newheading)")
+        headingUpdates.add_observation(Observation(v: newheading, t: NSDate()))
+        // Don't update the UI, wait for the timer to do so
+    }
+    
+    @IBAction func setTarget(sender: UIButton) {
+        log.debug("headingTarget set to current heading: \(headingCurrent)")
+        headingTarget = headingCurrent
+        updateUI()
+    }
+    
+    @IBAction func unsetTarget(sender: UIButton) {
+        log.debug("headingTarget unset")
+        headingTarget = nil
+        updateUI()
+    }
+    
+    @IBAction func stepDiffToleranceChanged(sender: UIStepper) {
+        log.debug("stepDiffTolerance changed to \(sender.value)")
+        diffTolerance = CLLocationDegrees(sender.value)
+        updateUI()
+    }
+    
+    @IBAction func stepTargetChanged(sender: UIStepper) {
+        log.debug("stepTarget changed to \(sender.value)")
+        if headingTarget != nil {
+            headingTarget = CLLocationDegrees(sender.value)
+        }
+        updateUI()
     }
 }
 
