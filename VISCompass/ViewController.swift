@@ -28,8 +28,8 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     @IBOutlet weak var stepDiffTolerance: UIStepper!
     @IBOutlet weak var stepTargetHeading: UIStepper!
     
-    let sndHigh: SystemSoundID = createSound("2000", fileExt: "wav")
-    let sndLow: SystemSoundID = createSound("300", fileExt: "wav")
+    let sndHigh: SystemSoundID = createSound("4k_to_2k_in_20ms", fileExt: "wav")
+    let sndLow: SystemSoundID = createSound("1k_to_2k_in_20ms", fileExt: "wav")
     let noDataText = "---"
     let slowest_interval_secs = 2.0
     let fastest_interval_secs = 0.1
@@ -165,10 +165,10 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             }
             beepInterval = intervalSecs
             if correction > -diffTolerance {
-                beepSound = sndLow
+                beepSound = sndLow  // steer to starboard
             }
             else if correction < diffTolerance {
-                beepSound = sndHigh
+                beepSound = sndHigh // steer to port
             }
         }
     }
