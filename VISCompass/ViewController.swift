@@ -44,7 +44,6 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     var lastBeepTime: NSDate?
     var diffTolerance: CLLocationDegrees = 5
     
-    // var headingUpdates: [(CLLocationDegrees, NSDate)] = []
     var headingUpdates: ObservationHistory = ObservationHistory(deltaFunc: ViewController.calcCorrection)
     
     //

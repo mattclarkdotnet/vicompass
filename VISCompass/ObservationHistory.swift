@@ -1,6 +1,6 @@
 //
 //  ObservationHistory.swift
-//  VICompass
+//  VISCompass
 //
 //  Created by Matt Clark on 06/11/2015.
 //  Copyright © 2015 mattclark.net. All rights reserved.

@@ -1,6 +1,6 @@
 //
-//  VICompassTests.swift
-//  VICompassTests
+//  VISCompassTests.swift
+//  VISCompassTests
 //
 //  Created by Matt Clark on 09/08/2015.
 //  Copyright © 2015 mattclark.net. All rights reserved.
@@ -9,7 +9,7 @@
 import XCTest
 import CoreLocation
 
-class VICompassTests: XCTestCase {
+class VISCompassTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
