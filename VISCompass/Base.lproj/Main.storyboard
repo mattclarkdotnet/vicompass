@@ -85,7 +85,7 @@
                                     <action selector="stepDiffToleranceChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="dC5-rd-Zkl"/>
                                 </connections>
                             </stepper>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" continuous="NO" autorepeat="NO" value="5" maximumValue="359" translatesAutoresizingMaskIntoConstraints="NO" id="T37-Ab-GQh">
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" continuous="NO" wraps="YES" value="5" maximumValue="359" translatesAutoresizingMaskIntoConstraints="NO" id="T37-Ab-GQh">
                                 <rect key="frame" x="340" y="55" width="94" height="29"/>
                                 <animations/>
                                 <connections>
