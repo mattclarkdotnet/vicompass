@@ -165,10 +165,10 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             }
             beepInterval = intervalSecs
             if correction > -diffTolerance {
-                beepSound = sndLow  // steer to starboard
+                beepSound = sndHigh  // a high pitched (rising) chirp means steer to starboard
             }
             else if correction < diffTolerance {
-                beepSound = sndHigh // steer to port
+                beepSound = sndLow // a low pitched (falling) chirp means steer to port
             }
         }
     }
