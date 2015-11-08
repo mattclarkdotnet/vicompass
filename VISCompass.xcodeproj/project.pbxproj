@@ -21,8 +21,6 @@
 		C9BBB6611B77786B00D57D3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9BBB65F1B77786B00D57D3F /* LaunchScreen.storyboard */; };
 		C9BBB66C1B77786C00D57D3F /* VISCompassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB66B1B77786C00D57D3F /* VISCompassTests.swift */; };
 		C9BBB6771B77786C00D57D3F /* VISCompassUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB6761B77786C00D57D3F /* VISCompassUITests.swift */; };
-		C9BBB6891B78CC2700D57D3F /* 2000.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9BBB6881B78CC2700D57D3F /* 2000.wav */; };
-		C9BBB68B1B78CC2F00D57D3F /* 300.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9BBB68A1B78CC2F00D57D3F /* 300.wav */; };
 		C9CCA5001B7A1CAA00CB2431 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9CCA4FF1B7A1CAA00CB2431 /* Default-568h@2x.png */; };
 		C9FD134A1B7B7BDA0095563F /* XCGLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FD13491B7B7BDA0095563F /* XCGLogger.swift */; };
 /* End PBXBuildFile section */
@@ -46,8 +44,8 @@
 
 /* Begin PBXFileReference section */
 		C90602F11BECC56E004BBD66 /* ObservationHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservationHistory.swift; sourceTree = "<group>"; };
-		C93C90121BEE915D006270DF /* 4k_to_2k_in_20ms.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 4k_to_2k_in_20ms.wav; sourceTree = "<group>"; };
-		C93C90131BEE915D006270DF /* 1k_to_2k_in_20ms.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 1k_to_2k_in_20ms.wav; sourceTree = "<group>"; };
+		C93C90121BEE915D006270DF /* 4k_to_2k_in_20ms.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = 4k_to_2k_in_20ms.wav; path = Assets/4k_to_2k_in_20ms.wav; sourceTree = "<group>"; };
+		C93C90131BEE915D006270DF /* 1k_to_2k_in_20ms.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = 1k_to_2k_in_20ms.wav; path = Assets/1k_to_2k_in_20ms.wav; sourceTree = "<group>"; };
 		C9BBB6531B77786B00D57D3F /* VISCompass.temp_caseinsensitive_rename.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VISCompass.temp_caseinsensitive_rename.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9BBB6561B77786B00D57D3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9BBB6581B77786B00D57D3F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -61,8 +59,6 @@
 		C9BBB6721B77786C00D57D3F /* VISCompass.temp_caseinsensitive_rename.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VISCompass.temp_caseinsensitive_rename.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9BBB6761B77786C00D57D3F /* VISCompassUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VISCompassUITests.swift; sourceTree = "<group>"; };
 		C9BBB6781B77786C00D57D3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C9BBB6881B78CC2700D57D3F /* 2000.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 2000.wav; sourceTree = "<group>"; };
-		C9BBB68A1B78CC2F00D57D3F /* 300.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 300.wav; sourceTree = "<group>"; };
 		C9CCA4FF1B7A1CAA00CB2431 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C9FD13491B7B7BDA0095563F /* XCGLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XCGLogger.swift; path = Vendor/XCGLogger/XCGLogger/Library/XCGLogger/XCGLogger.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -98,8 +94,6 @@
 				C93C90121BEE915D006270DF /* 4k_to_2k_in_20ms.wav */,
 				C93C90131BEE915D006270DF /* 1k_to_2k_in_20ms.wav */,
 				C9CCA4FF1B7A1CAA00CB2431 /* Default-568h@2x.png */,
-				C9BBB68A1B78CC2F00D57D3F /* 300.wav */,
-				C9BBB6881B78CC2700D57D3F /* 2000.wav */,
 				C9BBB6551B77786B00D57D3F /* VISCompass */,
 				C9BBB66A1B77786C00D57D3F /* VISCompassTests */,
 				C9BBB6751B77786C00D57D3F /* VISCompassUITests */,
@@ -257,10 +251,8 @@
 			files = (
 				C9BBB6611B77786B00D57D3F /* LaunchScreen.storyboard in Resources */,
 				C93C90151BEE915D006270DF /* 1k_to_2k_in_20ms.wav in Resources */,
-				C9BBB68B1B78CC2F00D57D3F /* 300.wav in Resources */,
 				C93C90141BEE915D006270DF /* 4k_to_2k_in_20ms.wav in Resources */,
 				C9BBB65E1B77786B00D57D3F /* Assets.xcassets in Resources */,
-				C9BBB6891B78CC2700D57D3F /* 2000.wav in Resources */,
 				C9BBB65C1B77786B00D57D3F /* Main.storyboard in Resources */,
 				C9CCA5001B7A1CAA00CB2431 /* Default-568h@2x.png in Resources */,
 			);
