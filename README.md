@@ -1,13 +1,13 @@
 # VISCompass
-A smartphone compass app with audio feedback for visually impaired sailors.
+A smartphone compass app with audio feedback for visually impaired cruising sailors.
 
 ## Background
 
-Few sports have the potential for empowering visually impaired people as much as sailing  . However when steering to a course, seeing the compass or  surroundings can be difficult or impossible .  However in some conditions visually impaired sailors can steer to the wind and waves. Additionally a custom built piece of hardware which gives an audible indication of variation from a set course , similar to the proximity warning sounds of a reversing car, has been used .
+Few sports have the potential for empowering visually impaired people as much as sailing  . However when steering a yacht to a course, seeing the compass or  surroundings can be difficult or impossible .  In some conditions visually impaired sailors can steer (with great accuracy in some cases) to the wind and waves . But in addition , a custom built piece of hardware which gives an audible indication of variation from a set course , similar to the proximity warning sounds of a reversing car, has been used .
 
 VISCompass builds the same functionality into an app using the built in compass of a smartphone. Its focus is empowering VIsailors to helm a course on a passge by a coastal cruising yacht , rather than enabling VIracing sailors to maximise their potential in competion.
 
-Use os a smartphone for this purpose has many advantages such as being much cheaper than using one of the very few hardware systems in existence, enabling the use of standard accesibility features, and individual setting of sensitivity and smoothing for different sea conditions. The use of a smartphone also opens up possibilies for onshore , pre voyage practice , plus pointing the way for future developments such as speech activation , vibrate and stereo operation .
+Use of a smartphone for this purpose has many advantages such as being much cheaper than using one of the very few hardware systems in existence, enabling the use of standard accesibility features, and individual setting of sensitivity and smoothing for different sea conditions. The use of a smartphone also opens up possibilies for onshore , pre voyage practice , plus pointing the way for future developments such as speech activation , vibrate and stereo operation .
 
 Interaction Model
 
