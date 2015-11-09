@@ -3,15 +3,17 @@ A smartphone compass app with audio feedback for visually impaired sailors.
 
 ## Background
 
-Sailing is an excellent sport for empowering  blind or visually impaired sailors people in many ways . However when steeringto a course, they cannot see the compass or the horizon.  In some conditions they can steer to the wind , but they also use a custom built piece of hardware which gives an audible indication of how far off a set course they are, similar to the proximity warning sounds of a reversing car.
+Few sports have the potential for empowering visually impaired people as much as sailing  . However when steering to a course, seeing the compass or  surroundings can be difficult or impossible .  However in some conditions visually impaired sailors can steer to the wind and waves. Additionally a custom built piece of hardware which gives an audible indication of variation from a set course , similar to the proximity warning sounds of a reversing car, has been used .
 
-VISCompass builds the same functionality into an app using the built in compass of a smartphone.  This has many advantages such as being much cheaper than using one of the very few hardware systems in existence, enabling the use of standard accesibility features, and individual setting of sensitivity and smoothing for different sea conditions. The use of a smartphone also opens up possibilies for onshore , pre voyage practice , plus developments such as speech activation , vibrate and stereo operation .
+VISCompass builds the same functionality into an app using the built in compass of a smartphone. Its focus is empowering VIsailors to helm a course on a passge by a coastal cruising yacht , rather than enabling VIracing sailors to maximise their potential in competion.
+
+Use os a smartphone for this purpose has many advantages such as being much cheaper than using one of the very few hardware systems in existence, enabling the use of standard accesibility features, and individual setting of sensitivity and smoothing for different sea conditions. The use of a smartphone also opens up possibilies for onshore , pre voyage practice , plus pointing the way for future developments such as speech activation , vibrate and stereo operation .
 
 Interaction Model
 
 The Interaction Model around which VISCompass is built is as follows. 
 
-Use by mixed sighted and VI crew on yachts and motorboats with a secure steering position
+Use by mixed sighted and VI crew on yachts and motorboats with a secure steering position operating in coastal or offshore cruising situations.
 
 VISCompass' hardware requirement is currently an iphone running iOS version... or above ; well charged (or supplied with external power) and set to non-sleep operation , plus mono or stereo  headphones . If wired , headphones trpically require a lead of at least 1.2 M. The app is optimised for bluetooth stereo headphones .
 
