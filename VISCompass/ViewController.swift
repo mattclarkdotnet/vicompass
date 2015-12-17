@@ -59,7 +59,9 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             locationManager.startUpdatingHeading()
             // hide the manual heading slider
             sldrHeadingOverride.hidden = true
-            txtHeadingOverrideLabel.hidden = true
+            if txtHeadingOverrideLabel != nil {
+                txtHeadingOverrideLabel.hidden = true
+            }
         } else {
             log.debug("Heading information not available on this device")
         }
