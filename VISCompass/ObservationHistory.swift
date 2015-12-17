@@ -18,13 +18,14 @@ struct Observation {
 class ObservationHistory {
     var deltaFunc: (Double, Double) -> Double = { (v1: Double, v2: Double) -> Double in return v1 - v2 }
     let gamma = 2.0
-    let window = 10.0
+    var window_secs: Double = 10.0
     let interval = 1.0
     var otherObservations: [Observation] = []
     var mostRecentObservation: Observation?
     
-    init(deltaFunc f: (Double, Double) -> Double) {
+    init(deltaFunc f: (Double, Double) -> Double, window_secs: Double) {
         self.deltaFunc = f
+        self.window_secs = window_secs
     }
     
     func add_observation(o: Observation) {
@@ -44,7 +45,7 @@ class ObservationHistory {
     }
     
     func usable(o: Observation) -> Bool {
-        let window_start = NSDate().timeIntervalSinceReferenceDate - window
+        let window_start = NSDate().timeIntervalSinceReferenceDate - window_secs
         return o.t.timeIntervalSinceReferenceDate > window_start
     }
     
@@ -56,7 +57,7 @@ class ObservationHistory {
         // create a series of equally intervaled values from intermittent observations
         var s = [Double]()
         var t = reftime.timeIntervalSinceReferenceDate
-        let earliest_t = t - window
+        let earliest_t = t - window_secs
         for o in observations() {
             while t >= o.t.timeIntervalSinceReferenceDate && t > earliest_t {
                 s.append(o.v)
@@ -71,10 +72,10 @@ class ObservationHistory {
     }
 
     func weight(delta_t: Double) -> Double {
-        if delta_t >= window {
+        if delta_t >= window_secs {
             return 0
         }
-        let linear_weight = (window - delta_t) / window
+        let linear_weight = (window_secs - delta_t) / window_secs
         return pow(linear_weight, gamma)
     }
 

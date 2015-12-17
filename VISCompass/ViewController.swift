@@ -23,10 +23,10 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     @IBOutlet weak var txtTarget: UILabel!
     @IBOutlet weak var txtHeading: UILabel!
     @IBOutlet weak var sldrHeadingOverride: UISlider!
-    @IBOutlet weak var txtHeadingOverrideLabel: UILabel!
     @IBOutlet weak var txtDiffTolerance: UILabel!
     @IBOutlet weak var stepDiffTolerance: UIStepper!
     @IBOutlet weak var stepTargetHeading: UIStepper!
+    @IBOutlet weak var segResponsiveness: UISegmentedControl!
     
     let sndHigh: SystemSoundID = createSound("4k_to_2k_in_20ms", fileExt: "wav")
     let sndLow: SystemSoundID = createSound("1k_to_2k_in_20ms", fileExt: "wav")
@@ -34,6 +34,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     let slowest_interval_secs = 2.0
     let fastest_interval_secs = 0.1
     let headingFilter: CLLocationDegrees = 1
+    let defaultResponsivenessIndex = 2
     
     var locationManager: CLLocationManager!
     var headingTarget: CLLocationDegrees?
@@ -44,7 +45,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     var lastBeepTime: NSDate?
     var diffTolerance: CLLocationDegrees = 5
     
-    var headingUpdates: ObservationHistory = ObservationHistory(deltaFunc: ViewController.calcCorrection)
+    let headingUpdates: ObservationHistory = ObservationHistory(deltaFunc: ViewController.calcCorrection, window_secs: 10)
     
     //
     // ViewController overrides
@@ -52,6 +53,8 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         locationManager = CLLocationManager()
+        segResponsiveness.selectedSegmentIndex = defaultResponsivenessIndex
+        updateResponsiveness(defaultResponsivenessIndex)
         if CLLocationManager.headingAvailable() {
             log.debug("Requesting heading updates with headingFilter of \(headingFilter)")
             locationManager.delegate = self
@@ -59,9 +62,6 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             locationManager.startUpdatingHeading()
             // hide the manual heading slider
             sldrHeadingOverride.hidden = true
-            if txtHeadingOverrideLabel != nil {
-                txtHeadingOverrideLabel.hidden = true
-            }
         } else {
             log.debug("Heading information not available on this device")
         }
@@ -253,6 +253,26 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             headingTarget = CLLocationDegrees(sender.value)
         }
         updateUI()
+    }
+    
+    func updateResponsiveness(index: Int) {
+        switch(index) {
+        case 0:
+            headingUpdates.window_secs = 10.0
+        case 1:
+            headingUpdates.window_secs = 6.0
+        case 3:
+            headingUpdates.window_secs = 2.0
+        case 4:
+            headingUpdates.window_secs = 1.0
+        default:
+            headingUpdates.window_secs = 3.5
+        }
+    }
+    
+    @IBAction func setResponsiveness(sender: UISegmentedControl) {
+        log.debug("setResponsiveness changed to index \(sender.selectedSegmentIndex)")
+        self.updateResponsiveness(sender.selectedSegmentIndex)
     }
 }
 

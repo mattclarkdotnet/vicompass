@@ -75,7 +75,7 @@ class ObservationTests: XCTestCase {
     func testOneObservation() {
         let now = NSDate()
         // If we have one observation within the window, then that is the only value in the interval series
-        let oh = ObservationHistory(deltaFunc: ViewController.calcCorrection)
+        let oh = ObservationHistory(deltaFunc: ViewController.calcCorrection, window_secs: 10)
         oh.add_observation(Observation(v: 20, t: now))
         XCTAssertEqual(oh.interval_series(now), [20.0])
         XCTAssertEqual(oh.interval_series(NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate + oh.interval)), [20.0, 20.0])
@@ -84,7 +84,7 @@ class ObservationTests: XCTestCase {
 
     func testTwoObservations() {
         let now = NSDate()
-        let oh = ObservationHistory(deltaFunc: ViewController.calcCorrection)
+        let oh = ObservationHistory(deltaFunc: ViewController.calcCorrection, window_secs: 10)
         let o1 = Observation(v: 20, t: NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate - oh.interval))
         let o2 = Observation(v: 10, t: now)
         oh.add_observation(o1)
@@ -100,7 +100,7 @@ class ObservationTests: XCTestCase {
     
     func testThreeObservations() {
         let now = NSDate()
-        let oh = ObservationHistory(deltaFunc: ViewController.calcCorrection)
+        let oh = ObservationHistory(deltaFunc: ViewController.calcCorrection, window_secs: 10)
         let o1 = Observation(v: 30, t: NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate - oh.interval * 2))
         let o2 = Observation(v: 20, t: NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate - oh.interval ))
         let o3 = Observation(v: 10, t: now)
@@ -119,15 +119,15 @@ class ObservationTests: XCTestCase {
     
     func testSmoothing() {
         let now = NSDate()
-        let oh = ObservationHistory(deltaFunc: ViewController.calcCorrection)
+        let oh = ObservationHistory(deltaFunc: ViewController.calcCorrection, window_secs: 10)
         let o1 = Observation(v: 20, t: NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate - oh.interval))
         let o2 = Observation(v: 10, t: now)
         oh.add_observation(o1)
         oh.add_observation(o2)
-        XCTAssertEqualWithAccuracy(oh.smoothed(now.dateByAddingTimeInterval(oh.window * 2))!, 10, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(oh.smoothed(now.dateByAddingTimeInterval(oh.window))!, 10, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(oh.smoothed(now.dateByAddingTimeInterval(oh.window / 10))!, 16.4, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(oh.smoothed(now.dateByAddingTimeInterval(oh.window / 2))!, 11.6, accuracy: 0.01)
+        XCTAssertEqualWithAccuracy(oh.smoothed(now.dateByAddingTimeInterval(oh.window_secs * 2))!, 10, accuracy: 0.01)
+        XCTAssertEqualWithAccuracy(oh.smoothed(now.dateByAddingTimeInterval(oh.window_secs))!, 10, accuracy: 0.01)
+        XCTAssertEqualWithAccuracy(oh.smoothed(now.dateByAddingTimeInterval(oh.window_secs / 10))!, 16.4, accuracy: 0.01)
+        XCTAssertEqualWithAccuracy(oh.smoothed(now.dateByAddingTimeInterval(oh.window_secs / 2))!, 11.6, accuracy: 0.01)
     }
 }
 
