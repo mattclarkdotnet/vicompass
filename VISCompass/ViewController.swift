@@ -25,7 +25,6 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     @IBOutlet weak var sldrHeadingOverride: UISlider!
     @IBOutlet weak var txtDiffTolerance: UILabel!
     @IBOutlet weak var stepDiffTolerance: UIStepper!
-    @IBOutlet weak var stepTargetHeading: UIStepper!
     @IBOutlet weak var segResponsiveness: UISegmentedControl!
     
     let sndHigh: SystemSoundID = createSound("4k_to_2k_in_20ms", fileExt: "wav")
@@ -127,9 +126,9 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             // no target set, so no difference to process
             txtTarget.text = noDataText
             txtDifference.text = noDataText
+            txtDifference.textColor = UIColor.whiteColor()
         }
         else {
-            stepTargetHeading.value = Double(headingTarget!)
             let correction = ViewController.calcCorrection(headingCurrent, target: headingTarget!)
             txtTarget.text = Int(headingTarget!).description
             txtDifference.text = Int(correction).description
@@ -247,10 +246,16 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         updateUI()
     }
     
-    @IBAction func stepTargetChanged(sender: UIStepper) {
-        log.debug("stepTarget changed to \(sender.value)")
+    @IBAction func touchTargetToPort(sender: UIButton) {
         if headingTarget != nil {
-            headingTarget = CLLocationDegrees(sender.value)
+            headingTarget = headingTarget! - 1
+        }
+        updateUI()
+    }
+    
+    @IBAction func touchTargetToStbd(sender: UIButton) {
+        if headingTarget != nil {
+            headingTarget = headingTarget! + 1
         }
         updateUI()
     }
