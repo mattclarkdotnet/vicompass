@@ -26,6 +26,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     @IBOutlet weak var txtDiffTolerance: UILabel!
     @IBOutlet weak var stepDiffTolerance: UIStepper!
     @IBOutlet weak var segResponsiveness: UISegmentedControl!
+    @IBOutlet weak var switchTargetOn: UISwitch!
     
     let sndHigh: SystemSoundID = createSound("4k_to_2k_in_20ms", fileExt: "wav")
     let sndLow: SystemSoundID = createSound("1k_to_2k_in_20ms", fileExt: "wav")
@@ -141,7 +142,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     //
     
     func updateBeepUI() {
-        if headingTarget == nil {
+        if headingTarget == nil || !switchTargetOn.on {
             beepInterval = nil
             beepSound = nil
         }
@@ -228,16 +229,17 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         // Don't update the UI, wait for the timer to do so
     }
     
-    @IBAction func setTarget(sender: UIButton) {
-        log.debug("headingTarget set to current heading: \(headingCurrent)")
-        headingTarget = headingCurrent
-        updateUI()
-    }
-    
-    @IBAction func unsetTarget(sender: UIButton) {
-        log.debug("headingTarget unset")
-        headingTarget = nil
-        updateUI()
+    @IBAction func switchTargetOn(sender: UISwitch) {
+        if sender.on {
+            log.debug("headingTarget set to current heading: \(headingCurrent)")
+            if headingTarget == nil {
+                headingTarget = headingCurrent
+            }
+        }
+        else {
+            log.debug("headingTarget set to nil")
+            headingTarget = nil
+        }
     }
     
     @IBAction func stepDiffToleranceChanged(sender: UIStepper) {

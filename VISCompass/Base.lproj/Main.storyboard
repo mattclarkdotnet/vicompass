@@ -73,28 +73,12 @@
                                     <action selector="stepDiffToleranceChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="dC5-rd-Zkl"/>
                                 </connections>
                             </stepper>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U7Q-1e-uqa">
-                                <rect key="frame" x="350" y="30" width="46" height="33"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Unset"/>
-                                <connections>
-                                    <action selector="unsetTarget:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NI5-SG-4B3"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mZ1-wj-4zk">
                                 <rect key="frame" x="20" y="77" width="54" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rEd-QK-58C">
-                                <rect key="frame" x="220" y="30" width="30" height="33"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Set "/>
-                                <connections>
-                                    <action selector="setTarget:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HH5-vg-qD1"/>
-                                </connections>
-                            </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Alj-Ug-qma">
                                 <rect key="frame" x="30" y="435" width="540" height="29"/>
                                 <constraints>
@@ -130,10 +114,17 @@
                                     <action selector="touchTargetToStbd:" destination="BYZ-38-t0r" eventType="touchDown" id="aNy-pf-77K"/>
                                 </connections>
                             </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fVa-jm-K33">
+                                <rect key="frame" x="276" y="27" width="51" height="31"/>
+                                <connections>
+                                    <action selector="switchTargetOn:" destination="BYZ-38-t0r" eventType="valueChanged" id="Yd3-S1-a1U"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="xPA-3W-GPE" firstAttribute="leading" secondItem="mZ1-wj-4zk" secondAttribute="leading" id="0bR-2E-gvk"/>
+                            <constraint firstItem="EMv-De-KI3" firstAttribute="top" secondItem="fVa-jm-K33" secondAttribute="bottom" constant="10" id="1hp-6B-3qy"/>
                             <constraint firstItem="zPT-mM-SHh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7yZ-p3-jr8"/>
                             <constraint firstItem="vcA-fh-U2D" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="B6A-Jz-aHO"/>
                             <constraint firstItem="EMv-De-KI3" firstAttribute="centerY" secondItem="TbD-W7-09r" secondAttribute="centerY" id="Dns-u6-IQy"/>
@@ -141,10 +132,8 @@
                             <constraint firstAttribute="trailingMargin" secondItem="mZY-oa-Swh" secondAttribute="trailing" constant="10" id="Fcq-pi-V2R"/>
                             <constraint firstItem="EMv-De-KI3" firstAttribute="leading" secondItem="TbD-W7-09r" secondAttribute="trailing" constant="10" id="HhR-bW-TUU"/>
                             <constraint firstItem="EMv-De-KI3" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="48" id="JhI-pm-THI"/>
-                            <constraint firstItem="rEd-QK-58C" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="30" id="Riq-aD-ewL"/>
                             <constraint firstItem="e8B-cm-lKX" firstAttribute="top" secondItem="EMv-De-KI3" secondAttribute="bottom" constant="8" symbolic="YES" id="SG3-TT-wQU"/>
                             <constraint firstAttribute="bottom" secondItem="Alj-Ug-qma" secondAttribute="bottom" constant="137" id="Us7-4R-v8z"/>
-                            <constraint firstItem="vP0-ex-90u" firstAttribute="leading" secondItem="U7Q-1e-uqa" secondAttribute="leading" id="VYw-hg-e4A"/>
                             <constraint firstItem="e8B-cm-lKX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Vpi-5T-dZY"/>
                             <constraint firstItem="6AS-UM-OJr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WBU-q3-Dvh"/>
                             <constraint firstItem="vP0-ex-90u" firstAttribute="centerY" secondItem="TbD-W7-09r" secondAttribute="centerY" id="b5S-wT-bhK"/>
@@ -155,9 +144,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Alj-Ug-qma" secondAttribute="trailing" constant="10" id="j7d-fD-VNq"/>
                             <constraint firstItem="mZY-oa-Swh" firstAttribute="centerY" secondItem="xPA-3W-GPE" secondAttribute="centerY" id="kku-yc-S0c"/>
                             <constraint firstItem="riZ-XU-G0r" firstAttribute="leading" secondItem="mZ1-wj-4zk" secondAttribute="leading" id="mQU-YB-u4p"/>
-                            <constraint firstItem="TbD-W7-09r" firstAttribute="trailing" secondItem="rEd-QK-58C" secondAttribute="trailing" id="mUt-kw-Ox6"/>
                             <constraint firstItem="zPT-mM-SHh" firstAttribute="top" secondItem="Alj-Ug-qma" secondAttribute="bottom" constant="40" id="nso-95-AF2"/>
-                            <constraint firstItem="U7Q-1e-uqa" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="30" id="oBw-6o-vsv"/>
                             <constraint firstItem="mZ1-wj-4zk" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="olD-Tu-wMd"/>
                             <constraint firstItem="zPT-mM-SHh" firstAttribute="centerY" secondItem="xPA-3W-GPE" secondAttribute="centerY" id="qc9-bc-wfX"/>
                             <constraint firstItem="EMv-De-KI3" firstAttribute="centerY" secondItem="mZ1-wj-4zk" secondAttribute="centerY" id="rv3-hd-Je2"/>
@@ -165,12 +152,14 @@
                             <constraint firstItem="Alj-Ug-qma" firstAttribute="trailing" secondItem="mZY-oa-Swh" secondAttribute="trailing" id="xNQ-Op-9EY"/>
                             <constraint firstItem="vcA-fh-U2D" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="yMp-76-aJY"/>
                             <constraint firstItem="e8B-cm-lKX" firstAttribute="centerY" secondItem="riZ-XU-G0r" secondAttribute="centerY" id="z2v-Q5-snw"/>
+                            <constraint firstItem="fVa-jm-K33" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="z7j-CD-H2M"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="segResponsiveness" destination="Alj-Ug-qma" id="j2p-nc-uYT"/>
                         <outlet property="sldrHeadingOverride" destination="6AS-UM-OJr" id="VEI-vV-5Zb"/>
                         <outlet property="stepDiffTolerance" destination="mZY-oa-Swh" id="Q5l-9T-KEg"/>
+                        <outlet property="switchTargetOn" destination="fVa-jm-K33" id="21e-jt-UJs"/>
                         <outlet property="txtDiffTolerance" destination="zPT-mM-SHh" id="Rgl-sV-864"/>
                         <outlet property="txtDifference" destination="vcA-fh-U2D" id="j2j-MW-zkL"/>
                         <outlet property="txtHeading" destination="e8B-cm-lKX" id="hTi-KY-KsN"/>
