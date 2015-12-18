@@ -132,6 +132,8 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             txtTarget.text = noDataText
             txtDifference.text = noDataText
             txtDifference.textColor = UIColor.whiteColor()
+            arrowPort.hidden = true
+            arrowStbd.hidden = true
         }
         else {
             let correction = ViewController.calcCorrection(headingCurrent, target: headingTarget!)
