@@ -27,6 +27,8 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     @IBOutlet weak var stepDiffTolerance: UIStepper!
     @IBOutlet weak var segResponsiveness: UISegmentedControl!
     @IBOutlet weak var switchTargetOn: UISwitch!
+    @IBOutlet weak var arrowPort: UILabel!
+    @IBOutlet weak var arrowStbd: UILabel!
     
     let sndHigh: SystemSoundID = createSound("4k_to_2k_in_20ms", fileExt: "wav")
     let sndLow: SystemSoundID = createSound("1k_to_2k_in_20ms", fileExt: "wav")
@@ -55,6 +57,8 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         locationManager = CLLocationManager()
         segResponsiveness.selectedSegmentIndex = defaultResponsivenessIndex
         updateResponsiveness(defaultResponsivenessIndex)
+        arrowPort.hidden = true
+        arrowStbd.hidden = true
         if CLLocationManager.headingAvailable() {
             log.debug("Requesting heading updates with headingFilter of \(headingFilter)")
             locationManager.delegate = self
@@ -134,6 +138,16 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             txtTarget.text = Int(headingTarget!).description
             txtDifference.text = Int(correction).description
             txtDifference.textColor = ViewController.correctionUIColor(correction, tolerance: diffTolerance)
+            if correction < -diffTolerance {
+                arrowPort.hidden = false
+                arrowStbd.hidden = true
+            } else if correction > diffTolerance {
+                arrowPort.hidden = true
+                arrowStbd.hidden = false
+            } else {
+                arrowPort.hidden = true
+                arrowStbd.hidden = true
+            }
         }
     }
     
