@@ -89,7 +89,8 @@
                                 <color key="tintColor" red="1" green="0.010280532767171335" blue="0.1191782699270908" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Port"/>
                                 <connections>
-                                    <action selector="touchTargetToPort:" destination="BYZ-38-t0r" eventType="touchDownRepeat" id="W6K-yJ-j1W"/>
+                                    <action selector="touchTargetStop:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="Hff-Os-cgB"/>
+                                    <action selector="touchTargetStop:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aOQ-uB-pHa"/>
                                     <action selector="touchTargetToPort:" destination="BYZ-38-t0r" eventType="touchDown" id="hJY-V1-0e0"/>
                                 </connections>
                             </button>
@@ -100,7 +101,8 @@
                                     <color key="titleColor" red="0.024309365487118595" green="1" blue="0.26582127020082502" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="touchTargetToStbd:" destination="BYZ-38-t0r" eventType="touchDownRepeat" id="IDg-dO-rPr"/>
+                                    <action selector="touchTargetStop:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZxU-VO-t7o"/>
+                                    <action selector="touchTargetStop:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="gPc-jW-8zt"/>
                                     <action selector="touchTargetToStbd:" destination="BYZ-38-t0r" eventType="touchDown" id="aNy-pf-77K"/>
                                 </connections>
                             </button>

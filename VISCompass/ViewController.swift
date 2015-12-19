@@ -37,15 +37,17 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     let fastest_interval_secs = 0.1
     let headingFilter: CLLocationDegrees = 1
     let defaultResponsivenessIndex = 2
+    var touchRepeatInterval = 0.2
+    var diffTolerance: CLLocationDegrees = 5
     
     var locationManager: CLLocationManager!
     var headingTarget: CLLocationDegrees?
     var headingCurrent: CLLocationDegrees = 150
+    var touchTimer: NSTimer?
     var beepTimer: NSTimer?
     var beepSound: SystemSoundID?
     var beepInterval: NSTimeInterval?
     var lastBeepTime: NSDate?
-    var diffTolerance: CLLocationDegrees = 5
     
     let headingUpdates: ObservationHistory = ObservationHistory(deltaFunc: ViewController.calcCorrection, window_secs: 10)
     
@@ -264,18 +266,37 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         updateUI()
     }
     
-    @IBAction func touchTargetToPort(sender: UIButton) {
-        if headingTarget != nil {
-            headingTarget = headingTarget! - 1
-        }
+    func changeTargetToPort() {
+        headingTarget! = headingTarget! - 1
         updateUI()
     }
     
-    @IBAction func touchTargetToStbd(sender: UIButton) {
-        if headingTarget != nil {
-            headingTarget = headingTarget! + 1
-        }
+    func changeTargetToStbd() {
+        headingTarget! = headingTarget! + 1
         updateUI()
+    }
+    
+    @IBAction func touchTargetToPort(sender: UIButton) {
+        if headingTarget == nil {
+            return
+        }
+        touchTimer = NSTimer.scheduledTimerWithTimeInterval(touchRepeatInterval, target: self, selector: "changeTargetToPort", userInfo: nil, repeats: true)
+        touchTimer!.fire()
+    }
+    
+    @IBAction func touchTargetToStbd(sender: UIButton) {
+        if headingTarget == nil {
+            return
+        }
+        touchTimer = NSTimer.scheduledTimerWithTimeInterval(touchRepeatInterval, target: self, selector: "changeTargetToStbd", userInfo: nil, repeats: true)
+        touchTimer!.fire()
+    }
+    
+    @IBAction func touchTargetStop(sender: UIButton) {
+        if touchTimer != nil {
+            touchTimer!.invalidate()
+            touchTimer = nil
+        }
     }
     
     func updateResponsiveness(index: Int) {
