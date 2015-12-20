@@ -107,9 +107,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         btnStbd.layer.borderWidth = 0.8
         btnStbd.layer.borderColor = UIColor.greenColor().CGColor
         btnStbd.layer.cornerRadius = 4.0
-
     }
-    
 
     //
     // Static methods
@@ -129,9 +127,9 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     }
     
     static func correctionUIColor(correction: CLLocationDegrees, tolerance: CLLocationDegrees) -> UIColor {
-        if correction < -tolerance {
+        if correction <= -tolerance {
             return UIColor.redColor()
-        } else if correction > tolerance {
+        } else if correction >= tolerance {
             return UIColor.greenColor()
         } else {
             return UIColor.whiteColor()
@@ -155,7 +153,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     func updateScreenUI() {
         txtHeading.text = Int(headingCurrent).description
         txtDiffTolerance.text = Int(diffTolerance).description
-        if headingTarget == nil {
+        if headingTarget == nil || !switchTargetOn.on {
             // no target set, so no difference to process
             txtTarget.text = noDataText
             txtDifference.text = noDataText
@@ -168,10 +166,10 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             txtTarget.text = Int(headingTarget!).description
             txtDifference.text = Int(correction).description
             txtDifference.textColor = ViewController.correctionUIColor(correction, tolerance: diffTolerance)
-            if correction < -diffTolerance {
+            if correction <= -diffTolerance {
                 arrowPort.hidden = false
                 arrowStbd.hidden = true
-            } else if correction > diffTolerance {
+            } else if correction >= diffTolerance {
                 arrowPort.hidden = true
                 arrowStbd.hidden = false
             } else {
@@ -274,7 +272,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     }
     
     //
-    // Turn target heading racking on and off
+    // Turn target heading tracking on and off
     //
     
     @IBAction func switchTargetOn(sender: UISwitch) {
