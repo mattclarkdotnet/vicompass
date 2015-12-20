@@ -22,6 +22,9 @@ func modifyDegrees(value: Double?=nil, delta: Double) -> Double? {
     return (value! + delta) % 360.0
 }
 
+class compassModel {
+    
+}
 
 
 class ViewController: UIViewController,CLLocationManagerDelegate {
@@ -52,7 +55,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     
     var locationManager: CLLocationManager!
     var headingTarget: CLLocationDegrees?
-    var headingCurrent: CLLocationDegrees = 150
+    var headingCurrent: CLLocationDegrees?
     var touchTimer: NSTimer?
     var beepTimer: NSTimer?
     var beepSound: SystemSoundID?
@@ -151,10 +154,15 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     }
     
     func updateScreenUI() {
-        txtHeading.text = Int(headingCurrent).description
         txtDiffTolerance.text = Int(diffTolerance).description
-        if headingTarget == nil || !switchTargetOn.on {
-            // no target set, so no difference to process
+        if headingCurrent == nil {
+            txtHeading.text = noDataText
+        }
+        else {
+            txtHeading.text = Int(headingCurrent!).description
+        }
+        if headingTarget == nil || !switchTargetOn.on || headingCurrent == nil {
+            // no target or heading set, so no difference to process
             txtTarget.text = noDataText
             txtDifference.text = noDataText
             txtDifference.textColor = UIColor.whiteColor()
@@ -162,9 +170,9 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             arrowStbd.hidden = true
         }
         else {
-            let correction = ViewController.calcCorrection(headingCurrent, target: headingTarget!)
+            let correction = ViewController.calcCorrection(headingCurrent!, target: headingTarget!)
             txtTarget.text = Int(headingTarget!).description
-            txtDifference.text = Int(correction).description
+            txtDifference.text = abs(Int(correction)).description
             txtDifference.textColor = ViewController.correctionUIColor(correction, tolerance: diffTolerance)
             if correction <= -diffTolerance {
                 arrowPort.hidden = false
@@ -184,12 +192,12 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     //
     
     func updateBeepUI() {
-        if headingTarget == nil || !switchTargetOn.on {
+        if headingTarget == nil || !switchTargetOn.on || headingCurrent == nil {
             beepInterval = nil
             beepSound = nil
         }
         else {
-            let correction = ViewController.calcCorrection(headingCurrent, target: headingTarget!)
+            let correction = ViewController.calcCorrection(headingCurrent!, target: headingTarget!)
             setBeepInterval(correction)
             beepMaybe()
         }
