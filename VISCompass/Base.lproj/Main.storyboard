@@ -84,10 +84,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TbD-W7-09r">
-                                <rect key="frame" x="191" y="145.5" width="39" height="36"/>
+                                <rect key="frame" x="171" y="151.5" width="59" height="24"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <color key="tintColor" red="1" green="0.010280532767171335" blue="0.1191782699270908" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                 <state key="normal" title="Port"/>
                                 <connections>
                                     <action selector="touchTargetStop:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="Hff-Os-cgB"/>
@@ -97,9 +98,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vP0-ex-90u">
-                                <rect key="frame" x="370" y="145.5" width="45" height="36"/>
+                                <rect key="frame" x="370" y="151.5" width="65" height="24"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                 <state key="normal" title="Stbd">
                                     <color key="titleColor" red="0.024309365487118595" green="1" blue="0.26582127020082502" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -178,6 +180,8 @@
                     <connections>
                         <outlet property="arrowPort" destination="J1U-LY-2Si" id="pHr-zY-DNV"/>
                         <outlet property="arrowStbd" destination="5Ji-CF-gnJ" id="x0L-K0-364"/>
+                        <outlet property="btnPort" destination="TbD-W7-09r" id="DQg-L0-NlK"/>
+                        <outlet property="btnStbd" destination="vP0-ex-90u" id="2Ax-RN-xlq"/>
                         <outlet property="segResponsiveness" destination="Alj-Ug-qma" id="j2p-nc-uYT"/>
                         <outlet property="sldrHeadingOverride" destination="6AS-UM-OJr" id="VEI-vV-5Zb"/>
                         <outlet property="stepDiffTolerance" destination="mZY-oa-Swh" id="Q5l-9T-KEg"/>

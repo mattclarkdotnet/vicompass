@@ -36,6 +36,8 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     @IBOutlet weak var switchTargetOn: UISwitch!
     @IBOutlet weak var arrowPort: UILabel!
     @IBOutlet weak var arrowStbd: UILabel!
+    @IBOutlet weak var btnPort: UIButton!
+    @IBOutlet weak var btnStbd: UIButton!
     
     let sndHigh: SystemSoundID = createSound("4k_to_2k_in_20ms", fileExt: "wav")
     let sndLow: SystemSoundID = createSound("1k_to_2k_in_20ms", fileExt: "wav")
@@ -65,10 +67,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         locationManager = CLLocationManager()
-        segResponsiveness.selectedSegmentIndex = defaultResponsivenessIndex
-        updateResponsiveness(defaultResponsivenessIndex)
-        arrowPort.hidden = true
-        arrowStbd.hidden = true
+        setupUI()
         if CLLocationManager.headingAvailable() {
             log.debug("Requesting heading updates with headingFilter of \(headingFilter)")
             locationManager.delegate = self
@@ -92,6 +91,25 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     override func shouldAutorotate() -> Bool {
         return false
     }
+    
+    //
+    // One-time UI setup
+    //
+    
+    func setupUI() {
+        segResponsiveness.selectedSegmentIndex = defaultResponsivenessIndex
+        updateResponsiveness(defaultResponsivenessIndex)
+        arrowPort.hidden = true
+        arrowStbd.hidden = true
+        btnPort.layer.borderWidth = 0.8
+        btnPort.layer.borderColor = UIColor.redColor().CGColor
+        btnPort.layer.cornerRadius = 4.0
+        btnStbd.layer.borderWidth = 0.8
+        btnStbd.layer.borderColor = UIColor.greenColor().CGColor
+        btnStbd.layer.cornerRadius = 4.0
+
+    }
+    
 
     //
     // Static methods
