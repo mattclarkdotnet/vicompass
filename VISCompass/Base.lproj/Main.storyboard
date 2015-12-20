@@ -93,6 +93,7 @@
                                 <connections>
                                     <action selector="touchTargetStop:" destination="BYZ-38-t0r" eventType="touchUpOutside" id="Hff-Os-cgB"/>
                                     <action selector="touchTargetStop:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aOQ-uB-pHa"/>
+                                    <action selector="touchTargetStop:" destination="BYZ-38-t0r" eventType="touchCancel" id="oQH-c9-uNc"/>
                                     <action selector="touchTargetToPort:" destination="BYZ-38-t0r" eventType="touchDown" id="hJY-V1-0e0"/>
                                     <outletCollection property="gestureRecognizers" destination="3pM-Je-DD5" appends="YES" id="P6X-Vj-0vj"/>
                                 </connections>
