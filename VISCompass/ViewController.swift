@@ -17,6 +17,13 @@ func createSound(fileName: String, fileExt: String) -> SystemSoundID {
     return soundID
 }
 
+func modifyDegrees(value: Double?=nil, delta: Double) -> Double? {
+    if value == nil { return nil }
+    return (value! + delta) % 360.0
+}
+
+
+
 class ViewController: UIViewController,CLLocationManagerDelegate {
 
     @IBOutlet weak var txtDifference: UILabel!
@@ -37,7 +44,8 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     let fastest_interval_secs = 0.1
     let headingFilter: CLLocationDegrees = 1
     let defaultResponsivenessIndex = 2
-    var touchRepeatInterval = 0.2
+    let touchRepeatInterval = 0.2
+    let tackDegrees = 100.0
     var diffTolerance: CLLocationDegrees = 5
     
     var locationManager: CLLocationManager!
@@ -229,7 +237,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     }
     
     //
-    // Functions that mutate model state
+    // Handle changes in heading
     //
     
     //CLLocationManagerDelegate
@@ -247,6 +255,10 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         // Don't update the UI, wait for the timer to do so
     }
     
+    //
+    // Turn target heading racking on and off
+    //
+    
     @IBAction func switchTargetOn(sender: UISwitch) {
         if sender.on {
             log.debug("headingTarget set to current heading: \(headingCurrent)")
@@ -260,44 +272,19 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         }
     }
     
+    //
+    // Modify the tolerance range
+    //
+    
     @IBAction func stepDiffToleranceChanged(sender: UIStepper) {
         log.debug("stepDiffTolerance changed to \(sender.value)")
         diffTolerance = CLLocationDegrees(sender.value)
         updateUI()
     }
     
-    func changeTargetToPort() {
-        headingTarget! = headingTarget! - 1
-        updateUI()
-    }
-    
-    func changeTargetToStbd() {
-        headingTarget! = headingTarget! + 1
-        updateUI()
-    }
-    
-    @IBAction func touchTargetToPort(sender: UIButton) {
-        if headingTarget == nil {
-            return
-        }
-        touchTimer = NSTimer.scheduledTimerWithTimeInterval(touchRepeatInterval, target: self, selector: "changeTargetToPort", userInfo: nil, repeats: true)
-        touchTimer!.fire()
-    }
-    
-    @IBAction func touchTargetToStbd(sender: UIButton) {
-        if headingTarget == nil {
-            return
-        }
-        touchTimer = NSTimer.scheduledTimerWithTimeInterval(touchRepeatInterval, target: self, selector: "changeTargetToStbd", userInfo: nil, repeats: true)
-        touchTimer!.fire()
-    }
-    
-    @IBAction func touchTargetStop(sender: UIButton) {
-        if touchTimer != nil {
-            touchTimer!.invalidate()
-            touchTimer = nil
-        }
-    }
+    //
+    // Change the responsiveness of the heading detection given changing compass input
+    //
     
     func updateResponsiveness(index: Int) {
         switch(index) {
@@ -318,6 +305,63 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         log.debug("setResponsiveness changed to index \(sender.selectedSegmentIndex)")
         self.updateResponsiveness(sender.selectedSegmentIndex)
     }
+
+    //
+    // Change the target heading (single taps, sustained presses and swipes all supported)
+    //
+    
+    @IBAction func touchTargetToPort(sender: UIButton) {
+        if headingTarget == nil {
+            return
+        }
+        touchTimer = NSTimer.scheduledTimerWithTimeInterval(touchRepeatInterval, target: self, selector: "changeTargetToPort", userInfo: nil, repeats: true)
+        touchTimer!.fire()
+    }
+    
+    @IBAction func touchTargetToStbd(sender: UIButton) {
+        if headingTarget == nil {
+            return
+        }
+        touchTimer = NSTimer.scheduledTimerWithTimeInterval(touchRepeatInterval, target: self, selector: "changeTargetToStbd", userInfo: nil, repeats: true)
+        touchTimer!.fire()
+    }
+    
+    @IBAction func swipeStbd(sender: UISwipeGestureRecognizer) {
+        tackToStarboard()
+    }
+    
+    @IBAction func swipePort(sender: UISwipeGestureRecognizer) {
+        tackToPort()
+    }
+    
+    @IBAction func touchTargetStop(sender: UIButton) {
+        if touchTimer != nil {
+            touchTimer!.invalidate()
+            touchTimer = nil
+        }
+    }
+        
+    func changeTargetToPort() {
+        headingTarget = modifyDegrees(headingTarget, delta: -1)
+        updateUI()
+    }
+    
+    func changeTargetToStbd() {
+        headingTarget = modifyDegrees(headingTarget, delta: 1)
+        updateUI()
+    }
+    
+    func tackToPort() {
+        headingTarget = modifyDegrees(headingTarget, delta: -tackDegrees)
+        updateUI()
+    }
+    
+    func tackToStarboard() {
+        headingTarget = modifyDegrees(headingTarget, delta: tackDegrees)
+        updateUI()
+    }
+    
+    
 }
 
 
