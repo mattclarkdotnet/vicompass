@@ -144,11 +144,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     //
     
     func updateUI() {
-        let h = headingUpdates.smoothed(NSDate())
-        if h != nil {
-            log.debug("Latest heading: \(headingUpdates.mostRecentObservation!.v), Smoothed heading value \(h!)")
-            headingCurrent = h! % 360
-        }
+        headingCurrent = headingUpdates.smoothed(NSDate())
         updateScreenUI()
         updateBeepUI()
     }
