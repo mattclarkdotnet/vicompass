@@ -17,12 +17,94 @@ func createSound(fileName: String, fileExt: String) -> SystemSoundID {
     return soundID
 }
 
-func modifyDegrees(value: Double?=nil, delta: Double) -> Double? {
-    if value == nil { return nil }
-    return (value! + delta) % 360.0
+enum Turn {
+    case Port
+    case Stbd
+}
+
+struct Correction {
+    var direction: Turn
+    var amount: CLLocationDegrees
+    var required: Bool
 }
 
 class compassModel {
+    var headingTarget: CLLocationDegrees?
+    var diffTolerance: CLLocationDegrees = 5
+    var responsivenessIndex = 2
+    let tackDegrees = 100.0
+    let headingUpdates: ObservationHistory = ObservationHistory(deltaFunc: compassModel.calcCorrection, window_secs: 10)
+    
+    static func calcCorrection(current: CLLocationDegrees, target: CLLocationDegrees) -> CLLocationDegrees {
+        let difference = target - current
+        if difference == -180 {
+            return 180
+        } else if difference > 180 {
+            return difference - 360
+        } else if difference < -180 {
+            return difference + 360
+        } else {
+            return difference
+        }
+    }
+    
+    func correction() -> CLLocationDegrees {
+        let headingCurrent = smoothedHeading()
+        return compassModel.calcCorrection(headingCurrent!, target: headingTarget!)
+    }
+    
+    func correction2() -> Correction? {
+        let headingCurrent = smoothedHeading()
+        if headingTarget == nil || headingCurrent == nil { return nil }
+        let c = correction()
+        return Correction(direction: c < 0 ? Turn.Port : Turn.Stbd, amount: c, required: abs(c) > diffTolerance)
+    }
+    
+    func resonsivenessWindowSecs() -> Double {
+        switch(responsivenessIndex) {
+        case 0:
+            return 10.0
+        case 1:
+            return 6.0
+        case 3:
+            return 2.0
+        case 4:
+            return 1.0
+        default:
+            return 3.5
+        }
+    }
+    
+    func setResponsiveness(index: Int) {
+        responsivenessIndex = index
+        headingUpdates.window_secs = resonsivenessWindowSecs()
+    }
+    
+    func smoothedHeading() -> CLLocationDegrees? {
+        let s = headingUpdates.smoothed(NSDate())
+        if s == nil { return nil }
+        return s!
+    }
+    
+    func updateCurrentHeading(newheading: CLLocationDegrees) {
+        log.debug("updateCurrentHeading got: \(newheading)")
+        headingUpdates.add_observation(Observation(v: newheading, t: NSDate()))
+        // Don't update the UI, wait for the timer to do so
+    }
+    
+    func modifyTarget(delta: Double) {
+        if headingTarget != nil {
+            headingTarget = (headingTarget! + delta) % 360.0
+        }
+    }
+
+    func tackPort() {
+        modifyTarget(-tackDegrees)
+    }
+    
+    func tackStbd() {
+        modifyTarget(tackDegrees)
+    }
     
 }
 
@@ -50,19 +132,15 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     let headingFilter: CLLocationDegrees = 1
     let defaultResponsivenessIndex = 2
     let touchRepeatInterval = 0.2
-    let tackDegrees = 100.0
-    var diffTolerance: CLLocationDegrees = 5
     
     var locationManager: CLLocationManager!
-    var headingTarget: CLLocationDegrees?
-    var headingCurrent: CLLocationDegrees?
     var touchTimer: NSTimer?
     var beepTimer: NSTimer?
     var beepSound: SystemSoundID?
     var beepInterval: NSTimeInterval?
     var lastBeepTime: NSDate?
+    var model = compassModel()
     
-    let headingUpdates: ObservationHistory = ObservationHistory(deltaFunc: ViewController.calcCorrection, window_secs: 10)
     
     //
     // ViewController overrides
@@ -101,7 +179,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     
     func setupUI() {
         segResponsiveness.selectedSegmentIndex = defaultResponsivenessIndex
-        updateResponsiveness(defaultResponsivenessIndex)
+        model.setResponsiveness(defaultResponsivenessIndex)
         arrowPort.hidden = true
         arrowStbd.hidden = true
         btnPort.layer.borderWidth = 0.8
@@ -113,51 +191,24 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     }
 
     //
-    // Static methods
-    //
-    
-    static func calcCorrection(current: CLLocationDegrees, target: CLLocationDegrees) -> CLLocationDegrees {
-        let difference = target - current
-        if difference == -180 {
-            return 180
-        } else if difference > 180 {
-            return difference - 360
-        } else if difference < -180 {
-            return difference + 360
-        } else {
-            return difference
-        }
-    }
-    
-    static func correctionUIColor(correction: CLLocationDegrees, tolerance: CLLocationDegrees) -> UIColor {
-        if correction <= -tolerance {
-            return UIColor.redColor()
-        } else if correction >= tolerance {
-            return UIColor.greenColor()
-        } else {
-            return UIColor.whiteColor()
-        }
-    }
-    
-    //
     // UI management
     //
     
     func updateUI() {
-        headingCurrent = headingUpdates.smoothed(NSDate())
         updateScreenUI()
         updateBeepUI()
     }
     
     func updateScreenUI() {
-        txtDiffTolerance.text = Int(diffTolerance).description
+        txtDiffTolerance.text = Int(model.diffTolerance).description
+        let headingCurrent = model.smoothedHeading()
         if headingCurrent == nil {
             txtHeading.text = noDataText
         }
         else {
             txtHeading.text = Int(headingCurrent!).description
         }
-        if headingTarget == nil || !switchTargetOn.on || headingCurrent == nil {
+        if model.headingTarget == nil || !switchTargetOn.on || headingCurrent == nil {
             // no target or heading set, so no difference to process
             txtTarget.text = noDataText
             txtDifference.text = noDataText
@@ -166,19 +217,29 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             arrowStbd.hidden = true
         }
         else {
-            let correction = ViewController.calcCorrection(headingCurrent!, target: headingTarget!)
-            txtTarget.text = Int(headingTarget!).description
-            txtDifference.text = abs(Int(correction)).description
-            txtDifference.textColor = ViewController.correctionUIColor(correction, tolerance: diffTolerance)
-            if correction <= -diffTolerance {
-                arrowPort.hidden = false
-                arrowStbd.hidden = true
-            } else if correction >= diffTolerance {
+            let correction = model.correction2()!
+            txtTarget.text = Int(model.headingTarget!).description
+            txtDifference.text = abs(Int(correction.amount)).description
+            if correction.direction == Turn.Stbd {
                 arrowPort.hidden = true
                 arrowStbd.hidden = false
-            } else {
-                arrowPort.hidden = true
+            } else if correction.direction == Turn.Port {
+                arrowPort.hidden = false
                 arrowStbd.hidden = true
+            }
+            if correction.required {
+                if correction.direction == Turn.Stbd {
+                    txtDifference.textColor = UIColor.greenColor()
+                    arrowStbd.textColor = UIColor.greenColor()
+                    
+                } else if correction.direction == Turn.Port {
+                    txtDifference.textColor = UIColor.redColor()
+                    arrowPort.textColor = UIColor.redColor()
+                }
+            } else {
+                txtDifference.textColor = UIColor.whiteColor()
+                arrowPort.textColor = UIColor.whiteColor()
+                arrowStbd.textColor = UIColor.whiteColor()
             }
         }
     }
@@ -188,34 +249,35 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     //
     
     func updateBeepUI() {
-        if headingTarget == nil || !switchTargetOn.on || headingCurrent == nil {
+        let headingCurrent = model.smoothedHeading()
+        if model.headingTarget == nil || !switchTargetOn.on || headingCurrent == nil {
             beepInterval = nil
             beepSound = nil
         }
         else {
-            let correction = ViewController.calcCorrection(headingCurrent!, target: headingTarget!)
+            let correction = model.correction()
             setBeepInterval(correction)
             beepMaybe()
         }
     }
     
     func setBeepInterval(correction: CLLocationDegrees) {
-        if abs(correction) < diffTolerance {
+        if abs(correction) < model.diffTolerance {
             beepInterval = nil
             beepSound = nil
         }
         else {
             let degrees = Double(abs(correction))
-            let numerator = Double(diffTolerance) * slowest_interval_secs
+            let numerator = Double(model.diffTolerance) * slowest_interval_secs
             var intervalSecs: NSTimeInterval = max(fastest_interval_secs, numerator/degrees)
             if intervalSecs < 0.05 {
                 intervalSecs = 0.05
             }
             beepInterval = intervalSecs
-            if correction > -diffTolerance {
+            if correction > -model.diffTolerance {
                 beepSound = sndHigh  // a high pitched (rising) chirp means steer to starboard
             }
-            else if correction < diffTolerance {
+            else if correction < model.diffTolerance {
                 beepSound = sndLow // a low pitched (falling) chirp means steer to port
             }
         }
@@ -262,17 +324,11 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     
     //CLLocationManagerDelegate
     func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        updateCurrentHeading(newHeading.magneticHeading)
+        model.updateCurrentHeading(newHeading.magneticHeading)
     }
     
     @IBAction func sldrHeadingOverrideValueChanged(sender: AnyObject) {
-        updateCurrentHeading(CLLocationDegrees(round(sldrHeadingOverride.value)))
-    }
-    
-    func updateCurrentHeading(newheading: CLLocationDegrees) {
-        log.debug("updateCurrentHeading got: \(newheading)")
-        headingUpdates.add_observation(Observation(v: newheading, t: NSDate()))
-        // Don't update the UI, wait for the timer to do so
+        model.updateCurrentHeading(CLLocationDegrees(round(sldrHeadingOverride.value)))
     }
     
     //
@@ -281,14 +337,12 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     
     @IBAction func switchTargetOn(sender: UISwitch) {
         if sender.on {
-            log.debug("headingTarget set to current heading: \(headingCurrent)")
-            if headingTarget == nil {
-                headingTarget = headingCurrent
+            if model.headingTarget == nil {
+                model.headingTarget = model.smoothedHeading()
             }
         }
         else {
-            log.debug("headingTarget set to nil")
-            headingTarget = nil
+            model.headingTarget = nil
         }
     }
     
@@ -298,7 +352,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     
     @IBAction func stepDiffToleranceChanged(sender: UIStepper) {
         log.debug("stepDiffTolerance changed to \(sender.value)")
-        diffTolerance = CLLocationDegrees(sender.value)
+        model.diffTolerance = CLLocationDegrees(sender.value)
         updateUI()
     }
     
@@ -306,24 +360,10 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     // Change the responsiveness of the heading detection given changing compass input
     //
     
-    func updateResponsiveness(index: Int) {
-        switch(index) {
-        case 0:
-            headingUpdates.window_secs = 10.0
-        case 1:
-            headingUpdates.window_secs = 6.0
-        case 3:
-            headingUpdates.window_secs = 2.0
-        case 4:
-            headingUpdates.window_secs = 1.0
-        default:
-            headingUpdates.window_secs = 3.5
-        }
-    }
-    
     @IBAction func setResponsiveness(sender: UISegmentedControl) {
         log.debug("setResponsiveness changed to index \(sender.selectedSegmentIndex)")
-        self.updateResponsiveness(sender.selectedSegmentIndex)
+        model.setResponsiveness(sender.selectedSegmentIndex)
+        updateUI()
     }
 
     //
@@ -331,7 +371,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     //
     
     @IBAction func touchTargetToPort(sender: UIButton) {
-        if headingTarget == nil {
+        if model.headingTarget == nil {
             return
         }
         touchTimer = NSTimer.scheduledTimerWithTimeInterval(touchRepeatInterval, target: self, selector: "changeTargetToPort", userInfo: nil, repeats: true)
@@ -339,7 +379,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     }
     
     @IBAction func touchTargetToStbd(sender: UIButton) {
-        if headingTarget == nil {
+        if model.headingTarget == nil {
             return
         }
         touchTimer = NSTimer.scheduledTimerWithTimeInterval(touchRepeatInterval, target: self, selector: "changeTargetToStbd", userInfo: nil, repeats: true)
@@ -347,11 +387,13 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     }
     
     @IBAction func swipeStbd(sender: UISwipeGestureRecognizer) {
-        tackToStarboard()
+        model.tackStbd()
+        updateUI()
     }
     
     @IBAction func swipePort(sender: UISwipeGestureRecognizer) {
-        tackToPort()
+        model.tackPort()
+        updateUI()
     }
     
     @IBAction func touchTargetStop(sender: UIButton) {
@@ -362,26 +404,14 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     }
         
     func changeTargetToPort() {
-        headingTarget = modifyDegrees(headingTarget, delta: -1)
+        model.modifyTarget(-1)
         updateUI()
     }
     
     func changeTargetToStbd() {
-        headingTarget = modifyDegrees(headingTarget, delta: 1)
+        model.modifyTarget(1)
         updateUI()
     }
-    
-    func tackToPort() {
-        headingTarget = modifyDegrees(headingTarget, delta: -tackDegrees)
-        updateUI()
-    }
-    
-    func tackToStarboard() {
-        headingTarget = modifyDegrees(headingTarget, delta: tackDegrees)
-        updateUI()
-    }
-    
-    
 }
 
 
