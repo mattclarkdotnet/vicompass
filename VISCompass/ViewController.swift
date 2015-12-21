@@ -17,96 +17,6 @@ func createSound(fileName: String, fileExt: String) -> SystemSoundID {
     return soundID
 }
 
-enum Turn {
-    case Port
-    case Stbd
-}
-
-struct Correction {
-    var direction: Turn
-    var amount: CLLocationDegrees
-    var required: Bool
-}
-
-class compassModel {
-    var headingTarget: CLLocationDegrees?
-    var diffTolerance: CLLocationDegrees = 5
-    var responsivenessIndex = 2
-    let tackDegrees = 100.0
-    let headingUpdates: ObservationHistory = ObservationHistory(deltaFunc: compassModel.calcCorrection, window_secs: 10)
-    
-    static func calcCorrection(current: CLLocationDegrees, target: CLLocationDegrees) -> CLLocationDegrees {
-        let difference = target - current
-        if difference == -180 {
-            return 180
-        } else if difference > 180 {
-            return difference - 360
-        } else if difference < -180 {
-            return difference + 360
-        } else {
-            return difference
-        }
-    }
-    
-    func correction() -> CLLocationDegrees {
-        let headingCurrent = smoothedHeading()
-        return compassModel.calcCorrection(headingCurrent!, target: headingTarget!)
-    }
-    
-    func correction2() -> Correction? {
-        let headingCurrent = smoothedHeading()
-        if headingTarget == nil || headingCurrent == nil { return nil }
-        let c = correction()
-        return Correction(direction: c < 0 ? Turn.Port : Turn.Stbd, amount: c, required: abs(c) > diffTolerance)
-    }
-    
-    func resonsivenessWindowSecs() -> Double {
-        switch(responsivenessIndex) {
-        case 0:
-            return 10.0
-        case 1:
-            return 6.0
-        case 3:
-            return 2.0
-        case 4:
-            return 1.0
-        default:
-            return 3.5
-        }
-    }
-    
-    func setResponsiveness(index: Int) {
-        responsivenessIndex = index
-        headingUpdates.window_secs = resonsivenessWindowSecs()
-    }
-    
-    func smoothedHeading() -> CLLocationDegrees? {
-        let s = headingUpdates.smoothed(NSDate())
-        if s == nil { return nil }
-        return s!
-    }
-    
-    func updateCurrentHeading(newheading: CLLocationDegrees) {
-        log.debug("updateCurrentHeading got: \(newheading)")
-        headingUpdates.add_observation(Observation(v: newheading, t: NSDate()))
-        // Don't update the UI, wait for the timer to do so
-    }
-    
-    func modifyTarget(delta: Double) {
-        if headingTarget != nil {
-            headingTarget = (headingTarget! + delta) % 360.0
-        }
-    }
-
-    func tackPort() {
-        modifyTarget(-tackDegrees)
-    }
-    
-    func tackStbd() {
-        modifyTarget(tackDegrees)
-    }
-    
-}
 
 
 class ViewController: UIViewController,CLLocationManagerDelegate {
@@ -139,7 +49,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     var beepSound: SystemSoundID?
     var beepInterval: NSTimeInterval?
     var lastBeepTime: NSDate?
-    var model = compassModel()
+    var model = CompassModel()
     
     
     //
@@ -217,15 +127,15 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             arrowStbd.hidden = true
         }
         else {
-            let correction = model.correction2()!
+            let correction = model.correction()!
             txtTarget.text = Int(model.headingTarget!).description
             txtDifference.text = abs(Int(correction.amount)).description
-            if correction.direction == Turn.Stbd {
+            if  abs(correction.amount) < 1.0 {
                 arrowPort.hidden = true
-                arrowStbd.hidden = false
-            } else if correction.direction == Turn.Port {
-                arrowPort.hidden = false
                 arrowStbd.hidden = true
+            } else {
+                arrowPort.hidden = correction.direction == Turn.Stbd
+                arrowStbd.hidden = correction.direction == Turn.Port
             }
             if correction.required {
                 if correction.direction == Turn.Stbd {
@@ -249,14 +159,13 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     //
     
     func updateBeepUI() {
-        let headingCurrent = model.smoothedHeading()
-        if model.headingTarget == nil || !switchTargetOn.on || headingCurrent == nil {
+        let correction = model.correction()
+        if correction == nil || !correction!.required {
             beepInterval = nil
             beepSound = nil
         }
         else {
-            let correction = model.correction()
-            setBeepInterval(correction)
+            setBeepInterval(correction!.amount)
             beepMaybe()
         }
     }
