@@ -21,45 +21,28 @@ struct Correction {
 }
 
 class CompassModel {
-    var headingTarget: CLLocationDegrees?
     var diffTolerance: CLLocationDegrees = 5
-    var responsivenessIndex = 2
+    var headingTarget: CLLocationDegrees?
+    var headingCurrent: CLLocationDegrees?
     
-    let responsivenessWindows: [Double] = [10.0, 6.0, 3.5, 2.0, 1.0]
-    let tackDegrees = 100.0
-    let headingUpdates: ObservationHistory = ObservationHistory(deltaFunc: CompassModel.correctionDegrees, window_secs: 10)
+    private var responsivenessIndex = 2
+    private let responsivenessWindows: [Double] = [10.0, 6.0, 3.5, 2.0, 1.0]
+    private let tackDegrees = 100.0
+    private let headingUpdates: ObservationHistory = ObservationHistory(deltaFunc: CompassModel.correctionDegrees, window_secs: 10)
     
-    static func correctionDegrees(current: CLLocationDegrees, target: CLLocationDegrees) -> CLLocationDegrees {
-        let difference = target - current
-        if difference == -180 {
-            return 180
-        } else if difference > 180 {
-            return difference - 360
-        } else if difference < -180 {
-            return difference + 360
-        } else {
-            return difference
-        }
-    }
+    //
+    // internal interface
+    //
     
     func correction() -> Correction? {
         if let hc = smoothedHeading(), let ht = headingTarget {
             let c = CompassModel.correctionDegrees(hc, target: ht)
             return Correction(direction: c < 0 ? Turn.Port : Turn.Stbd,
-                              amount: c,
-                              required: abs(c) > diffTolerance)
+                amount: c,
+                required: abs(c) > diffTolerance)
         } else {
             return nil
         }
-    }
-    
-    func resonsivenessWindowSecs() -> Double {
-        return responsivenessWindows[responsivenessIndex]
-    }
-    
-    func setResponsiveness(index: Int) {
-        responsivenessIndex = index
-        headingUpdates.window_secs = resonsivenessWindowSecs()
     }
     
     func smoothedHeading() -> CLLocationDegrees? {
@@ -67,7 +50,13 @@ class CompassModel {
     }
     
     func updateCurrentHeading(newheading: CLLocationDegrees) {
+        self.headingCurrent = newheading
         headingUpdates.add_observation(Observation(v: newheading, t: NSDate()))
+    }
+    
+    func setResponsiveness(index: Int) {
+        responsivenessIndex = index
+        headingUpdates.window_secs = resonsivenessWindowSecs()
     }
     
     func modifyTarget(delta: Double) {
@@ -84,4 +73,24 @@ class CompassModel {
         modifyTarget(tackDegrees)
     }
     
+    //
+    // private interface
+    //
+    
+    private class func correctionDegrees(current: CLLocationDegrees, target: CLLocationDegrees) -> CLLocationDegrees {
+        let difference = target - current
+        if difference == -180 {
+            return 180
+        } else if difference > 180 {
+            return difference - 360
+        } else if difference < -180 {
+            return difference + 360
+        } else {
+            return difference
+        }
+    }
+    
+    private func resonsivenessWindowSecs() -> Double {
+        return responsivenessWindows[responsivenessIndex]
+    }
 }

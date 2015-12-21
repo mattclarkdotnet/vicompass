@@ -23,6 +23,10 @@ class ObservationHistory {
     var otherObservations: [Observation] = []
     var mostRecentObservation: Observation?
     
+    //
+    // internal interface
+    //
+    
     init(deltaFunc f: (Double, Double) -> Double, window_secs: Double) {
         self.deltaFunc = f
         self.window_secs = window_secs
@@ -35,7 +39,25 @@ class ObservationHistory {
         otherObservations = new_obs.filter(usable)
     }
     
-    func observations() -> [Observation] {
+    func smoothed(reftime: NSDate) -> Double? {
+        var iseries = interval_series(reftime)
+        if iseries.count == 0 {
+            return nil
+        }
+        var sv = iseries.removeFirst()
+        for (i, v) in iseries.enumerate() {
+            let delta_t = Double((i + 1)) * interval
+            let delta_v = weight(delta_t) * deltaFunc(sv, v)
+            sv = sv + delta_v
+        }
+        return sv
+    }
+    
+    //
+    // private interface
+    //
+    
+    private func observations() -> [Observation] {
         if mostRecentObservation == nil {
             return []
         }
@@ -44,16 +66,16 @@ class ObservationHistory {
         return obs
     }
     
-    func usable(o: Observation) -> Bool {
+    private func usable(o: Observation) -> Bool {
         let window_start = NSDate().timeIntervalSinceReferenceDate - window_secs
         return o.t.timeIntervalSinceReferenceDate > window_start
     }
     
-    func timesorted(o1: Observation, o2: Observation) -> Bool {
+    private func timesorted(o1: Observation, o2: Observation) -> Bool {
         return o1.t.timeIntervalSinceReferenceDate > o2.t.timeIntervalSinceReferenceDate
     }
     
-    func interval_series(reftime: NSDate) -> [Double] {
+    private func interval_series(reftime: NSDate) -> [Double] {
         // create a series of equally intervaled values from intermittent observations
         var s = [Double]()
         var t = reftime.timeIntervalSinceReferenceDate
@@ -71,25 +93,11 @@ class ObservationHistory {
         return s
     }
 
-    func weight(delta_t: Double) -> Double {
+    private func weight(delta_t: Double) -> Double {
         if delta_t >= window_secs {
             return 0
         }
         let linear_weight = (window_secs - delta_t) / window_secs
         return pow(linear_weight, gamma)
-    }
-
-    func smoothed(reftime: NSDate) -> Double? {
-        var iseries = interval_series(reftime)
-        if iseries.count == 0 {
-            return nil
-        }
-        var sv = iseries.removeFirst()
-        for (i, v) in iseries.enumerate() {
-            let delta_t = Double((i + 1)) * interval
-            let delta_v = weight(delta_t) * deltaFunc(sv, v)
-            sv = sv + delta_v
-        }
-        return sv
     }
 }

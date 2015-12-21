@@ -110,26 +110,28 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     }
     
     func updateScreenUI() {
+        // Display the current tolerance
         txtDiffTolerance.text = Int(model.diffTolerance).description
-        let headingCurrent = model.smoothedHeading()
-        if headingCurrent == nil {
+        
+        // Display the current heading
+        if let headingCurrent = model.smoothedHeading() {
+            txtHeading.text = Int(headingCurrent).description
+        } else {
             txtHeading.text = noDataText
         }
-        else {
-            txtHeading.text = Int(headingCurrent!).description
-        }
-        if model.headingTarget == nil || !switchTargetOn.on || headingCurrent == nil {
-            // no target or heading set, so no difference to process
+        
+        // Display the target heading
+        if let headingTarget = model.headingTarget {
+            txtTarget.text = Int(headingTarget).description
+        } else {
             txtTarget.text = noDataText
-            txtDifference.text = noDataText
-            txtDifference.textColor = UIColor.whiteColor()
-            arrowPort.hidden = true
-            arrowStbd.hidden = true
         }
-        else {
-            let correction = model.correction()!
-            txtTarget.text = Int(model.headingTarget!).description
+        
+        if let correction = model.correction() {
+            // show the correction as whole numbers
             txtDifference.text = abs(Int(correction.amount)).description
+            
+            // display the appropriate direction indicator arrows
             if  abs(correction.amount) < 1.0 {
                 arrowPort.hidden = true
                 arrowStbd.hidden = true
@@ -137,6 +139,8 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
                 arrowPort.hidden = correction.direction == Turn.Stbd
                 arrowStbd.hidden = correction.direction == Turn.Port
             }
+            
+            // set the colour of the direction indicator arrows and correction value
             if correction.required {
                 if correction.direction == Turn.Stbd {
                     txtDifference.textColor = UIColor.greenColor()
@@ -151,6 +155,11 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
                 arrowPort.textColor = UIColor.whiteColor()
                 arrowStbd.textColor = UIColor.whiteColor()
             }
+        } else {
+            // There is no correction available
+            txtDifference.textColor = UIColor.whiteColor()
+            arrowPort.hidden = true
+            arrowStbd.hidden = true
         }
     }
     
