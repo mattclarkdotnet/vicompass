@@ -20,19 +20,35 @@ struct Correction {
     var required: Bool
 }
 
-class CompassModel {
+class CompassModel: NSObject, CLLocationManagerDelegate {
     var diffTolerance: CLLocationDegrees = 5
     var headingTarget: CLLocationDegrees?
     var headingCurrent: CLLocationDegrees?
     
+    var locationManager: CLLocationManager? = nil
+    private let headingFilter: CLLocationDegrees = 1.0
     private var responsivenessIndex = 2
     private let responsivenessWindows: [Double] = [10.0, 6.0, 3.5, 2.0, 1.0]
     private let tackDegrees = 100.0
     private let headingUpdates: ObservationHistory = ObservationHistory(deltaFunc: CompassModel.correctionDegrees, window_secs: 10)
     
+    override init() {
+        super.init()
+        if CLLocationManager.headingAvailable() {
+            locationManager = CLLocationManager()
+            locationManager!.delegate = self
+            locationManager!.headingFilter = headingFilter
+            locationManager!.startUpdatingHeading()
+        }
+    }
+    
     //
     // internal interface
     //
+    
+    func isUsingCompass() -> Bool {
+        return locationManager != nil
+    }
     
     func correction() -> Correction? {
         if let hc = smoothedHeading(), let ht = headingTarget {
@@ -72,6 +88,13 @@ class CompassModel {
     func tackStbd() {
         modifyTarget(tackDegrees)
     }
+    
+    //CLLocationManagerDelegate
+    func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        updateCurrentHeading(newHeading.magneticHeading)
+    }
+    
+    
     
     //
     // private interface

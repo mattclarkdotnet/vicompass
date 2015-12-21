@@ -19,7 +19,7 @@ func createSound(fileName: String, fileExt: String) -> SystemSoundID {
 
 
 
-class ViewController: UIViewController,CLLocationManagerDelegate {
+class ViewController: UIViewController {
 
     @IBOutlet weak var txtDifference: UILabel!
     @IBOutlet weak var txtTarget: UILabel!
@@ -39,46 +39,26 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     let noDataText = "---"
     let slowest_interval_secs = 2.0
     let fastest_interval_secs = 0.1
-    let headingFilter: CLLocationDegrees = 1
     let defaultResponsivenessIndex = 2
     let touchRepeatInterval = 0.2
     
-    var locationManager: CLLocationManager!
+    var model: CompassModel = CompassModel()
     var touchTimer: NSTimer?
     var beepTimer: NSTimer?
     var beepSound: SystemSoundID?
     var beepInterval: NSTimeInterval?
     var lastBeepTime: NSDate?
-    var model = CompassModel()
-    
     
     //
     // ViewController overrides
     //
     
     override func viewDidLoad() {
-        locationManager = CLLocationManager()
         setupUI()
-        if CLLocationManager.headingAvailable() {
-            log.debug("Requesting heading updates with headingFilter of \(headingFilter)")
-            locationManager.delegate = self
-            locationManager.headingFilter = headingFilter
-            locationManager.startUpdatingHeading()
-            // hide the manual heading slider
-            sldrHeadingOverride.hidden = true
-        } else {
-            log.debug("Heading information not available on this device")
-        }
         super.viewDidLoad()
         let _ = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateUI", userInfo: nil, repeats: true)
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     override func shouldAutorotate() -> Bool {
         return false
     }
@@ -88,6 +68,10 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     //
     
     func setupUI() {
+        if model.isUsingCompass() {
+            // hide the manual heading slider
+            sldrHeadingOverride.hidden = true
+        }
         segResponsiveness.selectedSegmentIndex = defaultResponsivenessIndex
         model.setResponsiveness(defaultResponsivenessIndex)
         arrowPort.hidden = true
@@ -157,6 +141,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             }
         } else {
             // There is no correction available
+            txtDifference.text = noDataText
             txtDifference.textColor = UIColor.whiteColor()
             arrowPort.hidden = true
             arrowStbd.hidden = true
@@ -239,11 +224,6 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     //
     // Handle changes in heading
     //
-    
-    //CLLocationManagerDelegate
-    func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        model.updateCurrentHeading(newHeading.magneticHeading)
-    }
     
     @IBAction func sldrHeadingOverrideValueChanged(sender: AnyObject) {
         model.updateCurrentHeading(CLLocationDegrees(round(sldrHeadingOverride.value)))
