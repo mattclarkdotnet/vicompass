@@ -43,10 +43,14 @@ class CompassModel {
     }
     
     func correction() -> Correction? {
-        let headingCurrent = smoothedHeading()
-        if headingTarget == nil || headingCurrent == nil { return nil }
-        let c = CompassModel.correctionDegrees(headingCurrent!, target: headingTarget!)
-        return Correction(direction: c < 0 ? Turn.Port : Turn.Stbd, amount: c, required: abs(c) > diffTolerance)
+        if let hc = smoothedHeading(), let ht = headingTarget {
+            let c = CompassModel.correctionDegrees(hc, target: ht)
+            return Correction(direction: c < 0 ? Turn.Port : Turn.Stbd,
+                              amount: c,
+                              required: abs(c) > diffTolerance)
+        } else {
+            return nil
+        }
     }
     
     func resonsivenessWindowSecs() -> Double {
@@ -59,15 +63,11 @@ class CompassModel {
     }
     
     func smoothedHeading() -> CLLocationDegrees? {
-        let s = headingUpdates.smoothed(NSDate())
-        if s == nil { return nil }
-        return s!
+        return headingUpdates.smoothed(NSDate())
     }
     
     func updateCurrentHeading(newheading: CLLocationDegrees) {
-        log.debug("updateCurrentHeading got: \(newheading)")
         headingUpdates.add_observation(Observation(v: newheading, t: NSDate()))
-        // Don't update the UI, wait for the timer to do so
     }
     
     func modifyTarget(delta: Double) {
