@@ -28,7 +28,7 @@ class CompassModel: NSObject, CLLocationManagerDelegate {
     var locationManager: CLLocationManager? = nil
     private let headingFilter: CLLocationDegrees = 1.0
     private var responsivenessIndex = 2
-    private let responsivenessWindows: [Double] = [10.0, 6.0, 3.5, 2.0, 1.0]
+    private let responsivenessWindows: [Double] = [10.0, 6.0, 3.0, 1.5, 0.75]
     private let tackDegrees = 100.0
     private let headingUpdates: ObservationHistory = ObservationHistory(deltaFunc: CompassModel.correctionDegrees, window_secs: 10)
     
