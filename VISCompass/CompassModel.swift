@@ -94,13 +94,7 @@ class CompassModel: NSObject, CLLocationManagerDelegate {
         updateCurrentHeading(newHeading.magneticHeading)
     }
     
-    
-    
-    //
-    // private interface
-    //
-    
-    private class func correctionDegrees(current: CLLocationDegrees, target: CLLocationDegrees) -> CLLocationDegrees {
+    class func correctionDegrees(current: CLLocationDegrees, target: CLLocationDegrees) -> CLLocationDegrees {
         let difference = target - current
         if difference == -180 {
             return 180
@@ -113,7 +107,7 @@ class CompassModel: NSObject, CLLocationManagerDelegate {
         }
     }
     
-    private func resonsivenessWindowSecs() -> Double {
+    func resonsivenessWindowSecs() -> Double {
         return responsivenessWindows[responsivenessIndex]
     }
 }

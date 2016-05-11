@@ -11,6 +11,7 @@
 		C90602F31BECC56E004BBD66 /* ObservationHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90602F11BECC56E004BBD66 /* ObservationHistory.swift */; };
 		C93C90141BEE915D006270DF /* 4k_to_2k_in_20ms.wav in Resources */ = {isa = PBXBuildFile; fileRef = C93C90121BEE915D006270DF /* 4k_to_2k_in_20ms.wav */; };
 		C93C90151BEE915D006270DF /* 1k_to_2k_in_20ms.wav in Resources */ = {isa = PBXBuildFile; fileRef = C93C90131BEE915D006270DF /* 1k_to_2k_in_20ms.wav */; };
+		C948DADA1CE3219300D7C1DE /* CompassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96274691C2808A20030C09F /* CompassModel.swift */; };
 		C960885E1B986D2B00F500A4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB6581B77786B00D57D3F /* ViewController.swift */; };
 		C960885F1B986D9C00F500A4 /* XCGLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FD13491B7B7BDA0095563F /* XCGLogger.swift */; };
 		C96088601B986D9F00F500A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB6561B77786B00D57D3F /* AppDelegate.swift */; };
@@ -300,6 +301,7 @@
 			files = (
 				C90602F31BECC56E004BBD66 /* ObservationHistory.swift in Sources */,
 				C96088601B986D9F00F500A4 /* AppDelegate.swift in Sources */,
+				C948DADA1CE3219300D7C1DE /* CompassModel.swift in Sources */,
 				C960885E1B986D2B00F500A4 /* ViewController.swift in Sources */,
 				C9BBB66C1B77786C00D57D3F /* VISCompassTests.swift in Sources */,
 				C960885F1B986D9C00F500A4 /* XCGLogger.swift in Sources */,

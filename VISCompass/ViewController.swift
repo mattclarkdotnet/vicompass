@@ -56,7 +56,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         setupUI()
         super.viewDidLoad()
-        let _ = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateUI", userInfo: nil, repeats: true)
+        let _ = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(ViewController.updateUI), userInfo: nil, repeats: true)
     }
 
     override func shouldAutorotate() -> Bool {
@@ -197,7 +197,7 @@ class ViewController: UIViewController {
             // No timer exists, or one exists but it is invalidated, or no last beep time is recorded, so go ahead and emit
             // our beep then schedule another beep in beepInterval seconds
             lastBeepTime = NSDate()
-            beepTimer = NSTimer.scheduledTimerWithTimeInterval(beepInterval!, target: self, selector: "beepMaybe", userInfo: nil, repeats: false)
+            beepTimer = NSTimer.scheduledTimerWithTimeInterval(beepInterval!, target: self, selector: #selector(ViewController.beepMaybe), userInfo: nil, repeats: false)
             AudioServicesPlaySystemSound(beepSound!) // ??? double check this is async
         }
         else {
@@ -209,14 +209,14 @@ class ViewController: UIViewController {
                 // beepInterval seconds
                 beepTimer!.invalidate()
                 lastBeepTime = NSDate()
-                beepTimer = NSTimer.scheduledTimerWithTimeInterval(beepInterval!, target: self, selector: "beepMaybe", userInfo: nil, repeats: false)
+                beepTimer = NSTimer.scheduledTimerWithTimeInterval(beepInterval!, target: self, selector: #selector(ViewController.beepMaybe), userInfo: nil, repeats: false)
                 AudioServicesPlaySystemSound(beepSound!)
             }
             else {
                 // The new beep interval is longer then the time since the last beep.  We need to wait a bit before beeping
                 // so schedule a new timer for beepInterval - timeSinceLastBeep seconds
                 beepTimer!.invalidate()
-                beepTimer = NSTimer.scheduledTimerWithTimeInterval(beepInterval! - timeSinceLastBeep, target: self, selector: "beepMaybe", userInfo: nil, repeats: false)
+                beepTimer = NSTimer.scheduledTimerWithTimeInterval(beepInterval! - timeSinceLastBeep, target: self, selector: #selector(ViewController.beepMaybe), userInfo: nil, repeats: false)
             }
         }
     }
@@ -272,7 +272,7 @@ class ViewController: UIViewController {
         if model.headingTarget == nil {
             return
         }
-        touchTimer = NSTimer.scheduledTimerWithTimeInterval(touchRepeatInterval, target: self, selector: "changeTargetToPort", userInfo: nil, repeats: true)
+        touchTimer = NSTimer.scheduledTimerWithTimeInterval(touchRepeatInterval, target: self, selector: #selector(ViewController.changeTargetToPort), userInfo: nil, repeats: true)
         touchTimer!.fire()
     }
     
@@ -280,7 +280,7 @@ class ViewController: UIViewController {
         if model.headingTarget == nil {
             return
         }
-        touchTimer = NSTimer.scheduledTimerWithTimeInterval(touchRepeatInterval, target: self, selector: "changeTargetToStbd", userInfo: nil, repeats: true)
+        touchTimer = NSTimer.scheduledTimerWithTimeInterval(touchRepeatInterval, target: self, selector: #selector(ViewController.changeTargetToStbd), userInfo: nil, repeats: true)
         touchTimer!.fire()
     }
     

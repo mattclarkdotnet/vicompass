@@ -34,32 +34,24 @@ class VISCompassTests: XCTestCase {
     }
     
     func testCorrectionCalculation() {
-        XCTAssertEqual(ViewController.calcCorrection(0, target: 0), 0)
-        XCTAssertEqual(ViewController.calcCorrection(90, target: 90), 0)
-        XCTAssertEqual(ViewController.calcCorrection(180, target: 180), 0)
-        XCTAssertEqual(ViewController.calcCorrection(270, target: 270), 0)
-        XCTAssertEqual(ViewController.calcCorrection(359, target: 359), 0)
-        XCTAssertEqual(ViewController.calcCorrection(1, target: 1), 0)
-        XCTAssertEqual(ViewController.calcCorrection(10, target: 20), 10)
-        XCTAssertEqual(ViewController.calcCorrection(20, target: 10), -10)
-        XCTAssertEqual(ViewController.calcCorrection(350, target: 20), 30)
-        XCTAssertEqual(ViewController.calcCorrection(20, target: 350), -30)
-        XCTAssertEqual(ViewController.calcCorrection(350, target: 320), -30)
-        XCTAssertEqual(ViewController.calcCorrection(320, target: 350), 30)
-        XCTAssertEqual(ViewController.calcCorrection(190, target: 0), 170)
-        XCTAssertEqual(ViewController.calcCorrection(0, target: 190), -170)
-        XCTAssertEqual(ViewController.calcCorrection(170, target: 190), 20)
-        XCTAssertEqual(ViewController.calcCorrection(190, target: 170), -20)
-        XCTAssertEqual(ViewController.calcCorrection(90, target: 270), 180)
-        XCTAssertEqual(ViewController.calcCorrection(270, target: 90), 180)
-    }
-    
-    func testCorrectionUIColor() {
-        XCTAssertEqual(ViewController.correctionUIColor(0, tolerance: 5), UIColor.whiteColor())
-        XCTAssertEqual(ViewController.correctionUIColor(5, tolerance: 5), UIColor.whiteColor())
-        XCTAssertEqual(ViewController.correctionUIColor(-5, tolerance: 5), UIColor.whiteColor())
-        XCTAssertEqual(ViewController.correctionUIColor(5, tolerance: 4), UIColor.greenColor())
-        XCTAssertEqual(ViewController.correctionUIColor(-5, tolerance: 4), UIColor.redColor())
+        XCTAssertEqual(CompassModel.correctionDegrees(0, target: 0), 0)
+        XCTAssertEqual(CompassModel.correctionDegrees(90, target: 90), 0)
+        XCTAssertEqual(CompassModel.correctionDegrees(180, target: 180), 0)
+        XCTAssertEqual(CompassModel.correctionDegrees(270, target: 270), 0)
+        XCTAssertEqual(CompassModel.correctionDegrees(359, target: 359), 0)
+        XCTAssertEqual(CompassModel.correctionDegrees(1, target: 1), 0)
+        XCTAssertEqual(CompassModel.correctionDegrees(10, target: 20), 10)
+        XCTAssertEqual(CompassModel.correctionDegrees(20, target: 10), -10)
+        XCTAssertEqual(CompassModel.correctionDegrees(350, target: 20), 30)
+        XCTAssertEqual(CompassModel.correctionDegrees(20, target: 350), -30)
+        XCTAssertEqual(CompassModel.correctionDegrees(350, target: 320), -30)
+        XCTAssertEqual(CompassModel.correctionDegrees(320, target: 350), 30)
+        XCTAssertEqual(CompassModel.correctionDegrees(190, target: 0), 170)
+        XCTAssertEqual(CompassModel.correctionDegrees(0, target: 190), -170)
+        XCTAssertEqual(CompassModel.correctionDegrees(170, target: 190), 20)
+        XCTAssertEqual(CompassModel.correctionDegrees(190, target: 170), -20)
+        XCTAssertEqual(CompassModel.correctionDegrees(90, target: 270), 180)
+        XCTAssertEqual(CompassModel.correctionDegrees(270, target: 90), 180)
     }
     
     func testBeepInterval() {
@@ -75,7 +67,7 @@ class ObservationTests: XCTestCase {
     func testOneObservation() {
         let now = NSDate()
         // If we have one observation within the window, then that is the only value in the interval series
-        let oh = ObservationHistory(deltaFunc: ViewController.calcCorrection, window_secs: 10)
+        let oh = ObservationHistory(deltaFunc: CompassModel.correctionDegrees, window_secs: 10)
         oh.add_observation(Observation(v: 20, t: now))
         XCTAssertEqual(oh.interval_series(now), [20.0])
         XCTAssertEqual(oh.interval_series(NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate + oh.interval)), [20.0, 20.0])
@@ -84,7 +76,7 @@ class ObservationTests: XCTestCase {
 
     func testTwoObservations() {
         let now = NSDate()
-        let oh = ObservationHistory(deltaFunc: ViewController.calcCorrection, window_secs: 10)
+        let oh = ObservationHistory(deltaFunc: CompassModel.correctionDegrees, window_secs: 10)
         let o1 = Observation(v: 20, t: NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate - oh.interval))
         let o2 = Observation(v: 10, t: now)
         oh.add_observation(o1)
@@ -100,7 +92,7 @@ class ObservationTests: XCTestCase {
     
     func testThreeObservations() {
         let now = NSDate()
-        let oh = ObservationHistory(deltaFunc: ViewController.calcCorrection, window_secs: 10)
+        let oh = ObservationHistory(deltaFunc: CompassModel.correctionDegrees, window_secs: 10)
         let o1 = Observation(v: 30, t: NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate - oh.interval * 2))
         let o2 = Observation(v: 20, t: NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate - oh.interval ))
         let o3 = Observation(v: 10, t: now)
@@ -119,7 +111,7 @@ class ObservationTests: XCTestCase {
     
     func testSmoothing() {
         let now = NSDate()
-        let oh = ObservationHistory(deltaFunc: ViewController.calcCorrection, window_secs: 10)
+        let oh = ObservationHistory(deltaFunc: CompassModel.correctionDegrees, window_secs: 10)
         let o1 = Observation(v: 20, t: NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate - oh.interval))
         let o2 = Observation(v: 10, t: now)
         oh.add_observation(o1)

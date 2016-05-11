@@ -57,7 +57,7 @@ class ObservationHistory {
     // private interface
     //
     
-    private func observations() -> [Observation] {
+    func observations() -> [Observation] {
         if mostRecentObservation == nil {
             return []
         }
@@ -75,7 +75,7 @@ class ObservationHistory {
         return o1.t.timeIntervalSinceReferenceDate > o2.t.timeIntervalSinceReferenceDate
     }
     
-    private func interval_series(reftime: NSDate) -> [Double] {
+    func interval_series(reftime: NSDate) -> [Double] {
         // create a series of equally intervaled values from intermittent observations
         var s = [Double]()
         var t = reftime.timeIntervalSinceReferenceDate
