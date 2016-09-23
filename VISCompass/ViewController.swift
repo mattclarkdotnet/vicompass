@@ -34,8 +34,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var btnPort: UIButton!
     @IBOutlet weak var btnStbd: UIButton!
     
-    let sndHigh: SystemSoundID = createSound("4k_to_2k_in_20ms", fileExt: "wav")
-    let sndLow: SystemSoundID = createSound("1k_to_2k_in_20ms", fileExt: "wav")
+    let sndHigh: SystemSoundID = createSound("click_high", fileExt: "wav")
+    let sndLow: SystemSoundID = createSound("click_low", fileExt: "wav")
     let noDataText = "---"
     let slowest_interval_secs = 2.0
     let fastest_interval_secs = 0.1
