@@ -13,10 +13,11 @@
 		C93C90151BEE915D006270DF /* 1k_to_2k_in_20ms.wav in Resources */ = {isa = PBXBuildFile; fileRef = C93C90131BEE915D006270DF /* 1k_to_2k_in_20ms.wav */; };
 		C948DADA1CE3219300D7C1DE /* CompassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96274691C2808A20030C09F /* CompassModel.swift */; };
 		C960885E1B986D2B00F500A4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB6581B77786B00D57D3F /* ViewController.swift */; };
-		C960885F1B986D9C00F500A4 /* XCGLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FD13491B7B7BDA0095563F /* XCGLogger.swift */; };
 		C96088601B986D9F00F500A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB6561B77786B00D57D3F /* AppDelegate.swift */; };
 		C96274681C25A52C0030C09F /* Compass_512.png in Resources */ = {isa = PBXBuildFile; fileRef = C96274671C25A52C0030C09F /* Compass_512.png */; };
 		C962746A1C2808A20030C09F /* CompassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96274691C2808A20030C09F /* CompassModel.swift */; };
+		C964F4BC1D94D71C000B0750 /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C964F4AD1D94D6CB000B0750 /* XCGLogger.framework */; };
+		C964F4BD1D94D71C000B0750 /* XCGLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C964F4AD1D94D6CB000B0750 /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C9BBB6571B77786B00D57D3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB6561B77786B00D57D3F /* AppDelegate.swift */; };
 		C9BBB6591B77786B00D57D3F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB6581B77786B00D57D3F /* ViewController.swift */; };
 		C9BBB65C1B77786B00D57D3F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9BBB65A1B77786B00D57D3F /* Main.storyboard */; };
@@ -25,10 +26,72 @@
 		C9BBB66C1B77786C00D57D3F /* VISCompassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB66B1B77786C00D57D3F /* VISCompassTests.swift */; };
 		C9BBB6771B77786C00D57D3F /* VISCompassUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB6761B77786C00D57D3F /* VISCompassUITests.swift */; };
 		C9CCA5001B7A1CAA00CB2431 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9CCA4FF1B7A1CAA00CB2431 /* Default-568h@2x.png */; };
-		C9FD134A1B7B7BDA0095563F /* XCGLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FD13491B7B7BDA0095563F /* XCGLogger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		C964F4AC1D94D6CB000B0750 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C964F4A11D94D6CB000B0750 /* XCGLogger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55E3EE4519D76F280068C3A7;
+			remoteInfo = "XCGLogger (iOS)";
+		};
+		C964F4AE1D94D6CB000B0750 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C964F4A11D94D6CB000B0750 /* XCGLogger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 554DF41719D76FE7005708BE;
+			remoteInfo = "XCGLogger (OS X)";
+		};
+		C964F4B01D94D6CB000B0750 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C964F4A11D94D6CB000B0750 /* XCGLogger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 70CB94201B99E728007802FF;
+			remoteInfo = "XCGLogger (watchOS)";
+		};
+		C964F4B21D94D6CB000B0750 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C964F4A11D94D6CB000B0750 /* XCGLogger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5515A3DF1BA119FA0047BA31;
+			remoteInfo = "XCGLogger (tvOS)";
+		};
+		C964F4B41D94D6CB000B0750 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C964F4A11D94D6CB000B0750 /* XCGLogger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55E3EE5019D76F280068C3A7;
+			remoteInfo = XCGLoggerTests_iOS;
+		};
+		C964F4B61D94D6CB000B0750 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C964F4A11D94D6CB000B0750 /* XCGLogger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BB1F011B79DC7500709779;
+			remoteInfo = XCGLoggerTests_OSX;
+		};
+		C964F4B81D94D6CB000B0750 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C964F4A11D94D6CB000B0750 /* XCGLogger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 558EEB851D6BAC61006A9C7A;
+			remoteInfo = XCGLoggerTests_watchOS;
+		};
+		C964F4BA1D94D6CB000B0750 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C964F4A11D94D6CB000B0750 /* XCGLogger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 558EEB921D6BAC66006A9C7A;
+			remoteInfo = XCGLoggerTests_tvOS;
+		};
+		C964F4BE1D94D71C000B0750 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C964F4A11D94D6CB000B0750 /* XCGLogger.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 55E3EE4419D76F280068C3A7;
+			remoteInfo = "XCGLogger (iOS)";
+		};
 		C9BBB6681B77786C00D57D3F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C9BBB64B1B77786B00D57D3F /* Project object */;
@@ -45,12 +108,27 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		C964F4C01D94D71C000B0750 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C964F4BD1D94D71C000B0750 /* XCGLogger.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		C90602F11BECC56E004BBD66 /* ObservationHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservationHistory.swift; sourceTree = "<group>"; };
 		C93C90121BEE915D006270DF /* 4k_to_2k_in_20ms.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = 4k_to_2k_in_20ms.wav; path = Assets/4k_to_2k_in_20ms.wav; sourceTree = "<group>"; };
 		C93C90131BEE915D006270DF /* 1k_to_2k_in_20ms.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = 1k_to_2k_in_20ms.wav; path = Assets/1k_to_2k_in_20ms.wav; sourceTree = "<group>"; };
 		C96274671C25A52C0030C09F /* Compass_512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Compass_512.png; sourceTree = "<group>"; };
 		C96274691C2808A20030C09F /* CompassModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompassModel.swift; sourceTree = "<group>"; };
+		C964F4A11D94D6CB000B0750 /* XCGLogger.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XCGLogger.xcodeproj; path = Vendor/XCGLogger/Sources/XCGLogger.xcodeproj; sourceTree = "<group>"; };
 		C9BBB6531B77786B00D57D3F /* VISCompass.temp_caseinsensitive_rename.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VISCompass.temp_caseinsensitive_rename.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9BBB6561B77786B00D57D3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9BBB6581B77786B00D57D3F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -65,7 +143,6 @@
 		C9BBB6761B77786C00D57D3F /* VISCompassUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VISCompassUITests.swift; sourceTree = "<group>"; };
 		C9BBB6781B77786C00D57D3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C9CCA4FF1B7A1CAA00CB2431 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		C9FD13491B7B7BDA0095563F /* XCGLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XCGLogger.swift; path = Vendor/XCGLogger/XCGLogger/Library/XCGLogger/XCGLogger.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +150,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C964F4BC1D94D71C000B0750 /* XCGLogger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,9 +171,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C964F4A21D94D6CB000B0750 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C964F4AD1D94D6CB000B0750 /* XCGLogger.framework */,
+				C964F4AF1D94D6CB000B0750 /* XCGLogger.framework */,
+				C964F4B11D94D6CB000B0750 /* XCGLogger.framework */,
+				C964F4B31D94D6CB000B0750 /* XCGLogger.framework */,
+				C964F4B51D94D6CB000B0750 /* XCGLoggerTests_iOS.xctest */,
+				C964F4B71D94D6CB000B0750 /* XCGLoggerTests (OS X).xctest */,
+				C964F4B91D94D6CB000B0750 /* XCGLoggerTests_watchOS.xctest */,
+				C964F4BB1D94D6CB000B0750 /* XCGLoggerTests_tvOS.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		C9BBB64A1B77786B00D57D3F = {
 			isa = PBXGroup;
 			children = (
+				C964F4A11D94D6CB000B0750 /* XCGLogger.xcodeproj */,
 				C96274671C25A52C0030C09F /* Compass_512.png */,
 				C93C90121BEE915D006270DF /* 4k_to_2k_in_20ms.wav */,
 				C93C90131BEE915D006270DF /* 1k_to_2k_in_20ms.wav */,
@@ -120,7 +214,6 @@
 		C9BBB6551B77786B00D57D3F /* VISCompass */ = {
 			isa = PBXGroup;
 			children = (
-				C9FD13491B7B7BDA0095563F /* XCGLogger.swift */,
 				C9BBB6561B77786B00D57D3F /* AppDelegate.swift */,
 				C9BBB6581B77786B00D57D3F /* ViewController.swift */,
 				C9BBB65A1B77786B00D57D3F /* Main.storyboard */,
@@ -161,10 +254,12 @@
 				C9BBB64F1B77786B00D57D3F /* Sources */,
 				C9BBB6501B77786B00D57D3F /* Frameworks */,
 				C9BBB6511B77786B00D57D3F /* Resources */,
+				C964F4C01D94D71C000B0750 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				C964F4BF1D94D71C000B0750 /* PBXTargetDependency */,
 			);
 			name = VISCompass;
 			productName = VISCompass;
@@ -214,19 +309,22 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = mattclark.net;
 				TargetAttributes = {
 					C9BBB6521B77786B00D57D3F = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = 98P2YHA54F;
+						LastSwiftMigration = 0800;
 					};
 					C9BBB6661B77786C00D57D3F = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0800;
 						TestTargetID = C9BBB6521B77786B00D57D3F;
 					};
 					C9BBB6711B77786C00D57D3F = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0800;
 						TestTargetID = C9BBB6521B77786B00D57D3F;
 					};
 				};
@@ -242,6 +340,12 @@
 			mainGroup = C9BBB64A1B77786B00D57D3F;
 			productRefGroup = C9BBB6541B77786B00D57D3F /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C964F4A21D94D6CB000B0750 /* Products */;
+					ProjectRef = C964F4A11D94D6CB000B0750 /* XCGLogger.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				C9BBB6521B77786B00D57D3F /* VISCompass */,
@@ -250,6 +354,65 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		C964F4AD1D94D6CB000B0750 /* XCGLogger.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = XCGLogger.framework;
+			remoteRef = C964F4AC1D94D6CB000B0750 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C964F4AF1D94D6CB000B0750 /* XCGLogger.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = XCGLogger.framework;
+			remoteRef = C964F4AE1D94D6CB000B0750 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C964F4B11D94D6CB000B0750 /* XCGLogger.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = XCGLogger.framework;
+			remoteRef = C964F4B01D94D6CB000B0750 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C964F4B31D94D6CB000B0750 /* XCGLogger.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = XCGLogger.framework;
+			remoteRef = C964F4B21D94D6CB000B0750 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C964F4B51D94D6CB000B0750 /* XCGLoggerTests_iOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = XCGLoggerTests_iOS.xctest;
+			remoteRef = C964F4B41D94D6CB000B0750 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C964F4B71D94D6CB000B0750 /* XCGLoggerTests (OS X).xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "XCGLoggerTests (OS X).xctest";
+			remoteRef = C964F4B61D94D6CB000B0750 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C964F4B91D94D6CB000B0750 /* XCGLoggerTests_watchOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = XCGLoggerTests_watchOS.xctest;
+			remoteRef = C964F4B81D94D6CB000B0750 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C964F4BB1D94D6CB000B0750 /* XCGLoggerTests_tvOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = XCGLoggerTests_tvOS.xctest;
+			remoteRef = C964F4BA1D94D6CB000B0750 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		C9BBB6511B77786B00D57D3F /* Resources */ = {
@@ -291,7 +454,6 @@
 				C90602F21BECC56E004BBD66 /* ObservationHistory.swift in Sources */,
 				C9BBB6571B77786B00D57D3F /* AppDelegate.swift in Sources */,
 				C962746A1C2808A20030C09F /* CompassModel.swift in Sources */,
-				C9FD134A1B7B7BDA0095563F /* XCGLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,7 +466,6 @@
 				C948DADA1CE3219300D7C1DE /* CompassModel.swift in Sources */,
 				C960885E1B986D2B00F500A4 /* ViewController.swift in Sources */,
 				C9BBB66C1B77786C00D57D3F /* VISCompassTests.swift in Sources */,
-				C960885F1B986D9C00F500A4 /* XCGLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +480,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		C964F4BF1D94D71C000B0750 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "XCGLogger (iOS)";
+			targetProxy = C964F4BE1D94D71C000B0750 /* PBXContainerItemProxy */;
+		};
 		C9BBB6691B77786C00D57D3F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C9BBB6521B77786B00D57D3F /* VISCompass */;
@@ -364,8 +530,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -408,8 +576,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -428,6 +598,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -435,6 +606,7 @@
 		C9BBB67C1B77786C00D57D3F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -444,12 +616,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = mattclark.net.vicompass;
 				PRODUCT_NAME = VISCompass.temp_caseinsensitive_rename;
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		C9BBB67D1B77786C00D57D3F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -459,6 +633,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = mattclark.net.vicompass;
 				PRODUCT_NAME = VISCompass.temp_caseinsensitive_rename;
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -470,6 +645,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "mattclark.net.Blind-SailingTests";
 				PRODUCT_NAME = VISCompass.temp_caseinsensitive_rename;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VISCompass.temp_caseinsensitive_rename.app/VISCompass.temp_caseinsensitive_rename";
 			};
 			name = Debug;
@@ -482,6 +658,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "mattclark.net.Blind-SailingTests";
 				PRODUCT_NAME = VISCompass.temp_caseinsensitive_rename;
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VISCompass.temp_caseinsensitive_rename.app/VISCompass.temp_caseinsensitive_rename";
 			};
 			name = Release;
@@ -493,6 +670,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "mattclark.net.Blind-SailingUITests";
 				PRODUCT_NAME = VISCompass.temp_caseinsensitive_rename;
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = VISCompass;
 				USES_XCTRUNNER = YES;
 			};
@@ -505,6 +683,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "mattclark.net.Blind-SailingUITests";
 				PRODUCT_NAME = VISCompass.temp_caseinsensitive_rename;
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = VISCompass;
 				USES_XCTRUNNER = YES;
 			};

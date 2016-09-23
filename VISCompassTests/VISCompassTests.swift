@@ -28,7 +28,7 @@ class VISCompassTests: XCTestCase {
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock {
+        self.measure {
             // Put the code you want to measure the time of here.
         }
     }
@@ -65,19 +65,19 @@ class VISCompassTests: XCTestCase {
 
 class ObservationTests: XCTestCase {
     func testOneObservation() {
-        let now = NSDate()
+        let now = Date()
         // If we have one observation within the window, then that is the only value in the interval series
         let oh = ObservationHistory(deltaFunc: CompassModel.correctionDegrees, window_secs: 10)
         oh.add_observation(Observation(v: 20, t: now))
         XCTAssertEqual(oh.interval_series(now), [20.0])
-        XCTAssertEqual(oh.interval_series(NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate + oh.interval)), [20.0, 20.0])
-        XCTAssertEqual(oh.interval_series(NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate + oh.interval * 2)), [20.0, 20.0, 20.0])
+        XCTAssertEqual(oh.interval_series(Date(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate + oh.interval)), [20.0, 20.0])
+        XCTAssertEqual(oh.interval_series(Date(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate + oh.interval * 2)), [20.0, 20.0, 20.0])
     }
 
     func testTwoObservations() {
-        let now = NSDate()
+        let now = Date()
         let oh = ObservationHistory(deltaFunc: CompassModel.correctionDegrees, window_secs: 10)
-        let o1 = Observation(v: 20, t: NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate - oh.interval))
+        let o1 = Observation(v: 20, t: Date(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate - oh.interval))
         let o2 = Observation(v: 10, t: now)
         oh.add_observation(o1)
         oh.add_observation(o2)
@@ -86,15 +86,15 @@ class ObservationTests: XCTestCase {
         XCTAssertEqual(obs[0].v, o2.v)
         XCTAssertEqual(obs[1].v, o1.v)
         XCTAssertEqual(oh.interval_series(now), [10.0, 20.0])
-        XCTAssertEqual(oh.interval_series(NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate + oh.interval)), [10.0, 10.0, 20.0])
-        XCTAssertEqual(oh.interval_series(NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate + oh.interval * 2)), [10.0, 10.0, 10.0, 20.0])
+        XCTAssertEqual(oh.interval_series(Date(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate + oh.interval)), [10.0, 10.0, 20.0])
+        XCTAssertEqual(oh.interval_series(Date(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate + oh.interval * 2)), [10.0, 10.0, 10.0, 20.0])
     }
     
     func testThreeObservations() {
-        let now = NSDate()
+        let now = Date()
         let oh = ObservationHistory(deltaFunc: CompassModel.correctionDegrees, window_secs: 10)
-        let o1 = Observation(v: 30, t: NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate - oh.interval * 2))
-        let o2 = Observation(v: 20, t: NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate - oh.interval ))
+        let o1 = Observation(v: 30, t: Date(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate - oh.interval * 2))
+        let o2 = Observation(v: 20, t: Date(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate - oh.interval ))
         let o3 = Observation(v: 10, t: now)
         oh.add_observation(o1)
         oh.add_observation(o2)
@@ -105,21 +105,21 @@ class ObservationTests: XCTestCase {
         XCTAssertEqual(obs[1].v, o2.v)
         XCTAssertEqual(obs[2].v, o1.v)
         XCTAssertEqual(oh.interval_series(now), [10.0, 20.0, 30.0])
-        XCTAssertEqual(oh.interval_series(NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate + oh.interval)), [10.0, 10.0, 20.0, 30.0])
-        XCTAssertEqual(oh.interval_series(NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate + oh.interval * 2)), [10.0, 10.0, 10.0, 20.0, 30.0])
+        XCTAssertEqual(oh.interval_series(Date(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate + oh.interval)), [10.0, 10.0, 20.0, 30.0])
+        XCTAssertEqual(oh.interval_series(Date(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate + oh.interval * 2)), [10.0, 10.0, 10.0, 20.0, 30.0])
     }
     
     func testSmoothing() {
-        let now = NSDate()
+        let now = Date()
         let oh = ObservationHistory(deltaFunc: CompassModel.correctionDegrees, window_secs: 10)
-        let o1 = Observation(v: 20, t: NSDate(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate - oh.interval))
+        let o1 = Observation(v: 20, t: Date(timeIntervalSinceReferenceDate: now.timeIntervalSinceReferenceDate - oh.interval))
         let o2 = Observation(v: 10, t: now)
         oh.add_observation(o1)
         oh.add_observation(o2)
-        XCTAssertEqualWithAccuracy(oh.smoothed(now.dateByAddingTimeInterval(oh.window_secs * 2))!, 10, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(oh.smoothed(now.dateByAddingTimeInterval(oh.window_secs))!, 10, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(oh.smoothed(now.dateByAddingTimeInterval(oh.window_secs / 10))!, 16.4, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(oh.smoothed(now.dateByAddingTimeInterval(oh.window_secs / 2))!, 11.6, accuracy: 0.01)
+        XCTAssertEqualWithAccuracy(oh.smoothed(now.addingTimeInterval(oh.window_secs * 2))!, 10, accuracy: 0.01)
+        XCTAssertEqualWithAccuracy(oh.smoothed(now.addingTimeInterval(oh.window_secs))!, 10, accuracy: 0.01)
+        XCTAssertEqualWithAccuracy(oh.smoothed(now.addingTimeInterval(oh.window_secs / 10))!, 16.4, accuracy: 0.01)
+        XCTAssertEqualWithAccuracy(oh.smoothed(now.addingTimeInterval(oh.window_secs / 2))!, 11.6, accuracy: 0.01)
     }
 }
 

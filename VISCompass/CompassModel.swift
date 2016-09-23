@@ -10,8 +10,8 @@ import Foundation
 import CoreLocation
 
 enum Turn {
-    case Port
-    case Stbd
+    case port
+    case stbd
 }
 
 struct Correction {
@@ -26,11 +26,11 @@ class CompassModel: NSObject, CLLocationManagerDelegate {
     var headingCurrent: CLLocationDegrees?
     
     var locationManager: CLLocationManager? = nil
-    private let headingFilter: CLLocationDegrees = 1.0
-    private var responsivenessIndex = 2
-    private let responsivenessWindows: [Double] = [10.0, 6.0, 3.0, 1.5, 0.75]
-    private let tackDegrees = 100.0
-    private let headingUpdates: ObservationHistory = ObservationHistory(deltaFunc: CompassModel.correctionDegrees, window_secs: 10)
+    fileprivate let headingFilter: CLLocationDegrees = 1.0
+    fileprivate var responsivenessIndex = 2
+    fileprivate let responsivenessWindows: [Double] = [10.0, 6.0, 3.0, 1.5, 0.75]
+    fileprivate let tackDegrees = 100.0
+    fileprivate let headingUpdates: ObservationHistory = ObservationHistory(deltaFunc: CompassModel.correctionDegrees, window_secs: 10)
     
     override init() {
         super.init()
@@ -53,7 +53,7 @@ class CompassModel: NSObject, CLLocationManagerDelegate {
     func correction() -> Correction? {
         if let hc = smoothedHeading(), let ht = headingTarget {
             let c = CompassModel.correctionDegrees(hc, target: ht)
-            return Correction(direction: c < 0 ? Turn.Port : Turn.Stbd,
+            return Correction(direction: c < 0 ? Turn.port : Turn.stbd,
                 amount: c,
                 required: abs(c) > diffTolerance)
         } else {
@@ -62,22 +62,22 @@ class CompassModel: NSObject, CLLocationManagerDelegate {
     }
     
     func smoothedHeading() -> CLLocationDegrees? {
-        return headingUpdates.smoothed(NSDate())
+        return headingUpdates.smoothed(Date())
     }
     
-    func updateCurrentHeading(newheading: CLLocationDegrees) {
+    func updateCurrentHeading(_ newheading: CLLocationDegrees) {
         self.headingCurrent = newheading
-        headingUpdates.add_observation(Observation(v: newheading, t: NSDate()))
+        headingUpdates.add_observation(Observation(v: newheading, t: Date()))
     }
     
-    func setResponsiveness(index: Int) {
+    func setResponsiveness(_ index: Int) {
         responsivenessIndex = index
         headingUpdates.window_secs = resonsivenessWindowSecs()
     }
     
-    func modifyTarget(delta: Double) {
+    func modifyTarget(_ delta: Double) {
         if headingTarget != nil {
-            headingTarget = (headingTarget! + delta) % 360.0
+            headingTarget = (headingTarget! + delta).truncatingRemainder(dividingBy: 360.0)
         }
     }
     
@@ -90,11 +90,11 @@ class CompassModel: NSObject, CLLocationManagerDelegate {
     }
     
     //CLLocationManagerDelegate
-    func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         updateCurrentHeading(newHeading.magneticHeading)
     }
     
-    class func correctionDegrees(current: CLLocationDegrees, target: CLLocationDegrees) -> CLLocationDegrees {
+    class func correctionDegrees(_ current: CLLocationDegrees, target: CLLocationDegrees) -> CLLocationDegrees {
         let difference = target - current
         if difference == -180 {
             return 180

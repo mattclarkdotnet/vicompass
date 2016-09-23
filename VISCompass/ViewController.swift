@@ -10,10 +10,10 @@ import UIKit
 import CoreLocation
 import AudioToolbox
 
-func createSound(fileName: String, fileExt: String) -> SystemSoundID {
+func createSound(_ fileName: String, fileExt: String) -> SystemSoundID {
     var soundID: SystemSoundID = 0
-    let soundURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), fileName, fileExt, nil)
-    AudioServicesCreateSystemSoundID(soundURL, &soundID)
+    let soundURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), fileName as CFString!, fileExt as CFString!, nil)
+    AudioServicesCreateSystemSoundID(soundURL!, &soundID)
     return soundID
 }
 
@@ -43,11 +43,11 @@ class ViewController: UIViewController {
     let touchRepeatInterval = 0.2
     
     var model: CompassModel = CompassModel()
-    var touchTimer: NSTimer?
-    var beepTimer: NSTimer?
+    var touchTimer: Timer?
+    var beepTimer: Timer?
     var beepSound: SystemSoundID?
-    var beepInterval: NSTimeInterval?
-    var lastBeepTime: NSDate?
+    var beepInterval: TimeInterval?
+    var lastBeepTime: Date?
     
     //
     // ViewController overrides
@@ -56,10 +56,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         setupUI()
         super.viewDidLoad()
-        let _ = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(ViewController.updateUI), userInfo: nil, repeats: true)
+        let _ = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ViewController.updateUI), userInfo: nil, repeats: true)
     }
 
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return false
     }
     
@@ -70,17 +70,17 @@ class ViewController: UIViewController {
     func setupUI() {
         if model.isUsingCompass() {
             // hide the manual heading slider
-            sldrHeadingOverride.hidden = true
+            sldrHeadingOverride.isHidden = true
         }
         segResponsiveness.selectedSegmentIndex = defaultResponsivenessIndex
         model.setResponsiveness(defaultResponsivenessIndex)
-        arrowPort.hidden = true
-        arrowStbd.hidden = true
+        arrowPort.isHidden = true
+        arrowStbd.isHidden = true
         btnPort.layer.borderWidth = 0.8
-        btnPort.layer.borderColor = UIColor.redColor().CGColor
+        btnPort.layer.borderColor = UIColor.red.cgColor
         btnPort.layer.cornerRadius = 4.0
         btnStbd.layer.borderWidth = 0.8
-        btnStbd.layer.borderColor = UIColor.greenColor().CGColor
+        btnStbd.layer.borderColor = UIColor.green.cgColor
         btnStbd.layer.cornerRadius = 4.0
     }
 
@@ -117,34 +117,34 @@ class ViewController: UIViewController {
             
             // display the appropriate direction indicator arrows
             if  abs(correction.amount) < 1.0 {
-                arrowPort.hidden = true
-                arrowStbd.hidden = true
+                arrowPort.isHidden = true
+                arrowStbd.isHidden = true
             } else {
-                arrowPort.hidden = correction.direction == Turn.Stbd
-                arrowStbd.hidden = correction.direction == Turn.Port
+                arrowPort.isHidden = correction.direction == Turn.stbd
+                arrowStbd.isHidden = correction.direction == Turn.port
             }
             
             // set the colour of the direction indicator arrows and correction value
             if correction.required {
-                if correction.direction == Turn.Stbd {
-                    txtDifference.textColor = UIColor.greenColor()
-                    arrowStbd.textColor = UIColor.greenColor()
+                if correction.direction == Turn.stbd {
+                    txtDifference.textColor = UIColor.green
+                    arrowStbd.textColor = UIColor.green
                     
-                } else if correction.direction == Turn.Port {
-                    txtDifference.textColor = UIColor.redColor()
-                    arrowPort.textColor = UIColor.redColor()
+                } else if correction.direction == Turn.port {
+                    txtDifference.textColor = UIColor.red
+                    arrowPort.textColor = UIColor.red
                 }
             } else {
-                txtDifference.textColor = UIColor.whiteColor()
-                arrowPort.textColor = UIColor.whiteColor()
-                arrowStbd.textColor = UIColor.whiteColor()
+                txtDifference.textColor = UIColor.white
+                arrowPort.textColor = UIColor.white
+                arrowStbd.textColor = UIColor.white
             }
         } else {
             // There is no correction available
             txtDifference.text = noDataText
-            txtDifference.textColor = UIColor.whiteColor()
-            arrowPort.hidden = true
-            arrowStbd.hidden = true
+            txtDifference.textColor = UIColor.white
+            arrowPort.isHidden = true
+            arrowStbd.isHidden = true
         }
     }
     
@@ -164,7 +164,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func setBeepInterval(correction: CLLocationDegrees) {
+    func setBeepInterval(_ correction: CLLocationDegrees) {
         if abs(correction) < model.diffTolerance {
             beepInterval = nil
             beepSound = nil
@@ -172,7 +172,7 @@ class ViewController: UIViewController {
         else {
             let degrees = Double(abs(correction))
             let numerator = Double(model.diffTolerance) * slowest_interval_secs
-            var intervalSecs: NSTimeInterval = max(fastest_interval_secs, numerator/degrees)
+            var intervalSecs: TimeInterval = max(fastest_interval_secs, numerator/degrees)
             if intervalSecs < 0.05 {
                 intervalSecs = 0.05
             }
@@ -193,11 +193,11 @@ class ViewController: UIViewController {
         if beepInterval == nil || beepSound == nil {
             return
         }
-        if beepTimer == nil || !beepTimer!.valid || lastBeepTime == nil {
+        if beepTimer == nil || !beepTimer!.isValid || lastBeepTime == nil {
             // No timer exists, or one exists but it is invalidated, or no last beep time is recorded, so go ahead and emit
             // our beep then schedule another beep in beepInterval seconds
-            lastBeepTime = NSDate()
-            beepTimer = NSTimer.scheduledTimerWithTimeInterval(beepInterval!, target: self, selector: #selector(ViewController.beepMaybe), userInfo: nil, repeats: false)
+            lastBeepTime = Date()
+            beepTimer = Timer.scheduledTimer(timeInterval: beepInterval!, target: self, selector: #selector(ViewController.beepMaybe), userInfo: nil, repeats: false)
             AudioServicesPlaySystemSound(beepSound!) // ??? double check this is async
         }
         else {
@@ -208,15 +208,15 @@ class ViewController: UIViewController {
                 // The new beep interval must be less than the old one so hurry up and beep now, then schedule another one in
                 // beepInterval seconds
                 beepTimer!.invalidate()
-                lastBeepTime = NSDate()
-                beepTimer = NSTimer.scheduledTimerWithTimeInterval(beepInterval!, target: self, selector: #selector(ViewController.beepMaybe), userInfo: nil, repeats: false)
+                lastBeepTime = Date()
+                beepTimer = Timer.scheduledTimer(timeInterval: beepInterval!, target: self, selector: #selector(ViewController.beepMaybe), userInfo: nil, repeats: false)
                 AudioServicesPlaySystemSound(beepSound!)
             }
             else {
                 // The new beep interval is longer then the time since the last beep.  We need to wait a bit before beeping
                 // so schedule a new timer for beepInterval - timeSinceLastBeep seconds
                 beepTimer!.invalidate()
-                beepTimer = NSTimer.scheduledTimerWithTimeInterval(beepInterval! - timeSinceLastBeep, target: self, selector: #selector(ViewController.beepMaybe), userInfo: nil, repeats: false)
+                beepTimer = Timer.scheduledTimer(timeInterval: beepInterval! - timeSinceLastBeep, target: self, selector: #selector(ViewController.beepMaybe), userInfo: nil, repeats: false)
             }
         }
     }
@@ -225,7 +225,7 @@ class ViewController: UIViewController {
     // Handle changes in heading
     //
     
-    @IBAction func sldrHeadingOverrideValueChanged(sender: AnyObject) {
+    @IBAction func sldrHeadingOverrideValueChanged(_ sender: AnyObject) {
         model.updateCurrentHeading(CLLocationDegrees(round(sldrHeadingOverride.value)))
     }
     
@@ -233,8 +233,8 @@ class ViewController: UIViewController {
     // Turn target heading tracking on and off
     //
     
-    @IBAction func switchTargetOn(sender: UISwitch) {
-        if sender.on {
+    @IBAction func switchTargetOn(_ sender: UISwitch) {
+        if sender.isOn {
             if model.headingTarget == nil {
                 model.headingTarget = model.smoothedHeading()
             }
@@ -248,7 +248,7 @@ class ViewController: UIViewController {
     // Modify the tolerance range
     //
     
-    @IBAction func stepDiffToleranceChanged(sender: UIStepper) {
+    @IBAction func stepDiffToleranceChanged(_ sender: UIStepper) {
         log.debug("stepDiffTolerance changed to \(sender.value)")
         model.diffTolerance = CLLocationDegrees(sender.value)
         updateUI()
@@ -258,7 +258,7 @@ class ViewController: UIViewController {
     // Change the responsiveness of the heading detection given changing compass input
     //
     
-    @IBAction func setResponsiveness(sender: UISegmentedControl) {
+    @IBAction func setResponsiveness(_ sender: UISegmentedControl) {
         log.debug("setResponsiveness changed to index \(sender.selectedSegmentIndex)")
         model.setResponsiveness(sender.selectedSegmentIndex)
         updateUI()
@@ -268,33 +268,33 @@ class ViewController: UIViewController {
     // Change the target heading (single taps, sustained presses and swipes all supported)
     //
     
-    @IBAction func touchTargetToPort(sender: UIButton) {
+    @IBAction func touchTargetToPort(_ sender: UIButton) {
         if model.headingTarget == nil {
             return
         }
-        touchTimer = NSTimer.scheduledTimerWithTimeInterval(touchRepeatInterval, target: self, selector: #selector(ViewController.changeTargetToPort), userInfo: nil, repeats: true)
+        touchTimer = Timer.scheduledTimer(timeInterval: touchRepeatInterval, target: self, selector: #selector(ViewController.changeTargetToPort), userInfo: nil, repeats: true)
         touchTimer!.fire()
     }
     
-    @IBAction func touchTargetToStbd(sender: UIButton) {
+    @IBAction func touchTargetToStbd(_ sender: UIButton) {
         if model.headingTarget == nil {
             return
         }
-        touchTimer = NSTimer.scheduledTimerWithTimeInterval(touchRepeatInterval, target: self, selector: #selector(ViewController.changeTargetToStbd), userInfo: nil, repeats: true)
+        touchTimer = Timer.scheduledTimer(timeInterval: touchRepeatInterval, target: self, selector: #selector(ViewController.changeTargetToStbd), userInfo: nil, repeats: true)
         touchTimer!.fire()
     }
     
-    @IBAction func swipeStbd(sender: UISwipeGestureRecognizer) {
+    @IBAction func swipeStbd(_ sender: UISwipeGestureRecognizer) {
         model.tackStbd()
         updateUI()
     }
     
-    @IBAction func swipePort(sender: UISwipeGestureRecognizer) {
+    @IBAction func swipePort(_ sender: UISwipeGestureRecognizer) {
         model.tackPort()
         updateUI()
     }
     
-    @IBAction func touchTargetStop(sender: UIButton) {
+    @IBAction func touchTargetStop(_ sender: UIButton) {
         if touchTimer != nil {
             touchTimer!.invalidate()
             touchTimer = nil

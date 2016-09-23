@@ -12,7 +12,7 @@ import CoreLocation
 
 struct Observation {
     let v: Double
-    let t: NSDate
+    let t: Date
 }
 
 class ObservationHistory {
@@ -27,25 +27,25 @@ class ObservationHistory {
     // internal interface
     //
     
-    init(deltaFunc f: (Double, Double) -> Double, window_secs: Double) {
+    init(deltaFunc f: @escaping (Double, Double) -> Double, window_secs: Double) {
         self.deltaFunc = f
         self.window_secs = window_secs
     }
     
-    func add_observation(o: Observation) {
+    func add_observation(_ o: Observation) {
         var new_obs = observations() + [o]
-        new_obs = new_obs.sort(timesorted)
+        new_obs = new_obs.sorted(by: timesorted)
         mostRecentObservation = new_obs.removeFirst()
         otherObservations = new_obs.filter(usable)
     }
     
-    func smoothed(reftime: NSDate) -> Double? {
+    func smoothed(_ reftime: Date) -> Double? {
         var iseries = interval_series(reftime)
         if iseries.count == 0 {
             return nil
         }
         var sv = iseries.removeFirst()
-        for (i, v) in iseries.enumerate() {
+        for (i, v) in iseries.enumerated() {
             let delta_t = Double((i + 1)) * interval
             let delta_v = weight(delta_t) * deltaFunc(sv, v)
             sv = sv + delta_v
@@ -66,16 +66,16 @@ class ObservationHistory {
         return obs
     }
     
-    private func usable(o: Observation) -> Bool {
-        let window_start = NSDate().timeIntervalSinceReferenceDate - window_secs
+    fileprivate func usable(_ o: Observation) -> Bool {
+        let window_start = Date().timeIntervalSinceReferenceDate - window_secs
         return o.t.timeIntervalSinceReferenceDate > window_start
     }
     
-    private func timesorted(o1: Observation, o2: Observation) -> Bool {
+    fileprivate func timesorted(_ o1: Observation, o2: Observation) -> Bool {
         return o1.t.timeIntervalSinceReferenceDate > o2.t.timeIntervalSinceReferenceDate
     }
     
-    func interval_series(reftime: NSDate) -> [Double] {
+    func interval_series(_ reftime: Date) -> [Double] {
         // create a series of equally intervaled values from intermittent observations
         var s = [Double]()
         var t = reftime.timeIntervalSinceReferenceDate
@@ -93,7 +93,7 @@ class ObservationHistory {
         return s
     }
 
-    private func weight(delta_t: Double) -> Double {
+    fileprivate func weight(_ delta_t: Double) -> Double {
         if delta_t >= window_secs {
             return 0
         }
