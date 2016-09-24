@@ -36,6 +36,7 @@ class ViewController: UIViewController {
     
     let sndHigh: SystemSoundID = createSound("click_high", fileExt: "wav")
     let sndLow: SystemSoundID = createSound("click_low", fileExt: "wav")
+    let sndNeutral: SystemSoundID = createSound("drum200", fileExt: "wav")
     let noDataText = "---"
     let slowest_interval_secs = 2.0
     let fastest_interval_secs = 0.1
@@ -154,36 +155,30 @@ class ViewController: UIViewController {
     
     func updateBeepUI() {
         let correction = model.correction()
-        if correction == nil || !correction!.required {
+        if correction == nil {
             beepInterval = nil
             beepSound = nil
         }
-        else {
-            setBeepInterval(correction!.amount)
-            beepMaybe()
-        }
-    }
-    
-    func setBeepInterval(_ correction: CLLocationDegrees) {
-        if abs(correction) < model.diffTolerance {
-            beepInterval = nil
-            beepSound = nil
+        else if !correction!.required {
+            beepInterval = 5
+            beepSound = sndNeutral
         }
         else {
-            let degrees = Double(abs(correction))
+            let degrees = Double(abs(correction!.amount))
             let numerator = Double(model.diffTolerance) * slowest_interval_secs
             var intervalSecs: TimeInterval = max(fastest_interval_secs, numerator/degrees)
             if intervalSecs < 0.05 {
                 intervalSecs = 0.05
             }
             beepInterval = intervalSecs
-            if correction > -model.diffTolerance {
-                beepSound = sndHigh  // a high pitched (rising) chirp means steer to starboard
-            }
-            else if correction < model.diffTolerance {
-                beepSound = sndLow // a low pitched (falling) chirp means steer to port
+            switch (correction!.direction) {
+                case Turn.stbd:
+                    beepSound = sndHigh
+                case Turn.port:
+                    beepSound = sndLow
             }
         }
+        beepMaybe()
     }
     
     func beepMaybe() {
@@ -242,6 +237,7 @@ class ViewController: UIViewController {
         else {
             model.headingTarget = nil
         }
+        updateUI()
     }
     
     //
