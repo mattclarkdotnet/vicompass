@@ -54,13 +54,6 @@ class VISCompassTests: XCTestCase {
         XCTAssertEqual(CompassModel.correctionDegrees(270, target: 90), 180)
     }
     
-    func testBeepInterval() {
-        let vc = ViewController()
-        vc.setBeepInterval(5)
-        XCTAssertEqual(vc.beepInterval, 2)
-        vc.setBeepInterval(-5)
-        XCTAssertEqual(vc.beepInterval, 2)
-    }
 }
 
 class ObservationTests: XCTestCase {
