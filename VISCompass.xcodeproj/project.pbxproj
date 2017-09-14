@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		C90602F21BECC56E004BBD66 /* ObservationHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90602F11BECC56E004BBD66 /* ObservationHistory.swift */; };
 		C90602F31BECC56E004BBD66 /* ObservationHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90602F11BECC56E004BBD66 /* ObservationHistory.swift */; };
+		C91E73D61F6A7FE0005A9BB8 /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C91E73BF1F6A7F7B005A9BB8 /* XCGLogger.framework */; };
+		C91E73D71F6A7FE0005A9BB8 /* XCGLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C91E73BF1F6A7F7B005A9BB8 /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C91E73DA1F6A7FE7005A9BB8 /* ObjcExceptionBridging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C91E73CF1F6A7F7B005A9BB8 /* ObjcExceptionBridging.framework */; };
+		C91E73DB1F6A7FE7005A9BB8 /* ObjcExceptionBridging.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C91E73CF1F6A7F7B005A9BB8 /* ObjcExceptionBridging.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C948DADA1CE3219300D7C1DE /* CompassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96274691C2808A20030C09F /* CompassModel.swift */; };
 		C960885E1B986D2B00F500A4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB6581B77786B00D57D3F /* ViewController.swift */; };
 		C96088601B986D9F00F500A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB6561B77786B00D57D3F /* AppDelegate.swift */; };
@@ -28,6 +32,104 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		C91E73BE1F6A7F7B005A9BB8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91E73AF1F6A7F7B005A9BB8 /* XCGLogger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55E3EE4519D76F280068C3A7;
+			remoteInfo = "XCGLogger (iOS)";
+		};
+		C91E73C01F6A7F7B005A9BB8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91E73AF1F6A7F7B005A9BB8 /* XCGLogger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 554DF41719D76FE7005708BE;
+			remoteInfo = "XCGLogger (macOS)";
+		};
+		C91E73C21F6A7F7B005A9BB8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91E73AF1F6A7F7B005A9BB8 /* XCGLogger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 70CB94201B99E728007802FF;
+			remoteInfo = "XCGLogger (watchOS)";
+		};
+		C91E73C41F6A7F7B005A9BB8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91E73AF1F6A7F7B005A9BB8 /* XCGLogger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5515A3DF1BA119FA0047BA31;
+			remoteInfo = "XCGLogger (tvOS)";
+		};
+		C91E73C61F6A7F7B005A9BB8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91E73AF1F6A7F7B005A9BB8 /* XCGLogger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55E3EE5019D76F280068C3A7;
+			remoteInfo = "XCGLoggerTests (iOS)";
+		};
+		C91E73C81F6A7F7B005A9BB8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91E73AF1F6A7F7B005A9BB8 /* XCGLogger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 55BB1F011B79DC7500709779;
+			remoteInfo = "XCGLoggerTests (macOS)";
+		};
+		C91E73CA1F6A7F7B005A9BB8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91E73AF1F6A7F7B005A9BB8 /* XCGLogger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 558EEB851D6BAC61006A9C7A;
+			remoteInfo = "XCGLoggerTests (watchOS)";
+		};
+		C91E73CC1F6A7F7B005A9BB8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91E73AF1F6A7F7B005A9BB8 /* XCGLogger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 558EEB921D6BAC66006A9C7A;
+			remoteInfo = "XCGLoggerTests (tvOS)";
+		};
+		C91E73CE1F6A7F7B005A9BB8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91E73AF1F6A7F7B005A9BB8 /* XCGLogger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7573B4BE1DE4146300726CE1;
+			remoteInfo = "ObjcExceptionBridging (iOS)";
+		};
+		C91E73D01F6A7F7B005A9BB8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91E73AF1F6A7F7B005A9BB8 /* XCGLogger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7573B4E11DE41AC200726CE1;
+			remoteInfo = "ObjcExceptionBridging (macOS)";
+		};
+		C91E73D21F6A7F7B005A9BB8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91E73AF1F6A7F7B005A9BB8 /* XCGLogger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7573B4F01DE41B1800726CE1;
+			remoteInfo = "ObjcExceptionBridging (watchOS)";
+		};
+		C91E73D41F6A7F7B005A9BB8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91E73AF1F6A7F7B005A9BB8 /* XCGLogger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7573B5011DE41B5000726CE1;
+			remoteInfo = "ObjcExceptionBridging (tvOS)";
+		};
+		C91E73D81F6A7FE0005A9BB8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91E73AF1F6A7F7B005A9BB8 /* XCGLogger.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 55E3EE4419D76F280068C3A7;
+			remoteInfo = "XCGLogger (iOS)";
+		};
+		C91E73DC1F6A7FE7005A9BB8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C91E73AF1F6A7F7B005A9BB8 /* XCGLogger.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 7573B4BD1DE4146300726CE1;
+			remoteInfo = "ObjcExceptionBridging (iOS)";
+		};
 		C9BBB6681B77786C00D57D3F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C9BBB64B1B77786B00D57D3F /* Project object */;
@@ -51,6 +153,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				C91E73DB1F6A7FE7005A9BB8 /* ObjcExceptionBridging.framework in Embed Frameworks */,
+				C91E73D71F6A7FE0005A9BB8 /* XCGLogger.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -59,6 +163,7 @@
 
 /* Begin PBXFileReference section */
 		C90602F11BECC56E004BBD66 /* ObservationHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservationHistory.swift; sourceTree = "<group>"; };
+		C91E73AF1F6A7F7B005A9BB8 /* XCGLogger.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XCGLogger.xcodeproj; path = Vendor/XCGLogger/XCGLogger.xcodeproj; sourceTree = "<group>"; };
 		C96274671C25A52C0030C09F /* Compass_512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Compass_512.png; sourceTree = "<group>"; };
 		C96274691C2808A20030C09F /* CompassModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompassModel.swift; sourceTree = "<group>"; };
 		C964F4C11D94DE85000B0750 /* click_high.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = click_high.wav; path = Assets/click_high.wav; sourceTree = "<group>"; };
@@ -85,6 +190,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C91E73DA1F6A7FE7005A9BB8 /* ObjcExceptionBridging.framework in Frameworks */,
+				C91E73D61F6A7FE0005A9BB8 /* XCGLogger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,9 +212,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C91E73B01F6A7F7B005A9BB8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C91E73BF1F6A7F7B005A9BB8 /* XCGLogger.framework */,
+				C91E73C11F6A7F7B005A9BB8 /* XCGLogger.framework */,
+				C91E73C31F6A7F7B005A9BB8 /* XCGLogger.framework */,
+				C91E73C51F6A7F7B005A9BB8 /* XCGLogger.framework */,
+				C91E73C71F6A7F7B005A9BB8 /* XCGLoggerTests (iOS).xctest */,
+				C91E73C91F6A7F7B005A9BB8 /* XCGLoggerTests (macOS).xctest */,
+				C91E73CB1F6A7F7B005A9BB8 /* XCGLoggerTests (watchOS).xctest */,
+				C91E73CD1F6A7F7B005A9BB8 /* XCGLoggerTests (tvOS).xctest */,
+				C91E73CF1F6A7F7B005A9BB8 /* ObjcExceptionBridging.framework */,
+				C91E73D11F6A7F7B005A9BB8 /* ObjcExceptionBridging.framework */,
+				C91E73D31F6A7F7B005A9BB8 /* ObjcExceptionBridging.framework */,
+				C91E73D51F6A7F7B005A9BB8 /* ObjcExceptionBridging.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		C9BBB64A1B77786B00D57D3F = {
 			isa = PBXGroup;
 			children = (
+				C91E73AF1F6A7F7B005A9BB8 /* XCGLogger.xcodeproj */,
 				C964F4C51D94E117000B0750 /* drum200.wav */,
 				C964F4C11D94DE85000B0750 /* click_high.wav */,
 				C964F4C21D94DE85000B0750 /* click_low.wav */,
@@ -178,6 +305,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				C91E73D91F6A7FE0005A9BB8 /* PBXTargetDependency */,
+				C91E73DD1F6A7FE7005A9BB8 /* PBXTargetDependency */,
 			);
 			name = VISCompass;
 			productName = VISCompass;
@@ -258,6 +387,12 @@
 			mainGroup = C9BBB64A1B77786B00D57D3F;
 			productRefGroup = C9BBB6541B77786B00D57D3F /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C91E73B01F6A7F7B005A9BB8 /* Products */;
+					ProjectRef = C91E73AF1F6A7F7B005A9BB8 /* XCGLogger.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				C9BBB6521B77786B00D57D3F /* VISCompass */,
@@ -266,6 +401,93 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		C91E73BF1F6A7F7B005A9BB8 /* XCGLogger.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = XCGLogger.framework;
+			remoteRef = C91E73BE1F6A7F7B005A9BB8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C91E73C11F6A7F7B005A9BB8 /* XCGLogger.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = XCGLogger.framework;
+			remoteRef = C91E73C01F6A7F7B005A9BB8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C91E73C31F6A7F7B005A9BB8 /* XCGLogger.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = XCGLogger.framework;
+			remoteRef = C91E73C21F6A7F7B005A9BB8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C91E73C51F6A7F7B005A9BB8 /* XCGLogger.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = XCGLogger.framework;
+			remoteRef = C91E73C41F6A7F7B005A9BB8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C91E73C71F6A7F7B005A9BB8 /* XCGLoggerTests (iOS).xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "XCGLoggerTests (iOS).xctest";
+			remoteRef = C91E73C61F6A7F7B005A9BB8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C91E73C91F6A7F7B005A9BB8 /* XCGLoggerTests (macOS).xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "XCGLoggerTests (macOS).xctest";
+			remoteRef = C91E73C81F6A7F7B005A9BB8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C91E73CB1F6A7F7B005A9BB8 /* XCGLoggerTests (watchOS).xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "XCGLoggerTests (watchOS).xctest";
+			remoteRef = C91E73CA1F6A7F7B005A9BB8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C91E73CD1F6A7F7B005A9BB8 /* XCGLoggerTests (tvOS).xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "XCGLoggerTests (tvOS).xctest";
+			remoteRef = C91E73CC1F6A7F7B005A9BB8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C91E73CF1F6A7F7B005A9BB8 /* ObjcExceptionBridging.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ObjcExceptionBridging.framework;
+			remoteRef = C91E73CE1F6A7F7B005A9BB8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C91E73D11F6A7F7B005A9BB8 /* ObjcExceptionBridging.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ObjcExceptionBridging.framework;
+			remoteRef = C91E73D01F6A7F7B005A9BB8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C91E73D31F6A7F7B005A9BB8 /* ObjcExceptionBridging.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ObjcExceptionBridging.framework;
+			remoteRef = C91E73D21F6A7F7B005A9BB8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C91E73D51F6A7F7B005A9BB8 /* ObjcExceptionBridging.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ObjcExceptionBridging.framework;
+			remoteRef = C91E73D41F6A7F7B005A9BB8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		C9BBB6511B77786B00D57D3F /* Resources */ = {
@@ -334,6 +556,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		C91E73D91F6A7FE0005A9BB8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "XCGLogger (iOS)";
+			targetProxy = C91E73D81F6A7FE0005A9BB8 /* PBXContainerItemProxy */;
+		};
+		C91E73DD1F6A7FE7005A9BB8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ObjcExceptionBridging (iOS)";
+			targetProxy = C91E73DC1F6A7FE7005A9BB8 /* PBXContainerItemProxy */;
+		};
 		C9BBB6691B77786C00D57D3F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C9BBB6521B77786B00D57D3F /* VISCompass */;
@@ -461,7 +693,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 98P2YHA54F;
 				INFOPLIST_FILE = "$(SRCROOT)/VISCompass/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mattclark.net.vicompass;
 				PRODUCT_NAME = VISCompass.temp_caseinsensitive_rename;
@@ -479,7 +711,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 98P2YHA54F;
 				INFOPLIST_FILE = "$(SRCROOT)/VISCompass/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mattclark.net.vicompass;
 				PRODUCT_NAME = VISCompass.temp_caseinsensitive_rename;
