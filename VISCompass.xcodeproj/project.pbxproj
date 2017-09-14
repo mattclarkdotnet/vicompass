@@ -14,8 +14,6 @@
 		C96088601B986D9F00F500A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB6561B77786B00D57D3F /* AppDelegate.swift */; };
 		C96274681C25A52C0030C09F /* Compass_512.png in Resources */ = {isa = PBXBuildFile; fileRef = C96274671C25A52C0030C09F /* Compass_512.png */; };
 		C962746A1C2808A20030C09F /* CompassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96274691C2808A20030C09F /* CompassModel.swift */; };
-		C964F4BC1D94D71C000B0750 /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C964F4AD1D94D6CB000B0750 /* XCGLogger.framework */; };
-		C964F4BD1D94D71C000B0750 /* XCGLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C964F4AD1D94D6CB000B0750 /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C964F4C31D94DE85000B0750 /* click_high.wav in Resources */ = {isa = PBXBuildFile; fileRef = C964F4C11D94DE85000B0750 /* click_high.wav */; };
 		C964F4C41D94DE85000B0750 /* click_low.wav in Resources */ = {isa = PBXBuildFile; fileRef = C964F4C21D94DE85000B0750 /* click_low.wav */; };
 		C964F4C61D94E117000B0750 /* drum200.wav in Resources */ = {isa = PBXBuildFile; fileRef = C964F4C51D94E117000B0750 /* drum200.wav */; };
@@ -30,69 +28,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		C964F4AC1D94D6CB000B0750 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C964F4A11D94D6CB000B0750 /* XCGLogger.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 55E3EE4519D76F280068C3A7;
-			remoteInfo = "XCGLogger (iOS)";
-		};
-		C964F4AE1D94D6CB000B0750 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C964F4A11D94D6CB000B0750 /* XCGLogger.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 554DF41719D76FE7005708BE;
-			remoteInfo = "XCGLogger (OS X)";
-		};
-		C964F4B01D94D6CB000B0750 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C964F4A11D94D6CB000B0750 /* XCGLogger.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 70CB94201B99E728007802FF;
-			remoteInfo = "XCGLogger (watchOS)";
-		};
-		C964F4B21D94D6CB000B0750 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C964F4A11D94D6CB000B0750 /* XCGLogger.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5515A3DF1BA119FA0047BA31;
-			remoteInfo = "XCGLogger (tvOS)";
-		};
-		C964F4B41D94D6CB000B0750 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C964F4A11D94D6CB000B0750 /* XCGLogger.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 55E3EE5019D76F280068C3A7;
-			remoteInfo = XCGLoggerTests_iOS;
-		};
-		C964F4B61D94D6CB000B0750 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C964F4A11D94D6CB000B0750 /* XCGLogger.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 55BB1F011B79DC7500709779;
-			remoteInfo = XCGLoggerTests_OSX;
-		};
-		C964F4B81D94D6CB000B0750 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C964F4A11D94D6CB000B0750 /* XCGLogger.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 558EEB851D6BAC61006A9C7A;
-			remoteInfo = XCGLoggerTests_watchOS;
-		};
-		C964F4BA1D94D6CB000B0750 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C964F4A11D94D6CB000B0750 /* XCGLogger.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 558EEB921D6BAC66006A9C7A;
-			remoteInfo = XCGLoggerTests_tvOS;
-		};
-		C964F4BE1D94D71C000B0750 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C964F4A11D94D6CB000B0750 /* XCGLogger.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 55E3EE4419D76F280068C3A7;
-			remoteInfo = "XCGLogger (iOS)";
-		};
 		C9BBB6681B77786C00D57D3F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C9BBB64B1B77786B00D57D3F /* Project object */;
@@ -116,7 +51,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C964F4BD1D94D71C000B0750 /* XCGLogger.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -127,7 +61,6 @@
 		C90602F11BECC56E004BBD66 /* ObservationHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservationHistory.swift; sourceTree = "<group>"; };
 		C96274671C25A52C0030C09F /* Compass_512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Compass_512.png; sourceTree = "<group>"; };
 		C96274691C2808A20030C09F /* CompassModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompassModel.swift; sourceTree = "<group>"; };
-		C964F4A11D94D6CB000B0750 /* XCGLogger.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XCGLogger.xcodeproj; path = Vendor/XCGLogger/Sources/XCGLogger.xcodeproj; sourceTree = "<group>"; };
 		C964F4C11D94DE85000B0750 /* click_high.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = click_high.wav; path = Assets/click_high.wav; sourceTree = "<group>"; };
 		C964F4C21D94DE85000B0750 /* click_low.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = click_low.wav; path = Assets/click_low.wav; sourceTree = "<group>"; };
 		C964F4C51D94E117000B0750 /* drum200.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = drum200.wav; path = Assets/drum200.wav; sourceTree = "<group>"; };
@@ -152,7 +85,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C964F4BC1D94D71C000B0750 /* XCGLogger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,28 +105,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C964F4A21D94D6CB000B0750 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				C964F4AD1D94D6CB000B0750 /* XCGLogger.framework */,
-				C964F4AF1D94D6CB000B0750 /* XCGLogger.framework */,
-				C964F4B11D94D6CB000B0750 /* XCGLogger.framework */,
-				C964F4B31D94D6CB000B0750 /* XCGLogger.framework */,
-				C964F4B51D94D6CB000B0750 /* XCGLoggerTests_iOS.xctest */,
-				C964F4B71D94D6CB000B0750 /* XCGLoggerTests (OS X).xctest */,
-				C964F4B91D94D6CB000B0750 /* XCGLoggerTests_watchOS.xctest */,
-				C964F4BB1D94D6CB000B0750 /* XCGLoggerTests_tvOS.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		C9BBB64A1B77786B00D57D3F = {
 			isa = PBXGroup;
 			children = (
 				C964F4C51D94E117000B0750 /* drum200.wav */,
 				C964F4C11D94DE85000B0750 /* click_high.wav */,
 				C964F4C21D94DE85000B0750 /* click_low.wav */,
-				C964F4A11D94D6CB000B0750 /* XCGLogger.xcodeproj */,
 				C96274671C25A52C0030C09F /* Compass_512.png */,
 				C9CCA4FF1B7A1CAA00CB2431 /* Default-568h@2x.png */,
 				C9BBB6551B77786B00D57D3F /* VISCompass */,
@@ -262,7 +178,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				C964F4BF1D94D71C000B0750 /* PBXTargetDependency */,
 			);
 			name = VISCompass;
 			productName = VISCompass;
@@ -343,12 +258,6 @@
 			mainGroup = C9BBB64A1B77786B00D57D3F;
 			productRefGroup = C9BBB6541B77786B00D57D3F /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = C964F4A21D94D6CB000B0750 /* Products */;
-					ProjectRef = C964F4A11D94D6CB000B0750 /* XCGLogger.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				C9BBB6521B77786B00D57D3F /* VISCompass */,
@@ -357,65 +266,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		C964F4AD1D94D6CB000B0750 /* XCGLogger.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = XCGLogger.framework;
-			remoteRef = C964F4AC1D94D6CB000B0750 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C964F4AF1D94D6CB000B0750 /* XCGLogger.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = XCGLogger.framework;
-			remoteRef = C964F4AE1D94D6CB000B0750 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C964F4B11D94D6CB000B0750 /* XCGLogger.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = XCGLogger.framework;
-			remoteRef = C964F4B01D94D6CB000B0750 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C964F4B31D94D6CB000B0750 /* XCGLogger.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = XCGLogger.framework;
-			remoteRef = C964F4B21D94D6CB000B0750 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C964F4B51D94D6CB000B0750 /* XCGLoggerTests_iOS.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = XCGLoggerTests_iOS.xctest;
-			remoteRef = C964F4B41D94D6CB000B0750 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C964F4B71D94D6CB000B0750 /* XCGLoggerTests (OS X).xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "XCGLoggerTests (OS X).xctest";
-			remoteRef = C964F4B61D94D6CB000B0750 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C964F4B91D94D6CB000B0750 /* XCGLoggerTests_watchOS.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = XCGLoggerTests_watchOS.xctest;
-			remoteRef = C964F4B81D94D6CB000B0750 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C964F4BB1D94D6CB000B0750 /* XCGLoggerTests_tvOS.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = XCGLoggerTests_tvOS.xctest;
-			remoteRef = C964F4BA1D94D6CB000B0750 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		C9BBB6511B77786B00D57D3F /* Resources */ = {
@@ -484,11 +334,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		C964F4BF1D94D71C000B0750 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "XCGLogger (iOS)";
-			targetProxy = C964F4BE1D94D71C000B0750 /* PBXContainerItemProxy */;
-		};
 		C9BBB6691B77786C00D57D3F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C9BBB6521B77786B00D57D3F /* VISCompass */;
@@ -616,7 +461,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 98P2YHA54F;
 				INFOPLIST_FILE = "$(SRCROOT)/VISCompass/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mattclark.net.vicompass;
 				PRODUCT_NAME = VISCompass.temp_caseinsensitive_rename;
@@ -634,7 +479,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 98P2YHA54F;
 				INFOPLIST_FILE = "$(SRCROOT)/VISCompass/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mattclark.net.vicompass;
 				PRODUCT_NAME = VISCompass.temp_caseinsensitive_rename;
