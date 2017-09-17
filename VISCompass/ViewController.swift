@@ -33,10 +33,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var arrowStbd: UILabel!
     @IBOutlet weak var btnPort: UIButton!
     @IBOutlet weak var btnStbd: UIButton!
+    @IBOutlet weak var drumButton: UIButton!
+    
     
     let sndHigh: SystemSoundID = createSound("click_high", fileExt: "wav")
     let sndLow: SystemSoundID = createSound("click_low", fileExt: "wav")
     let sndNeutral: SystemSoundID = createSound("drum200", fileExt: "wav")
+    let drumbeatOnimg = UIImage(named: "side-drum-icon-27836.png")
+    let drumbeatOffimg = UIImage(named: "side-drum-icon-27836-crossed-out.png")
     let noDataText = "---"
     let slowest_interval_secs = 2.0
     let fastest_interval_secs = 0.1
@@ -49,6 +53,7 @@ class ViewController: UIViewController {
     var beepSound: SystemSoundID?
     var beepInterval: TimeInterval?
     var lastBeepTime: Date?
+    var drumming: Bool = true
     
     //
     // ViewController overrides
@@ -83,6 +88,9 @@ class ViewController: UIViewController {
         btnStbd.layer.borderWidth = 0.8
         btnStbd.layer.borderColor = UIColor.green.cgColor
         btnStbd.layer.cornerRadius = 4.0
+        drumButton.setImage(drumbeatOnimg, for: UIControlState.selected)
+        drumButton.setImage(drumbeatOffimg, for: UIControlState.normal)
+        drumButton.isSelected = drumming
     }
 
     //
@@ -160,8 +168,14 @@ class ViewController: UIViewController {
             beepSound = nil
         }
         else if !correction!.required {
-            beepInterval = 5
-            beepSound = sndNeutral
+            if drumming {
+                beepInterval = 5
+                beepSound = sndNeutral
+            }
+            else {
+                beepInterval = nil
+                beepSound = nil
+            }
         }
         else {
             let degrees = Double(abs(correction!.amount))
@@ -296,7 +310,13 @@ class ViewController: UIViewController {
             touchTimer = nil
         }
     }
-        
+    
+    @IBAction func drumButtonUp(_ sender: Any) {
+        drumButton.isSelected = !drumButton.isSelected
+        drumming = drumButton.isSelected
+        updateUI()
+    }
+    
     func changeTargetToPort() {
         model.modifyTarget(-1)
         updateUI()

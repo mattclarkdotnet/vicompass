@@ -13,6 +13,7 @@
 		C91E73D71F6A7FE0005A9BB8 /* XCGLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C91E73BF1F6A7F7B005A9BB8 /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C91E73DA1F6A7FE7005A9BB8 /* ObjcExceptionBridging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C91E73CF1F6A7F7B005A9BB8 /* ObjcExceptionBridging.framework */; };
 		C91E73DB1F6A7FE7005A9BB8 /* ObjcExceptionBridging.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C91E73CF1F6A7F7B005A9BB8 /* ObjcExceptionBridging.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C91E73DF1F6AC792005A9BB8 /* side-drum-icon-27836.png in Resources */ = {isa = PBXBuildFile; fileRef = C91E73DE1F6AC792005A9BB8 /* side-drum-icon-27836.png */; };
 		C948DADA1CE3219300D7C1DE /* CompassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96274691C2808A20030C09F /* CompassModel.swift */; };
 		C960885E1B986D2B00F500A4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB6581B77786B00D57D3F /* ViewController.swift */; };
 		C96088601B986D9F00F500A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB6561B77786B00D57D3F /* AppDelegate.swift */; };
@@ -21,6 +22,7 @@
 		C964F4C31D94DE85000B0750 /* click_high.wav in Resources */ = {isa = PBXBuildFile; fileRef = C964F4C11D94DE85000B0750 /* click_high.wav */; };
 		C964F4C41D94DE85000B0750 /* click_low.wav in Resources */ = {isa = PBXBuildFile; fileRef = C964F4C21D94DE85000B0750 /* click_low.wav */; };
 		C964F4C61D94E117000B0750 /* drum200.wav in Resources */ = {isa = PBXBuildFile; fileRef = C964F4C51D94E117000B0750 /* drum200.wav */; };
+		C966EA4C1F6E53D1002E5E5C /* side-drum-icon-27836-crossed-out.png in Resources */ = {isa = PBXBuildFile; fileRef = C966EA4B1F6E53D1002E5E5C /* side-drum-icon-27836-crossed-out.png */; };
 		C9BBB6571B77786B00D57D3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB6561B77786B00D57D3F /* AppDelegate.swift */; };
 		C9BBB6591B77786B00D57D3F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB6581B77786B00D57D3F /* ViewController.swift */; };
 		C9BBB65C1B77786B00D57D3F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9BBB65A1B77786B00D57D3F /* Main.storyboard */; };
@@ -164,11 +166,13 @@
 /* Begin PBXFileReference section */
 		C90602F11BECC56E004BBD66 /* ObservationHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservationHistory.swift; sourceTree = "<group>"; };
 		C91E73AF1F6A7F7B005A9BB8 /* XCGLogger.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XCGLogger.xcodeproj; path = Vendor/XCGLogger/XCGLogger.xcodeproj; sourceTree = "<group>"; };
+		C91E73DE1F6AC792005A9BB8 /* side-drum-icon-27836.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "side-drum-icon-27836.png"; path = "Assets/side-drum-icon-27836.png"; sourceTree = "<group>"; };
 		C96274671C25A52C0030C09F /* Compass_512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Compass_512.png; sourceTree = "<group>"; };
 		C96274691C2808A20030C09F /* CompassModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompassModel.swift; sourceTree = "<group>"; };
 		C964F4C11D94DE85000B0750 /* click_high.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = click_high.wav; path = Assets/click_high.wav; sourceTree = "<group>"; };
 		C964F4C21D94DE85000B0750 /* click_low.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = click_low.wav; path = Assets/click_low.wav; sourceTree = "<group>"; };
 		C964F4C51D94E117000B0750 /* drum200.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = drum200.wav; path = Assets/drum200.wav; sourceTree = "<group>"; };
+		C966EA4B1F6E53D1002E5E5C /* side-drum-icon-27836-crossed-out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "side-drum-icon-27836-crossed-out.png"; path = "Assets/side-drum-icon-27836-crossed-out.png"; sourceTree = "<group>"; };
 		C9BBB6531B77786B00D57D3F /* VISCompass.temp_caseinsensitive_rename.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VISCompass.temp_caseinsensitive_rename.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9BBB6561B77786B00D57D3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9BBB6581B77786B00D57D3F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -234,6 +238,8 @@
 		C9BBB64A1B77786B00D57D3F = {
 			isa = PBXGroup;
 			children = (
+				C966EA4B1F6E53D1002E5E5C /* side-drum-icon-27836-crossed-out.png */,
+				C91E73DE1F6AC792005A9BB8 /* side-drum-icon-27836.png */,
 				C91E73AF1F6A7F7B005A9BB8 /* XCGLogger.xcodeproj */,
 				C964F4C51D94E117000B0750 /* drum200.wav */,
 				C964F4C11D94DE85000B0750 /* click_high.wav */,
@@ -495,8 +501,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C96274681C25A52C0030C09F /* Compass_512.png in Resources */,
+				C966EA4C1F6E53D1002E5E5C /* side-drum-icon-27836-crossed-out.png in Resources */,
 				C964F4C61D94E117000B0750 /* drum200.wav in Resources */,
 				C9BBB6611B77786B00D57D3F /* LaunchScreen.storyboard in Resources */,
+				C91E73DF1F6AC792005A9BB8 /* side-drum-icon-27836.png in Resources */,
 				C9BBB65E1B77786B00D57D3F /* Assets.xcassets in Resources */,
 				C964F4C31D94DE85000B0750 /* click_high.wav in Resources */,
 				C964F4C41D94DE85000B0750 /* click_low.wav in Resources */,
