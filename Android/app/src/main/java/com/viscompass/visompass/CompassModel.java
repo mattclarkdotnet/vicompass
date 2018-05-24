@@ -23,6 +23,10 @@ public class CompassModel implements SensorEventListener{
         sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),SensorManager.SENSOR_DELAY_GAME);
 
     }
+    public CompassModel()
+    {
+        //create a compass model without a sensor manager for testing purposes
+    }
 
 
     public String getCurrentHeading(){
@@ -58,18 +62,20 @@ public class CompassModel implements SensorEventListener{
         // not in use
     }
     public void calculateCorrection(){
-        Float diff = 0.0f;
 
-
-        diff = headingTarget - headingCurrent;
-        if (diff == -180){headingCorrection.amount = 180.0f;}
-        else if (diff > 180){headingCorrection.amount = diff - 360.0f;}
-        else if (diff < -180) {headingCorrection.amount = diff + 360.0f;}
-        else {headingCorrection.amount = diff;};
-
-
+        headingCorrection.amount = correctionDegrees(headingTarget, headingCurrent);
         headingCorrection.direction = (headingCorrection.amount < 0) ? Turn.port:Turn.stbd;
         headingCorrection.required = (Math.abs(headingCorrection.amount) > 5) ? true : false; //also need to calculate this based on sensitivity
+    }
+
+    public Float correctionDegrees(Float ht, Float hc){
+        Float diff = 0.0f;
+
+        diff = ht - hc;
+        if (diff == -180){return 180.0f;}
+        else if (diff > 180){return diff - 360.0f;}
+        else if (diff < -180) {return diff + 360.0f;}
+        else {return diff;}
     }
 
     void modifyTarget(Float delta){
