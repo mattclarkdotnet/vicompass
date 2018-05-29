@@ -40,11 +40,23 @@ public Float smoothed(Date refDateTime){
         Float delta_v = weight(delta_t) * deltaFunc(sv,iseries.get(counter));
         sv = sv + delta_v;
     }
+    if(sv < 0){
+        sv = 360 -sv;
+    }
+    else if(sv > 360){
+        sv = sv - 360;
+    }
     return sv;
 }
 
 Float deltaFunc(Float v1, Float v2){
-    return v2-v1;
+    Float diff = 0.0f;
+
+    diff = v2 - v1;
+    if (diff == -180){return 180.0f;}
+    else if (diff > 180){return diff - 360.0f;}
+    else if (diff < -180) {return diff + 360.0f;}
+    else {return diff;}
 }
 ArrayList<Float> interval_series(Date refTime){
     ArrayList<Float> s = new ArrayList<Float>();

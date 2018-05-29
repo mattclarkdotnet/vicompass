@@ -21,13 +21,14 @@ public class ObservationHistoryTests {
         Long lDate;
         Date date = new Date();
         lDate = date.getTime();
-        oh.addObservation(new Observation(92.0f, new Date(lDate-6000)));
-        oh.addObservation(new Observation(91.0f, new Date(lDate-5000)));
-        oh.addObservation(new Observation(89.0f, new Date(lDate-4000)));
-        oh.addObservation(new Observation(88.0f, new Date(lDate-3000)));
-        oh.addObservation(new Observation(90.0f, new Date(lDate)));
+        oh.addObservation(new Observation(92.0f, new Date(lDate-4000)));
+        oh.addObservation(new Observation(91.0f, new Date(lDate-3000)));
+        oh.addObservation(new Observation(90.0f, new Date(lDate-2000)));
+        oh.addObservation(new Observation(89.0f, new Date(lDate-1000)));
+        oh.addObservation(new Observation(88.0f, new Date(lDate)));
 
-        assertEquals(90.0f,oh.smoothed(new Date(lDate)),0.1);
+        assertTrue( (oh.smoothed(new Date(lDate)) < 90.0f));
+        assertTrue((oh.smoothed(new Date(lDate)) > 88.0f));
     }
 
     @Test
@@ -42,9 +43,10 @@ public class ObservationHistoryTests {
         oh.addObservation(new Observation(89.0f, new Date(lDate-4000)));
         oh.addObservation(new Observation(88.0f, new Date(lDate-3000)));
         oh.addObservation(new Observation(90.0f, new Date(lDate)));
-        oh.addObservation(new Observation(10.0f, new Date(lDate-6000)));
+        oh.addObservation(new Observation(10.0f, new Date(lDate-16000)));
 
-        assertEquals(90.0f,oh.smoothed(new Date(lDate)),0.1);
+        assertTrue( (oh.smoothed(new Date(lDate)) < 90.0f));
+        assertTrue((oh.smoothed(new Date(lDate)) > 88.0f));
     }
     @Test
     public void testMostRecentObservation() throws Exception{
