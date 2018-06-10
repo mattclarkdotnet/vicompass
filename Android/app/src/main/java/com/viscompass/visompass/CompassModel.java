@@ -13,7 +13,7 @@ enum Turn{
 }
 
 public class CompassModel implements SensorEventListener{
-    Float diffTolerance = 0.0f;
+    Float diffTolerance = 5.0f;
     Float headingTarget = 0.0f;
     Float headingCurrent = 0.0f;
     Integer responsivenessIndex = 2;
@@ -56,6 +56,11 @@ public class CompassModel implements SensorEventListener{
         headingTarget = headingCurrent;
 
     }
+    public void setResponsiveness(Integer index){
+        responsivenessIndex = index;
+        oh.window_msecs = responsivenessWindows[index];
+
+    }
 
     public void onSensorChanged(SensorEvent event) {
 
@@ -86,11 +91,6 @@ public class CompassModel implements SensorEventListener{
         else {return diff;}
     }
 
-    public void setResponsiveness(Integer index){
-        responsivenessIndex = index;
-        oh.window_msecs = responsivenessWindows[index];
-
-    }
     void modifyTarget(Float delta){
      if(headingTarget != null){
          headingTarget = (headingTarget + delta) % 360;
