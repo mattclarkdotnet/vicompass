@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static long interval = 1000;
     final Handler handler = new Handler();
     Button btnQQ,btnQ,btnM,btnS,btnSS;
+    Button btnPort,btnStbd;
 
 @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnS.setOnClickListener(this);
         btnSS = (Button) findViewById(R.id.btnSS);
         btnSS.setOnClickListener(this);
+        btnPort = (Button) findViewById(R.id.btnPort);
+        btnPort.setOnClickListener(this);
+        btnStbd = (Button) findViewById(R.id.btnStbd);
+        btnStbd.setOnClickListener(this);
 
         //Set default responsiveness
         model.setResponsiveness(2);
@@ -137,6 +142,12 @@ public void onClick(View view){
         deselectAllSensitivityButtons();
         btnQQ.setBackgroundResource(R.drawable.bordered_button_selected);
     }
+    if(view.equals(btnPort)){
+        model.modifyTarget(-1.0f);
+    }
+    if(view.equals(btnStbd)){
+        model.modifyTarget(1.0f);
+    }
 
 }
     public void updateUI() {
@@ -172,6 +183,9 @@ public void onClick(View view){
 
     void updateBeepUI(){
         if(!switch1.isChecked()){
+            if(beepTimer != null){
+                beepTimer.cancel();
+            }
             return;
         }
         Correction corr = model.getCorrection();

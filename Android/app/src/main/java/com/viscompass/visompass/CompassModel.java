@@ -94,6 +94,10 @@ public class CompassModel implements SensorEventListener{
     void modifyTarget(Float delta){
      if(headingTarget != null){
          headingTarget = (headingTarget + delta) % 360;
+         if(headingTarget < 0){
+             headingTarget += 360;
+         }
+         calculateCorrection();
      }
     }
 
