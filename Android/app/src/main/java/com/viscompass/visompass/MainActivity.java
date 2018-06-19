@@ -26,10 +26,7 @@ import static java.util.Objects.isNull;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     CompassModel model;
-    TextView tvHeading;
-    TextView tvTarget;
-    TextView tvCorrection;
-    TextView tvTolerance;
+    TextView tvHeading, tvTarget, tvCorrection, tvTolerance, tvPortArrow, tvStbdArrow;
     Switch switch1;
     Timer timer;
     Timer beepTimer;
@@ -46,18 +43,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static long interval = 1000;
     final Handler handler = new Handler();
     Button btnQQ,btnQ,btnM,btnS,btnSS;
-    Button btnPort,btnStbd;
+    Button btnPort,btnStbd,btnPlus, btnMinus;
 
 @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Context context = this;
         model = new CompassModel((SensorManager) getSystemService(SENSOR_SERVICE));
         tvHeading = (TextView) findViewById(R.id.tvHeading);
         tvTarget = (TextView) findViewById(R.id.tvTarget);
         tvCorrection = (TextView) findViewById(R.id.tvCorrection);
         tvTolerance = (TextView) findViewById(R.id.tvTolerance);
-        tvTolerance.setText(model.getDiffTolerance().toString());
+        tvTolerance.setText(Integer.toString(model.getDiffTolerance()));
+        tvPortArrow = (TextView) findViewById(R.id.tvPortArrow);
+        tvStbdArrow = (TextView) findViewById(R.id.tvStbdArrow);
+        btnPlus = (Button) findViewById(R.id.btnPlus);
+        btnPlus.setOnClickListener(this);
+        btnMinus = (Button) findViewById(R.id.btnMinus);
+        btnMinus.setOnClickListener(this);
         btnQQ = (Button) findViewById(R.id.btnQQ);
         btnQQ.setOnClickListener(this);
         btnQ = (Button) findViewById(R.id.btnQ);
@@ -72,6 +76,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnPort.setOnClickListener(this);
         btnStbd = (Button) findViewById(R.id.btnStbd);
         btnStbd.setOnClickListener(this);
+        tvTarget.setOnTouchListener(new OnSwipeTouchListener(context){
+            @Override
+            public void onSwipeLeft(){
+               model.tackStbd();
+            }
+
+            @Override
+            public void onSwipeRight() {
+                model.tackPort();
+            }
+        });
 
         //Set default responsiveness
         model.setResponsiveness(2);
@@ -98,8 +113,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     model.setTargetHeading();
-                    tvTarget.setVisibility(View.VISIBLE);
-                    tvCorrection.setVisibility((View.VISIBLE));
+                }
+                else{
+                    tvTarget.setText("---");
+                    tvCorrection.setText("---");
+                    tvCorrection.setTextColor(Color.WHITE);
+                    tvPortArrow.setVisibility(View.INVISIBLE);
+                    tvStbdArrow.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -115,6 +135,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         };
         timer.schedule(taskNew,MainActivity.interval, MainActivity.interval);
+
+
    }
 public void onClick(View view){
     if(view.equals(btnSS)) {
@@ -148,8 +170,18 @@ public void onClick(View view){
     if(view.equals(btnStbd)){
         model.modifyTarget(1.0f);
     }
+    if(view.equals(btnPlus)){
+        model.setDiffTolerance(model.getDiffTolerance() + 1);
+        tvTolerance.setText(Integer.toString(model.getDiffTolerance()));
+    }
+    if(view.equals(btnMinus)){
+        model.setDiffTolerance(model.getDiffTolerance() -1);
+        tvTolerance.setText(Integer.toString(model.getDiffTolerance()));
+    }
+
 
 }
+
     public void updateUI() {
         updateScreenUI();
         updateBeepUI();
@@ -164,19 +196,22 @@ public void onClick(View view){
             if(corr.required){
                 if(corr.direction == Turn.port){
                     tvCorrection.setTextColor(Color.RED);
+                    tvStbdArrow.setVisibility(View.INVISIBLE);
+                    tvPortArrow.setVisibility(View.VISIBLE);
                 }
                 else if(corr.direction == Turn.stbd){
                     tvCorrection.setTextColor(Color.GREEN);
+                    tvPortArrow.setVisibility(View.INVISIBLE);
+                    tvStbdArrow.setVisibility(View.VISIBLE);
                 };
             }
             else{
                 tvCorrection.setTextColor(Color.WHITE);
+                tvStbdArrow.setVisibility(View.INVISIBLE);
+                tvPortArrow.setVisibility(View.INVISIBLE);
             };
         }
-        else{
-            tvTarget.setVisibility(View.INVISIBLE);
-            tvCorrection.setVisibility(View.INVISIBLE);
-        }
+
 
 
     }

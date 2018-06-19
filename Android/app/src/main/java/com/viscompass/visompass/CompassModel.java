@@ -13,7 +13,7 @@ enum Turn{
 }
 
 public class CompassModel implements SensorEventListener{
-    Float diffTolerance = 5.0f;
+    int diffTolerance = 5;
     Float headingTarget = 0.0f;
     Float headingCurrent = 0.0f;
     Integer responsivenessIndex = 2;
@@ -44,12 +44,15 @@ public class CompassModel implements SensorEventListener{
     public Correction getCorrection(){
         return headingCorrection;
     }
-    public Float getDiffTolerance(){
+    public int getDiffTolerance(){
         return diffTolerance;
     }
 
-    public void setDiffTolerance(Float dt){
-        diffTolerance = dt;
+    public void setDiffTolerance(int dt){
+        if(dt > 4) {
+            diffTolerance = dt;
+            calculateCorrection();
+        }
     }
 
     public void setTargetHeading(){
@@ -78,7 +81,7 @@ public class CompassModel implements SensorEventListener{
 
         headingCorrection.amount = correctionDegrees(headingTarget, headingCurrent);
         headingCorrection.direction = (headingCorrection.amount < 0) ? Turn.port:Turn.stbd;
-        headingCorrection.required = (Math.abs(headingCorrection.amount) > 5) ? true : false; //also need to calculate this based on sensitivity
+        headingCorrection.required = (Math.abs(headingCorrection.amount) > (float)diffTolerance) ? true : false;
     }
 
     public Float correctionDegrees(Float ht, Float hc){
