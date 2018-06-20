@@ -49,7 +49,7 @@ public class CompassModel implements SensorEventListener{
     }
 
     public void setDiffTolerance(int dt){
-        if(dt > 4) {
+        if(dt > 0) {
             diffTolerance = dt;
             calculateCorrection();
         }
