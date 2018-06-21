@@ -21,7 +21,7 @@ struct Correction {
 }
 
 class CompassModel: NSObject, CLLocationManagerDelegate {
-    var diffTolerance: CLLocationDegrees = 5
+    var diffTolerance: CLLocationDegrees = 10
     var headingTarget: CLLocationDegrees?
     var headingCurrent: CLLocationDegrees?
     
