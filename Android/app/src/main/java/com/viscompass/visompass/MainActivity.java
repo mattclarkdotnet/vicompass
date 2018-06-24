@@ -13,6 +13,7 @@ import android.content.Context;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -44,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     final Handler handler = new Handler();
     Button btnQQ,btnQ,btnM,btnS,btnSS;
     Button btnPort,btnStbd,btnPlus, btnMinus;
+    ImageView imgViewDrum;
+    boolean drumOn = true;
 
 @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnPort.setOnClickListener(this);
         btnStbd = (Button) findViewById(R.id.btnStbd);
         btnStbd.setOnClickListener(this);
+        imgViewDrum = (ImageView) findViewById(R.id.imageViewDrum);
+
         tvTarget.setOnTouchListener(new OnSwipeTouchListener(context){
             @Override
             public void onSwipeLeft(){
@@ -181,6 +186,15 @@ public void onClick(View view){
 
 
 }
+    public void imgViewDrumOnClick(View view){
+        drumOn = !drumOn;
+        if(drumOn) {
+            imgViewDrum.setImageResource(R.drawable.side_drum_icon_27836);
+        }
+        else{
+            imgViewDrum.setImageResource(R.drawable.side_drum_icon_27836_crossed_out);
+        }
+    }
 
     public void updateUI() {
         updateScreenUI();
@@ -227,7 +241,7 @@ public void onClick(View view){
 
         if(!corr.required){
             beepInterval = 5000;
-            beepSound = (int)soundPoolMap.get("Normal");
+            beepSound = drumOn ? (int)soundPoolMap.get("Normal"): 0;
         }
         else{
             float degrees = Math.abs(corr.amount);
