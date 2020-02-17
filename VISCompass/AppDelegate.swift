@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import XCGLogger
+import SwiftyBeaver
 
-let log = XCGLogger.default;
+let log = SwiftyBeaver.self;
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,7 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        log.setup(level: .debug, showThreadName: true,showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil)
+        let console = ConsoleDestination()  // log to Xcode Console
+        // use custom format and set console output to short time, log level & message
+        console.format = "$DHH:mm:ss$d $L $M"
+        log.addDestination(console)
+
+        //log.setup(level: .debug, showThreadName: true,showLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil)
         application.isIdleTimerDisabled = true
         return true
     }
