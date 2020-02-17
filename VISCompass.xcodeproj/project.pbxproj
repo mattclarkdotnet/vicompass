@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -69,17 +69,17 @@
 		C964F4C21D94DE85000B0750 /* click_low.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = click_low.wav; path = Assets/click_low.wav; sourceTree = "<group>"; };
 		C964F4C51D94E117000B0750 /* drum200.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = drum200.wav; path = Assets/drum200.wav; sourceTree = "<group>"; };
 		C966EA4B1F6E53D1002E5E5C /* side-drum-icon-27836-crossed-out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "side-drum-icon-27836-crossed-out.png"; path = "Assets/side-drum-icon-27836-crossed-out.png"; sourceTree = "<group>"; };
-		C9BBB6531B77786B00D57D3F /* VISCompass.temp_caseinsensitive_rename.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VISCompass.temp_caseinsensitive_rename.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9BBB6531B77786B00D57D3F /* VISCompass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VISCompass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9BBB6561B77786B00D57D3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9BBB6581B77786B00D57D3F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C9BBB65B1B77786B00D57D3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C9BBB65D1B77786B00D57D3F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C9BBB6601B77786B00D57D3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C9BBB6621B77786B00D57D3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C9BBB6671B77786C00D57D3F /* VISCompass.temp_caseinsensitive_rename.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VISCompass.temp_caseinsensitive_rename.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9BBB6671B77786C00D57D3F /* VISCompassTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VISCompassTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9BBB66B1B77786C00D57D3F /* VISCompassTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VISCompassTests.swift; sourceTree = "<group>"; };
 		C9BBB66D1B77786C00D57D3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C9BBB6721B77786C00D57D3F /* VISCompass.temp_caseinsensitive_rename.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VISCompass.temp_caseinsensitive_rename.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9BBB6721B77786C00D57D3F /* VISCompassUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VISCompassUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9BBB6761B77786C00D57D3F /* VISCompassUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VISCompassUITests.swift; sourceTree = "<group>"; };
 		C9BBB6781B77786C00D57D3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C9CCA4FF1B7A1CAA00CB2431 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -131,9 +131,9 @@
 		C9BBB6541B77786B00D57D3F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C9BBB6531B77786B00D57D3F /* VISCompass.temp_caseinsensitive_rename.app */,
-				C9BBB6671B77786C00D57D3F /* VISCompass.temp_caseinsensitive_rename.xctest */,
-				C9BBB6721B77786C00D57D3F /* VISCompass.temp_caseinsensitive_rename.xctest */,
+				C9BBB6531B77786B00D57D3F /* VISCompass.app */,
+				C9BBB6671B77786C00D57D3F /* VISCompassTests.xctest */,
+				C9BBB6721B77786C00D57D3F /* VISCompassUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -189,7 +189,7 @@
 			);
 			name = VISCompass;
 			productName = VISCompass;
-			productReference = C9BBB6531B77786B00D57D3F /* VISCompass.temp_caseinsensitive_rename.app */;
+			productReference = C9BBB6531B77786B00D57D3F /* VISCompass.app */;
 			productType = "com.apple.product-type.application";
 		};
 		C9BBB6661B77786C00D57D3F /* VISCompassTests */ = {
@@ -207,7 +207,7 @@
 			);
 			name = VISCompassTests;
 			productName = VISCompassTests;
-			productReference = C9BBB6671B77786C00D57D3F /* VISCompass.temp_caseinsensitive_rename.xctest */;
+			productReference = C9BBB6671B77786C00D57D3F /* VISCompassTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		C9BBB6711B77786C00D57D3F /* VISCompassUITests */ = {
@@ -225,7 +225,7 @@
 			);
 			name = VISCompassUITests;
 			productName = VISCompassUITests;
-			productReference = C9BBB6721B77786C00D57D3F /* VISCompass.temp_caseinsensitive_rename.xctest */;
+			productReference = C9BBB6721B77786C00D57D3F /* VISCompassUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -235,28 +235,28 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = mattclark.net;
 				TargetAttributes = {
 					C9BBB6521B77786B00D57D3F = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = 98P2YHA54F;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1010;
 					};
 					C9BBB6661B77786C00D57D3F = {
 						CreatedOnToolsVersion = 7.0;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1010;
 						TestTargetID = C9BBB6521B77786B00D57D3F;
 					};
 					C9BBB6711B77786C00D57D3F = {
 						CreatedOnToolsVersion = 7.0;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1010;
 						TestTargetID = C9BBB6521B77786B00D57D3F;
 					};
 				};
 			};
 			buildConfigurationList = C9BBB64E1B77786B00D57D3F /* Build configuration list for PBXProject "VISCompass" */;
-			compatibilityVersion = "Xcode 8.0";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -384,14 +384,22 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -414,7 +422,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -430,14 +438,22 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -454,10 +470,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -472,11 +489,15 @@
 				DEVELOPMENT_TEAM = 98P2YHA54F;
 				INFOPLIST_FILE = "$(SRCROOT)/VISCompass/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = mattclark.net.vicompass;
-				PRODUCT_NAME = VISCompass.temp_caseinsensitive_rename;
+				PRODUCT_NAME = VISCompass;
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -490,11 +511,15 @@
 				DEVELOPMENT_TEAM = 98P2YHA54F;
 				INFOPLIST_FILE = "$(SRCROOT)/VISCompass/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = mattclark.net.vicompass;
-				PRODUCT_NAME = VISCompass.temp_caseinsensitive_rename;
+				PRODUCT_NAME = VISCompass;
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -503,11 +528,16 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = VISCompassTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "mattclark.net.Blind-SailingTests";
-				PRODUCT_NAME = VISCompass.temp_caseinsensitive_rename;
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VISCompass.temp_caseinsensitive_rename.app/VISCompass.temp_caseinsensitive_rename";
+				PRODUCT_NAME = VISCompassTests;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VISCompass.app/VISCompass";
 			};
 			name = Debug;
 		};
@@ -516,11 +546,16 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = VISCompassTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "mattclark.net.Blind-SailingTests";
-				PRODUCT_NAME = VISCompass.temp_caseinsensitive_rename;
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VISCompass.temp_caseinsensitive_rename.app/VISCompass.temp_caseinsensitive_rename";
+				PRODUCT_NAME = VISCompassTests;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VISCompass.app/VISCompass";
 			};
 			name = Release;
 		};
@@ -528,10 +563,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = VISCompassUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "mattclark.net.Blind-SailingUITests";
-				PRODUCT_NAME = VISCompass.temp_caseinsensitive_rename;
-				SWIFT_VERSION = 3.0;
+				PRODUCT_NAME = VISCompassUITests;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = VISCompass;
 				USES_XCTRUNNER = YES;
 			};
@@ -541,10 +581,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = VISCompassUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "mattclark.net.Blind-SailingUITests";
-				PRODUCT_NAME = VISCompass.temp_caseinsensitive_rename;
-				SWIFT_VERSION = 3.0;
+				PRODUCT_NAME = VISCompassUITests;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = VISCompass;
 				USES_XCTRUNNER = YES;
 			};

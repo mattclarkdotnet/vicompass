@@ -109,10 +109,10 @@ class ObservationTests: XCTestCase {
         let o2 = Observation(v: 10, t: now)
         oh.add_observation(o1)
         oh.add_observation(o2)
-        XCTAssertEqualWithAccuracy(oh.smoothed(now.addingTimeInterval(oh.window_secs * 2))!, 10, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(oh.smoothed(now.addingTimeInterval(oh.window_secs))!, 10, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(oh.smoothed(now.addingTimeInterval(oh.window_secs / 10))!, 16.4, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(oh.smoothed(now.addingTimeInterval(oh.window_secs / 2))!, 11.6, accuracy: 0.01)
+        XCTAssertEqual(oh.smoothed(now.addingTimeInterval(oh.window_secs * 2))!, 10, accuracy: 0.01)
+        XCTAssertEqual(oh.smoothed(now.addingTimeInterval(oh.window_secs))!, 10, accuracy: 0.01)
+        XCTAssertEqual(oh.smoothed(now.addingTimeInterval(oh.window_secs / 10))!, 16.4, accuracy: 0.01)
+        XCTAssertEqual(oh.smoothed(now.addingTimeInterval(oh.window_secs / 2))!, 11.6, accuracy: 0.01)
     }
 }
 

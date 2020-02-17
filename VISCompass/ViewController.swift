@@ -12,7 +12,7 @@ import AudioToolbox
 
 func createSound(_ fileName: String, fileExt: String) -> SystemSoundID {
     var soundID: SystemSoundID = 0
-    let soundURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), fileName as CFString!, fileExt as CFString!, nil)
+    let soundURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), fileName as CFString, fileExt as CFString, nil)
     AudioServicesCreateSystemSoundID(soundURL!, &soundID)
     return soundID
 }
@@ -88,8 +88,8 @@ class ViewController: UIViewController {
         btnStbd.layer.borderWidth = 0.8
         btnStbd.layer.borderColor = UIColor.green.cgColor
         btnStbd.layer.cornerRadius = 4.0
-        drumButton.setImage(drumbeatOnimg, for: UIControlState.selected)
-        drumButton.setImage(drumbeatOffimg, for: UIControlState.normal)
+        drumButton.setImage(drumbeatOnimg, for: UIControl.State.selected)
+        drumButton.setImage(drumbeatOffimg, for: UIControl.State.normal)
         drumButton.isSelected = drumming
     }
 
@@ -97,7 +97,7 @@ class ViewController: UIViewController {
     // UI management
     //
     
-    func updateUI() {
+    @objc func updateUI() {
         updateScreenUI()
         updateBeepUI()
     }
@@ -195,7 +195,7 @@ class ViewController: UIViewController {
         beepMaybe()
     }
     
-    func beepMaybe() {
+    @objc func beepMaybe() {
         //
         // This method really should be reentrant but is not, so races certainly exist.  Implement locking ASAP.
         //
@@ -317,12 +317,12 @@ class ViewController: UIViewController {
         updateUI()
     }
     
-    func changeTargetToPort() {
+    @objc func changeTargetToPort() {
         model.modifyTarget(-1)
         updateUI()
     }
     
-    func changeTargetToStbd() {
+    @objc func changeTargetToStbd() {
         model.modifyTarget(1)
         updateUI()
     }
