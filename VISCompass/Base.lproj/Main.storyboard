@@ -109,6 +109,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Drumming:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="23i-T5-UoA">
+                                <rect key="frame" x="30" y="669" width="85" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" continuous="NO" autorepeat="NO" value="10" minimumValue="1" maximumValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="mZY-oa-Swh">
                                 <rect key="frame" x="290" y="785.5" width="94" height="32"/>
                                 <connections>
@@ -195,14 +202,14 @@
                                 <color key="textColor" red="0.024309365489999998" green="1" blue="0.26582127020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qiz-KD-g8t">
-                                <rect key="frame" x="300" y="20" width="44" height="44"/>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XOr-4l-hfW">
+                                <rect key="frame" x="134" y="664" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="DRUM"/>
+                                <accessibility key="accessibilityConfiguration" label="Drumming"/>
                                 <connections>
-                                    <action selector="drumButtonUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SIA-vg-SjV"/>
+                                    <action selector="drummingSwitchChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="eJW-qH-bNj"/>
                                 </connections>
-                            </button>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <gestureRecognizers/>
@@ -255,7 +262,7 @@
                         <outlet property="arrowStbd" destination="5Ji-CF-gnJ" id="x0L-K0-364"/>
                         <outlet property="btnPort" destination="TbD-W7-09r" id="DQg-L0-NlK"/>
                         <outlet property="btnStbd" destination="vP0-ex-90u" id="2Ax-RN-xlq"/>
-                        <outlet property="drumButton" destination="Qiz-KD-g8t" id="GBk-eJ-XnI"/>
+                        <outlet property="drummingSwitch" destination="XOr-4l-hfW" id="4th-a1-eLU"/>
                         <outlet property="segResponsiveness" destination="Alj-Ug-qma" id="j2p-nc-uYT"/>
                         <outlet property="sldrHeadingOverride" destination="6AS-UM-OJr" id="VEI-vV-5Zb"/>
                         <outlet property="stepDiffTolerance" destination="mZY-oa-Swh" id="Q5l-9T-KEg"/>
@@ -278,7 +285,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="774" y="321"/>
+            <point key="canvasLocation" x="871.01449275362324" y="-50.223214285714285"/>
         </scene>
     </scenes>
     <resources>

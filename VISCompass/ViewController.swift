@@ -33,14 +33,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var arrowStbd: UILabel!
     @IBOutlet weak var btnPort: UIButton!
     @IBOutlet weak var btnStbd: UIButton!
-    @IBOutlet weak var drumButton: UIButton!
-    
+    @IBOutlet weak var drummingSwitch: UISwitch!
+
     
     let sndHigh: SystemSoundID = createSound("click_high", fileExt: "wav")
     let sndLow: SystemSoundID = createSound("click_low", fileExt: "wav")
     let sndNeutral: SystemSoundID = createSound("drum200", fileExt: "wav")
-    let drumbeatOnimg = UIImage(named: "side-drum-icon-27836.png")
-    let drumbeatOffimg = UIImage(named: "side-drum-icon-27836-crossed-out.png")
     let noDataText = "---"
     let slowest_interval_secs = 2.0
     let fastest_interval_secs = 0.1
@@ -88,9 +86,6 @@ class ViewController: UIViewController {
         btnStbd.layer.borderWidth = 0.8
         btnStbd.layer.borderColor = UIColor.green.cgColor
         btnStbd.layer.cornerRadius = 4.0
-        drumButton.setImage(drumbeatOnimg, for: UIControl.State.selected)
-        drumButton.setImage(drumbeatOffimg, for: UIControl.State.normal)
-        drumButton.isSelected = drumming
     }
 
     //
@@ -311,9 +306,8 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func drumButtonUp(_ sender: Any) {
-        drumButton.isSelected = !drumButton.isSelected
-        drumming = drumButton.isSelected
+    @IBAction func drummingSwitchChanged(_ sender: Any) {
+        drumming = drummingSwitch.isOn
         updateUI()
     }
     
