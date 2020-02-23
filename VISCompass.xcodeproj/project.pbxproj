@@ -28,6 +28,7 @@
 		C9BBB6771B77786C00D57D3F /* VISCompassUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB6761B77786C00D57D3F /* VISCompassUITests.swift */; };
 		C9CCA5001B7A1CAA00CB2431 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9CCA4FF1B7A1CAA00CB2431 /* Default-568h@2x.png */; };
 		C9D8B2F423FE8A2F0010A2CC /* Compass_1024.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D8B2F323FE8A2F0010A2CC /* Compass_1024.png */; };
+		C9D8B2F92402798E0010A2CC /* Compass_1024_noalpha.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D8B2F82402798D0010A2CC /* Compass_1024_noalpha.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		C9BBB6781B77786C00D57D3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C9CCA4FF1B7A1CAA00CB2431 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C9D8B2F323FE8A2F0010A2CC /* Compass_1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Compass_1024.png; sourceTree = "<group>"; };
+		C9D8B2F82402798D0010A2CC /* Compass_1024_noalpha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Compass_1024_noalpha.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 		C9BBB64A1B77786B00D57D3F = {
 			isa = PBXGroup;
 			children = (
+				C9D8B2F82402798D0010A2CC /* Compass_1024_noalpha.png */,
 				C9D8B2F323FE8A2F0010A2CC /* Compass_1024.png */,
 				C91E73DE1F6AC792005A9BB8 /* side-drum-icon-27836.png */,
 				C964F4C51D94E117000B0750 /* drum200.wav */,
@@ -287,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C96274681C25A52C0030C09F /* Compass_512.png in Resources */,
+				C9D8B2F92402798E0010A2CC /* Compass_1024_noalpha.png in Resources */,
 				C964F4C61D94E117000B0750 /* drum200.wav in Resources */,
 				C9BBB6611B77786B00D57D3F /* LaunchScreen.storyboard in Resources */,
 				C9D8B2F423FE8A2F0010A2CC /* Compass_1024.png in Resources */,
