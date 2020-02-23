@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import AudioToolbox
+import AVFoundation
 
 func createSound(_ fileName: String, fileExt: String) -> SystemSoundID {
     var soundID: SystemSoundID = 0
@@ -17,7 +18,11 @@ func createSound(_ fileName: String, fileExt: String) -> SystemSoundID {
     return soundID
 }
 
-
+enum feedbackSound {
+    case drum
+    case heading
+    case off
+}
 
 class ViewController: UIViewController {
 
@@ -33,8 +38,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var arrowStbd: UILabel!
     @IBOutlet weak var btnPort: UIButton!
     @IBOutlet weak var btnStbd: UIButton!
-    @IBOutlet weak var drummingSwitch: UISwitch!
-
+    @IBOutlet weak var feedbackAudioChoice: UISegmentedControl!
+    
     
     let sndHigh: SystemSoundID = createSound("click_high", fileExt: "wav")
     let sndLow: SystemSoundID = createSound("click_low", fileExt: "wav")
@@ -44,14 +49,14 @@ class ViewController: UIViewController {
     let fastest_interval_secs = 0.1
     let defaultResponsivenessIndex = 2
     let touchRepeatInterval = 0.2
+    let speechSynthesiser: AVSpeechSynthesizer = AVSpeechSynthesizer()
     
     var model: CompassModel = CompassModel()
     var touchTimer: Timer?
     var beepTimer: Timer?
-    var beepSound: SystemSoundID?
     var beepInterval: TimeInterval?
     var lastBeepTime: Date?
-    var drumming: Bool = true
+    var feedbackSoundSelected: feedbackSound = .drum
     
     //
     // ViewController overrides
@@ -60,6 +65,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         setupUI()
         super.viewDidLoad()
+        // Update the UI every second to show heading changes
         let _ = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ViewController.updateUI), userInfo: nil, repeats: true)
     }
 
@@ -159,20 +165,25 @@ class ViewController: UIViewController {
     func updateBeepUI() {
         let correction = model.correction()
         if correction == nil {
+            // we're not navigating
             beepInterval = nil
-            beepSound = nil
         }
         else if !correction!.required {
-            if drumming {
-                beepInterval = 5
-                beepSound = sndNeutral
+            // we're navigating and within tolerance, send comforting feedback
+            if feedbackSoundSelected == feedbackSound.off {
+                beepInterval = nil
             }
             else {
-                beepInterval = nil
-                beepSound = nil
+                if feedbackSoundSelected == feedbackSound.drum {
+                    beepInterval = 5
+                }
+                else if feedbackSoundSelected == feedbackSound.heading {
+                    beepInterval = 10
+                }
             }
         }
         else {
+            // we're navigating and outside tolerance, send urgent feedback
             let degrees = Double(abs(correction!.amount))
             let numerator = Double(model.diffTolerance) * slowest_interval_secs
             var intervalSecs: TimeInterval = max(fastest_interval_secs, numerator/degrees)
@@ -180,12 +191,6 @@ class ViewController: UIViewController {
                 intervalSecs = 0.05
             }
             beepInterval = intervalSecs
-            switch (correction!.direction) {
-                case Turn.stbd:
-                    beepSound = sndHigh
-                case Turn.port:
-                    beepSound = sndLow
-            }
         }
         beepMaybe()
     }
@@ -194,7 +199,7 @@ class ViewController: UIViewController {
         //
         // This method really should be reentrant but is not, so races certainly exist.  Implement locking ASAP.
         //
-        if beepInterval == nil || beepSound == nil {
+        if beepInterval == nil {
             return
         }
         if beepTimer == nil || !beepTimer!.isValid || lastBeepTime == nil {
@@ -202,7 +207,7 @@ class ViewController: UIViewController {
             // our beep then schedule another beep in beepInterval seconds
             lastBeepTime = Date()
             beepTimer = Timer.scheduledTimer(timeInterval: beepInterval!, target: self, selector: #selector(ViewController.beepMaybe), userInfo: nil, repeats: false)
-            AudioServicesPlaySystemSound(beepSound!) // ??? double check this is async
+            playFeedbackSound()
         }
         else {
             // A timer exists and is valid, and we know when the last beep happened, so we need to decide whether to adjust
@@ -214,13 +219,37 @@ class ViewController: UIViewController {
                 beepTimer!.invalidate()
                 lastBeepTime = Date()
                 beepTimer = Timer.scheduledTimer(timeInterval: beepInterval!, target: self, selector: #selector(ViewController.beepMaybe), userInfo: nil, repeats: false)
-                AudioServicesPlaySystemSound(beepSound!)
+                playFeedbackSound()
             }
             else {
                 // The new beep interval is longer then the time since the last beep.  We need to wait a bit before beeping
                 // so schedule a new timer for beepInterval - timeSinceLastBeep seconds
                 beepTimer!.invalidate()
                 beepTimer = Timer.scheduledTimer(timeInterval: beepInterval! - timeSinceLastBeep, target: self, selector: #selector(ViewController.beepMaybe), userInfo: nil, repeats: false)
+            }
+        }
+    }
+    
+    func playFeedbackSound() {
+        let correction = model.correction()
+        if correction == nil { return }
+        if correction!.required {
+            switch (correction!.direction) {
+            case Turn.stbd:
+                AudioServicesPlaySystemSound(sndHigh)
+            case Turn.port:
+                AudioServicesPlaySystemSound(sndLow)
+            }
+        }
+        else {
+            // no correction required
+            if feedbackSoundSelected == feedbackSound.heading {
+                let h = Int(model.headingCurrent!)
+                let u = AVSpeechUtterance(string: "heading \(h) degrees")
+                speechSynthesiser.speak(u)
+            }
+            else {
+                AudioServicesPlaySystemSound(sndNeutral)
             }
         }
     }
@@ -306,8 +335,21 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func drummingSwitchChanged(_ sender: Any) {
-        drumming = drummingSwitch.isOn
+    @IBAction func steadyFeedBackAudioChoiceChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            log.debug("Drumming feedback selected")
+            feedbackSoundSelected = feedbackSound.drum
+            beepInterval = 5
+        case 1:
+            log.debug("Heading feedback selected")
+            feedbackSoundSelected = feedbackSound.heading
+            beepInterval = 10
+        default:
+            log.debug("Audio feedback off")
+            feedbackSoundSelected = feedbackSound.off
+            beepInterval = nil
+        }
         updateUI()
     }
     
