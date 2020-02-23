@@ -178,7 +178,7 @@ class ViewController: UIViewController {
                     beepInterval = 5
                 }
                 else if feedbackSoundSelected == feedbackSound.heading {
-                    beepInterval = 10
+                    beepInterval = 15
                 }
             }
         }
@@ -340,15 +340,12 @@ class ViewController: UIViewController {
         case 0:
             log.debug("Drumming feedback selected")
             feedbackSoundSelected = feedbackSound.drum
-            beepInterval = 5
         case 1:
             log.debug("Heading feedback selected")
             feedbackSoundSelected = feedbackSound.heading
-            beepInterval = 10
         default:
             log.debug("Audio feedback off")
             feedbackSoundSelected = feedbackSound.off
-            beepInterval = nil
         }
         updateUI()
     }
