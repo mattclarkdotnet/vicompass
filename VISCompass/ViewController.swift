@@ -30,8 +30,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var txtTarget: UILabel!
     @IBOutlet weak var txtHeading: UILabel!
     @IBOutlet weak var sldrHeadingOverride: UISlider!
-    @IBOutlet weak var txtDiffTolerance: UILabel!
-    @IBOutlet weak var stepDiffTolerance: UIStepper!
     @IBOutlet weak var segResponsiveness: UISegmentedControl!
     @IBOutlet weak var switchTargetOn: UISwitch!
     @IBOutlet weak var arrowPort: UILabel!
@@ -39,7 +37,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var btnPort: UIButton!
     @IBOutlet weak var btnStbd: UIButton!
     @IBOutlet weak var feedbackAudioChoice: UISegmentedControl!
-    
+    @IBOutlet weak var segTolerance: UISegmentedControl!
     
     let sndHigh: SystemSoundID = createSound("click_high", fileExt: "wav")
     let sndLow: SystemSoundID = createSound("click_low", fileExt: "wav")
@@ -47,7 +45,8 @@ class ViewController: UIViewController {
     let noDataText = "---"
     let slowest_interval_secs = 2.0
     let fastest_interval_secs = 0.1
-    let defaultResponsivenessIndex = 2
+    let defaultResponsivenessIndex = 2 // M
+    let defaultToleranceIndex = 1 // 10 degrees
     let touchRepeatInterval = 0.2
     let speechSynthesiser: AVSpeechSynthesizer = AVSpeechSynthesizer()
     
@@ -84,6 +83,8 @@ class ViewController: UIViewController {
         }
         segResponsiveness.selectedSegmentIndex = defaultResponsivenessIndex
         model.setResponsiveness(defaultResponsivenessIndex)
+        segTolerance.selectedSegmentIndex = defaultToleranceIndex // 10 degrees
+        model.diffTolerance = 10
         arrowPort.isHidden = true
         arrowStbd.isHidden = true
         btnPort.layer.borderWidth = 0.8
@@ -105,8 +106,6 @@ class ViewController: UIViewController {
     
     func updateScreenUI() {
         // Display the current tolerance
-        txtDiffTolerance.text = Int(model.diffTolerance).description
-        
         // Display the current heading
         if let headingCurrent = model.smoothedHeading() {
             txtHeading.text = Int(headingCurrent).description
@@ -281,13 +280,20 @@ class ViewController: UIViewController {
     //
     // Modify the tolerance range
     //
-    
-    @IBAction func stepDiffToleranceChanged(_ sender: UIStepper) {
-        log.debug("stepDiffTolerance changed to \(sender.value)")
-        model.diffTolerance = CLLocationDegrees(sender.value)
-        updateUI()
+    @IBAction func segToleranceChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            model.diffTolerance = 5
+        case 1:
+            model.diffTolerance = 10
+        case 2:
+            model.diffTolerance = 15
+        case 3:
+            model.diffTolerance = 20
+        default:
+            model.diffTolerance = 5
+        }
     }
-    
     //
     // Change the responsiveness of the heading detection given changing compass input
     //
