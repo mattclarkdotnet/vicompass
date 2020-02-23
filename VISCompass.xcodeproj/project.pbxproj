@@ -18,7 +18,6 @@
 		C964F4C31D94DE85000B0750 /* click_high.wav in Resources */ = {isa = PBXBuildFile; fileRef = C964F4C11D94DE85000B0750 /* click_high.wav */; };
 		C964F4C41D94DE85000B0750 /* click_low.wav in Resources */ = {isa = PBXBuildFile; fileRef = C964F4C21D94DE85000B0750 /* click_low.wav */; };
 		C964F4C61D94E117000B0750 /* drum200.wav in Resources */ = {isa = PBXBuildFile; fileRef = C964F4C51D94E117000B0750 /* drum200.wav */; };
-		C966EA4C1F6E53D1002E5E5C /* side-drum-icon-27836-crossed-out.png in Resources */ = {isa = PBXBuildFile; fileRef = C966EA4B1F6E53D1002E5E5C /* side-drum-icon-27836-crossed-out.png */; };
 		C99D6D9623FA9BCF0046873C /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = C99D6D9523FA9BCF0046873C /* SwiftyBeaver */; };
 		C9BBB6571B77786B00D57D3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB6561B77786B00D57D3F /* AppDelegate.swift */; };
 		C9BBB6591B77786B00D57D3F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB6581B77786B00D57D3F /* ViewController.swift */; };
@@ -69,7 +68,6 @@
 		C964F4C11D94DE85000B0750 /* click_high.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = click_high.wav; path = Assets/click_high.wav; sourceTree = "<group>"; };
 		C964F4C21D94DE85000B0750 /* click_low.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = click_low.wav; path = Assets/click_low.wav; sourceTree = "<group>"; };
 		C964F4C51D94E117000B0750 /* drum200.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = drum200.wav; path = Assets/drum200.wav; sourceTree = "<group>"; };
-		C966EA4B1F6E53D1002E5E5C /* side-drum-icon-27836-crossed-out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "side-drum-icon-27836-crossed-out.png"; path = "Assets/side-drum-icon-27836-crossed-out.png"; sourceTree = "<group>"; };
 		C9BBB6531B77786B00D57D3F /* VISCompass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VISCompass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9BBB6561B77786B00D57D3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9BBB6581B77786B00D57D3F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -117,7 +115,6 @@
 			isa = PBXGroup;
 			children = (
 				C9D8B2F323FE8A2F0010A2CC /* Compass_1024.png */,
-				C966EA4B1F6E53D1002E5E5C /* side-drum-icon-27836-crossed-out.png */,
 				C91E73DE1F6AC792005A9BB8 /* side-drum-icon-27836.png */,
 				C964F4C51D94E117000B0750 /* drum200.wav */,
 				C964F4C11D94DE85000B0750 /* click_high.wav */,
@@ -290,7 +287,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C96274681C25A52C0030C09F /* Compass_512.png in Resources */,
-				C966EA4C1F6E53D1002E5E5C /* side-drum-icon-27836-crossed-out.png in Resources */,
 				C964F4C61D94E117000B0750 /* drum200.wav in Resources */,
 				C9BBB6611B77786B00D57D3F /* LaunchScreen.storyboard in Resources */,
 				C9D8B2F423FE8A2F0010A2CC /* Compass_1024.png in Resources */,
@@ -498,6 +494,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 98P2YHA54F;
 				INFOPLIST_FILE = "$(SRCROOT)/VISCompass/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -505,6 +502,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = mattclark.net.vicompass;
 				PRODUCT_NAME = VISCompass;
 				PROVISIONING_PROFILE = "";
@@ -520,6 +518,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 98P2YHA54F;
 				INFOPLIST_FILE = "$(SRCROOT)/VISCompass/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -527,6 +526,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = mattclark.net.vicompass;
 				PRODUCT_NAME = VISCompass;
 				PROVISIONING_PROFILE = "";
