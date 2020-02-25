@@ -22,6 +22,7 @@ enum feedbackSound {
     case drum
     case heading
     case off
+    case correction
 }
 
 class ViewController: UIViewController {
@@ -54,6 +55,7 @@ class ViewController: UIViewController {
     var touchTimer: Timer?
     var beepTimer: Timer?
     var beepInterval: TimeInterval?
+    var nextFeedbackSound: feedbackSound?
     var lastBeepTime: Date?
     var feedbackSoundSelected: feedbackSound = .drum
     
@@ -175,9 +177,11 @@ class ViewController: UIViewController {
             else {
                 if feedbackSoundSelected == feedbackSound.drum {
                     beepInterval = 5
+                    nextFeedbackSound = .drum
                 }
                 else if feedbackSoundSelected == feedbackSound.heading {
                     beepInterval = 15
+                    nextFeedbackSound = .heading
                 }
             }
         }
@@ -190,6 +194,7 @@ class ViewController: UIViewController {
                 intervalSecs = 0.05
             }
             beepInterval = intervalSecs
+            nextFeedbackSound = .correction
         }
         beepMaybe()
     }
@@ -230,26 +235,26 @@ class ViewController: UIViewController {
     }
     
     func playFeedbackSound() {
-        let correction = model.correction()
-        if correction == nil { return }
-        if correction!.required {
-            switch (correction!.direction) {
-            case Turn.stbd:
-                AudioServicesPlaySystemSound(sndHigh)
-            case Turn.port:
-                AudioServicesPlaySystemSound(sndLow)
+        switch nextFeedbackSound {
+        case .drum:
+            AudioServicesPlaySystemSound(sndNeutral)
+        case .heading:
+            let h = Int(model.headingCurrent!)
+            let u = AVSpeechUtterance(string: "heading \(h) degrees")
+            speechSynthesiser.speak(u)
+        case .correction:
+            let correction = model.correction()
+            if correction == nil { return }
+            if correction!.required {
+                switch (correction!.direction) {
+                case Turn.stbd:
+                    AudioServicesPlaySystemSound(sndHigh)
+                case Turn.port:
+                    AudioServicesPlaySystemSound(sndLow)
+                }
             }
-        }
-        else {
-            // no correction required
-            if feedbackSoundSelected == feedbackSound.heading {
-                let h = Int(model.headingCurrent!)
-                let u = AVSpeechUtterance(string: "heading \(h) degrees")
-                speechSynthesiser.speak(u)
-            }
-            else {
-                AudioServicesPlaySystemSound(sndNeutral)
-            }
+        default:
+            return
         }
     }
     
