@@ -239,8 +239,9 @@ class ViewController: UIViewController {
         case .drum:
             AudioServicesPlaySystemSound(sndNeutral)
         case .heading:
-            let h = Int(model.headingCurrent!)
-            let u = AVSpeechUtterance(string: "heading \(h) degrees")
+            let headingStr = String(Int(model.headingCurrent!)) // e.g. '130'
+            let headingDigits = headingStr.map({"\($0) "})
+            let u = AVSpeechUtterance(string: "heading \(headingDigits)")
             speechSynthesiser.speak(u)
         case .correction:
             let correction = model.correction()
