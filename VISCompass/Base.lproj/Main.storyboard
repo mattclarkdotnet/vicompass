@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="m7G-Vd-vLU">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
@@ -16,17 +16,17 @@
                         <viewControllerLayoutGuide type="bottom" id="4pw-ik-ve0"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="H2b-Lt-QXV">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" image="Compass_512.png" translatesAutoresizingMaskIntoConstraints="NO" id="jVQ-9o-aqZ">
-                                <rect key="frame" x="-311" y="229" width="1024" height="138"/>
+                                <rect key="frame" x="-330.5" y="114.5" width="1024" height="138"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="138" id="XSk-vR-sp9"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgb-u0-pzm">
-                                <rect key="frame" x="161.5" y="728.5" width="79" height="39"/>
+                                <rect key="frame" x="142" y="614" width="79" height="39"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Proceed"/>
                                 <connections>
@@ -34,7 +34,7 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N7j-8q-d4T">
-                                <rect key="frame" x="81" y="380" width="240" height="200"/>
+                                <rect key="frame" x="61.5" y="272.5" width="240" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="9TL-Wa-rMJ"/>
                                     <constraint firstAttribute="height" constant="200" id="wPk-eF-RzH"/>
@@ -46,7 +46,7 @@
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to VISCompass" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TCB-2b-61q">
-                                <rect key="frame" x="104.5" y="144" width="193" height="20.5"/>
+                                <rect key="frame" x="85" y="30" width="193" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -58,10 +58,10 @@
                             <constraint firstItem="jVQ-9o-aqZ" firstAttribute="centerY" secondItem="H2b-Lt-QXV" secondAttribute="centerY" constant="-150" id="BTz-s5-NYc"/>
                             <constraint firstItem="dgb-u0-pzm" firstAttribute="centerX" secondItem="TCB-2b-61q" secondAttribute="centerX" id="BVq-6n-0iG"/>
                             <constraint firstItem="N7j-8q-d4T" firstAttribute="centerX" secondItem="H2b-Lt-QXV" secondAttribute="centerX" constant="-6" id="Dzi-LJ-2uA"/>
-                            <constraint firstItem="TCB-2b-61q" firstAttribute="top" secondItem="H2b-Lt-QXV" secondAttribute="topMargin" constant="100" id="I2G-Mb-Rgr"/>
+                            <constraint firstItem="N7j-8q-d4T" firstAttribute="top" secondItem="jVQ-9o-aqZ" secondAttribute="bottom" constant="20" id="G8c-r1-1SD"/>
+                            <constraint firstItem="TCB-2b-61q" firstAttribute="top" secondItem="H2b-Lt-QXV" secondAttribute="topMargin" constant="30" id="I2G-Mb-Rgr"/>
                             <constraint firstItem="dgb-u0-pzm" firstAttribute="centerY" secondItem="H2b-Lt-QXV" secondAttribute="centerY" constant="300" id="OsP-Iu-968"/>
                             <constraint firstItem="dgb-u0-pzm" firstAttribute="centerX" secondItem="N7j-8q-d4T" secondAttribute="centerX" id="gVy-2B-gQx"/>
-                            <constraint firstItem="N7j-8q-d4T" firstAttribute="centerY" secondItem="H2b-Lt-QXV" secondAttribute="centerY" constant="32" id="zMW-yl-aHf"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -78,11 +78,11 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-155" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcA-fh-U2D">
-                                <rect key="frame" x="107.5" y="388.5" width="199" height="119"/>
+                                <rect key="frame" x="88" y="274" width="199" height="119"/>
                                 <accessibility key="accessibilityConfiguration" label="deviation from target">
                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                 </accessibility>
@@ -91,7 +91,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="180" minValue="0.0" maxValue="359" translatesAutoresizingMaskIntoConstraints="NO" id="6AS-UM-OJr">
-                                <rect key="frame" x="35" y="824" width="344" height="31"/>
+                                <rect key="frame" x="15.5" y="629" width="344" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="ULe-ix-QIb"/>
                                     <constraint firstAttribute="width" constant="340" id="rsJ-M9-ryR"/>
@@ -101,7 +101,7 @@
                                 </connections>
                             </slider>
                             <segmentedControl opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Alj-Ug-qma">
-                                <rect key="frame" x="30" y="786" width="354" height="29"/>
+                                <rect key="frame" x="26" y="591" width="323" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="TaY-S8-6Yi"/>
                                 </constraints>
@@ -117,16 +117,15 @@
                                 </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="150" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e8B-cm-lKX">
-                                <rect key="frame" x="168.5" y="54" width="77" height="58"/>
+                                <rect key="frame" x="109" y="10" width="157" height="115"/>
                                 <accessibility key="accessibilityConfiguration" hint="real time readout of actual heading" label="heading">
                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                 </accessibility>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="48"/>
-                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="96"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="150" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMv-De-KI3">
-                                <rect key="frame" x="147" y="193" width="120" height="51"/>
+                                <rect key="frame" x="127.5" y="186" width="120" height="51"/>
                                 <accessibility key="accessibilityConfiguration" hint="helm should be aiming for this heading" label="target heading">
                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                 </accessibility>
@@ -138,7 +137,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TbD-W7-09r">
-                                <rect key="frame" x="99" y="194.5" width="38" height="48"/>
+                                <rect key="frame" x="79.5" y="187.5" width="38" height="48"/>
                                 <accessibility key="accessibilityConfiguration" label="change target to port"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="40"/>
@@ -154,7 +153,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vP0-ex-90u">
-                                <rect key="frame" x="277" y="194.5" width="46" height="48"/>
+                                <rect key="frame" x="257.5" y="187.5" width="46" height="48"/>
                                 <accessibility key="accessibilityConfiguration" label="change target to starboard"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="40"/>
@@ -171,14 +170,14 @@
                                 </connections>
                             </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fVa-jm-K33">
-                                <rect key="frame" x="182.5" y="142" width="51" height="31"/>
+                                <rect key="frame" x="163" y="135" width="51" height="31"/>
                                 <accessibility key="accessibilityConfiguration" hint="when app is off no feedback is given" label="app on off switch"/>
                                 <connections>
                                     <action selector="switchTargetOn:" destination="BYZ-38-t0r" eventType="valueChanged" id="Yd3-S1-a1U"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1U-LY-2Si">
-                                <rect key="frame" x="20" y="362" width="94" height="172"/>
+                                <rect key="frame" x="16" y="247.5" width="94" height="172"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <bool key="isElement" value="NO"/>
                                 </accessibility>
@@ -187,7 +186,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ji-CF-gnJ">
-                                <rect key="frame" x="316" y="362" width="93" height="172"/>
+                                <rect key="frame" x="281" y="247.5" width="93" height="172"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <bool key="isElement" value="NO"/>
                                 </accessibility>
@@ -196,7 +195,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="qce-Q2-x8T">
-                                <rect key="frame" x="30" y="642" width="354" height="32"/>
+                                <rect key="frame" x="26" y="447" width="323" height="32"/>
                                 <segments>
                                     <segment title="Drum"/>
                                     <segment title="Heading"/>
@@ -207,7 +206,7 @@
                                 </connections>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="XjG-VP-8Ye">
-                                <rect key="frame" x="30" y="714" width="354" height="32"/>
+                                <rect key="frame" x="26" y="519" width="323" height="32"/>
                                 <segments>
                                     <segment title="5°"/>
                                     <segment title="10°"/>
@@ -219,19 +218,19 @@
                                 </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Responsiveness" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TKi-0T-cvm">
-                                <rect key="frame" x="30" y="760" width="124" height="21"/>
+                                <rect key="frame" x="26" y="565" width="124" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tolerance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICs-qj-3Qk">
-                                <rect key="frame" x="30" y="688" width="75" height="21"/>
+                                <rect key="frame" x="26" y="493" width="75" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l8s-3y-ATc">
-                                <rect key="frame" x="182.5" y="249" width="49" height="21"/>
+                                <rect key="frame" x="163" y="242" width="49" height="21"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <bool key="isElement" value="NO"/>
                                 </accessibility>
@@ -240,7 +239,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On-course feedback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AJW-Pe-uzB">
-                                <rect key="frame" x="30" y="616" width="158" height="21"/>
+                                <rect key="frame" x="26" y="421" width="158" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -279,7 +278,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Alj-Ug-qma" secondAttribute="trailing" constant="10" id="j7d-fD-VNq"/>
                             <constraint firstItem="ICs-qj-3Qk" firstAttribute="top" secondItem="qce-Q2-x8T" secondAttribute="bottom" constant="15" id="kuB-8C-RwI"/>
                             <constraint firstItem="ICs-qj-3Qk" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="leA-Eb-XVM"/>
-                            <constraint firstItem="fVa-jm-K33" firstAttribute="top" secondItem="e8B-cm-lKX" secondAttribute="bottom" constant="30" id="lf7-Mp-iSv"/>
+                            <constraint firstItem="fVa-jm-K33" firstAttribute="top" secondItem="e8B-cm-lKX" secondAttribute="bottom" constant="10" id="lf7-Mp-iSv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qce-Q2-x8T" secondAttribute="trailing" constant="10" id="pfc-jH-Rvy"/>
                             <constraint firstItem="vP0-ex-90u" firstAttribute="leading" secondItem="EMv-De-KI3" secondAttribute="trailing" constant="10" id="tKL-tf-ggg"/>
                             <constraint firstItem="EMv-De-KI3" firstAttribute="top" secondItem="fVa-jm-K33" secondAttribute="bottom" constant="20" id="vO2-hs-hjT"/>
