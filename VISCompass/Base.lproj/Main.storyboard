@@ -83,6 +83,9 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-155" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcA-fh-U2D">
                                 <rect key="frame" x="107.5" y="388.5" width="199" height="119"/>
+                                <accessibility key="accessibilityConfiguration" label="deviation from target">
+                                    <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
+                                </accessibility>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="100"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -115,12 +118,18 @@
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="150" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e8B-cm-lKX">
                                 <rect key="frame" x="168.5" y="54" width="77" height="58"/>
+                                <accessibility key="accessibilityConfiguration" hint="real time readout of actual heading" label="heading">
+                                    <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
+                                </accessibility>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="48"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="150" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMv-De-KI3">
                                 <rect key="frame" x="147" y="193" width="120" height="51"/>
+                                <accessibility key="accessibilityConfiguration" hint="helm should be aiming for this heading" label="target heading">
+                                    <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
+                                </accessibility>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="A1G-ix-XYE"/>
                                 </constraints>
@@ -130,6 +139,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TbD-W7-09r">
                                 <rect key="frame" x="99" y="194.5" width="38" height="48"/>
+                                <accessibility key="accessibilityConfiguration" label="change target to port"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="40"/>
                                 <color key="tintColor" red="1" green="0.010280532767171335" blue="0.1191782699270908" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -145,6 +155,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vP0-ex-90u">
                                 <rect key="frame" x="277" y="194.5" width="46" height="48"/>
+                                <accessibility key="accessibilityConfiguration" label="change target to starboard"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="40"/>
                                 <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
@@ -161,18 +172,25 @@
                             </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fVa-jm-K33">
                                 <rect key="frame" x="182.5" y="142" width="51" height="31"/>
+                                <accessibility key="accessibilityConfiguration" hint="when app is off no feedback is given" label="app on off switch"/>
                                 <connections>
                                     <action selector="switchTargetOn:" destination="BYZ-38-t0r" eventType="valueChanged" id="Yd3-S1-a1U"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1U-LY-2Si">
                                 <rect key="frame" x="20" y="362" width="94" height="172"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="144"/>
                                 <color key="textColor" red="1" green="0.092699718903047956" blue="0.12499543550261749" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ji-CF-gnJ">
                                 <rect key="frame" x="316" y="362" width="93" height="172"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="144"/>
                                 <color key="textColor" red="0.024309365489999998" green="1" blue="0.26582127020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -214,6 +232,9 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l8s-3y-ATc">
                                 <rect key="frame" x="182.5" y="249" width="49" height="21"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
