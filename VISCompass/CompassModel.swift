@@ -18,7 +18,6 @@ enum Turn {
 struct Correction {
     var direction: Turn
     var amount: CLLocationDegrees
-    var required: Bool
 }
 
 class CompassModel: NSObject, CLLocationManagerDelegate {
@@ -55,13 +54,11 @@ class CompassModel: NSObject, CLLocationManagerDelegate {
             let c = CompassModel.correctionDegrees(hc, target: ht)
             if abs(c) < diffTolerance {
                 return Correction(direction: Turn.none,
-                                  amount: c,
-                                  required: false)
+                                  amount: c)
             }
             else {
                 return Correction(direction: c < 0 ? Turn.port : Turn.stbd,
-                                  amount: c,
-                                  required: true)
+                                  amount: c)
             }
         }
         else {

@@ -244,15 +244,13 @@ class ViewController: UIViewController {
             let u = AVSpeechUtterance(string: "heading \(headingDigits)")
             speechSynthesiser.speak(u)
         case .correction:
-            let correction = model.correction()
-            if correction == nil { return }
-            if correction!.required {
-                switch (correction!.direction) {
+            if let correction = model.correction() {
+                switch (correction.direction) {
                 case Turn.stbd: AudioServicesPlaySystemSound(sndHigh)
                 case Turn.port: AudioServicesPlaySystemSound(sndLow)
                 case Turn.none: break
-                }
             }
+        }
         default:
             return
         }
