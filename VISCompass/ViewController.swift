@@ -56,10 +56,10 @@ class ViewController: UIViewController {
     var touchTimer: Timer?
     var beepTimer: Timer?
     var beepInterval: TimeInterval?
-    var nextFeedbackSound: feedbackSound?
     var lastBeepTime: Date?
     var feedbackSoundSelected: feedbackSound = .drum
-    
+    var nextFeedbackSound: feedbackSound = .off
+
     //
     // ViewController overrides
     //
@@ -236,6 +236,8 @@ class ViewController: UIViewController {
     
     func playFeedbackSound() {
         switch nextFeedbackSound {
+        case .off:
+            break
         case .drum:
             AudioServicesPlaySystemSound(sndNeutral)
         case .heading:
@@ -249,13 +251,11 @@ class ViewController: UIViewController {
                 case Turn.stbd: AudioServicesPlaySystemSound(sndHigh)
                 case Turn.port: AudioServicesPlaySystemSound(sndLow)
                 case Turn.none: break
+                }
             }
         }
-        default:
-            return
-        }
     }
-    
+        
     //
     // Handle changes in heading
     //
