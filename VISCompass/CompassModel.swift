@@ -12,6 +12,7 @@ import CoreLocation
 enum Turn {
     case port
     case stbd
+    case none
 }
 
 struct Correction {
@@ -52,10 +53,18 @@ class CompassModel: NSObject, CLLocationManagerDelegate {
     func correction() -> Correction? {
         if let hc = smoothedHeading(), let ht = headingTarget {
             let c = CompassModel.correctionDegrees(hc, target: ht)
-            return Correction(direction: c < 0 ? Turn.port : Turn.stbd,
-                amount: c,
-                required: abs(c) > diffTolerance)
-        } else {
+            if abs(c) < diffTolerance {
+                return Correction(direction: Turn.none,
+                                  amount: c,
+                                  required: false)
+            }
+            else {
+                return Correction(direction: c < 0 ? Turn.port : Turn.stbd,
+                                  amount: c,
+                                  required: true)
+            }
+        }
+        else {
             return nil
         }
     }

@@ -105,6 +105,7 @@ class ViewController: UIViewController {
     @objc func updateUI() {
         updateScreenUI()
         updateBeepUI()
+        beepMaybe()
     }
     
     func updateScreenUI() {
@@ -126,27 +127,27 @@ class ViewController: UIViewController {
         if let correction = model.correction() {
             // show the correction as whole numbers
             txtDifference.text = abs(Int(correction.amount)).description
-            
-            // display the appropriate direction indicator arrows
-            if  abs(correction.amount) < 1.0 {
+            if abs(correction.amount) < 2 {
                 arrowPort.isHidden = true
                 arrowStbd.isHidden = true
-            } else {
-                arrowPort.isHidden = correction.direction == Turn.stbd
-                arrowStbd.isHidden = correction.direction == Turn.port
+            }
+            else if correction.amount >= 2 {
+                arrowPort.isHidden = true
+                arrowStbd.isHidden = false
+            }
+            else if correction.amount <= 2 {
+                arrowPort.isHidden = false
+                arrowStbd.isHidden = true
             }
             
-            // set the colour of the direction indicator arrows and correction value
-            if correction.required {
-                if correction.direction == Turn.stbd {
-                    txtDifference.textColor = UIColor.green
-                    arrowStbd.textColor = UIColor.green
-                    
-                } else if correction.direction == Turn.port {
-                    txtDifference.textColor = UIColor.red
-                    arrowPort.textColor = UIColor.red
-                }
-            } else {
+            switch correction.direction {
+            case Turn.stbd:
+                txtDifference.textColor = UIColor.green
+                arrowStbd.textColor = UIColor.green
+            case Turn.port:
+                txtDifference.textColor = UIColor.red
+                arrowPort.textColor = UIColor.red
+            case Turn.none:
                 txtDifference.textColor = UIColor.label
                 arrowPort.textColor = UIColor.label
                 arrowStbd.textColor = UIColor.label
@@ -154,7 +155,7 @@ class ViewController: UIViewController {
         } else {
             // There is no correction available
             txtDifference.text = noDataText
-            txtDifference.textColor = UIColor.white
+            txtDifference.textColor = UIColor.label
             arrowPort.isHidden = true
             arrowStbd.isHidden = true
         }
@@ -165,39 +166,37 @@ class ViewController: UIViewController {
     //
     
     func updateBeepUI() {
-        let correction = model.correction()
-        if correction == nil {
-            // we're not navigating
-            beepInterval = nil
-        }
-        else if !correction!.required {
-            // we're navigating and within tolerance, send comforting feedback
-            if feedbackSoundSelected == feedbackSound.off {
-                beepInterval = nil
-            }
-            else {
-                if feedbackSoundSelected == feedbackSound.drum {
+        if let correction = model.correction() {
+            // we're navigating
+            switch correction.direction {
+            case .none:
+                // we're within tolerance, send comforting feedback
+                switch feedbackSoundSelected {
+                case .drum:
                     beepInterval = 5
                     nextFeedbackSound = .drum
-                }
-                else if feedbackSoundSelected == feedbackSound.heading {
+                case .heading:
                     beepInterval = 15
                     nextFeedbackSound = .heading
+                default:
+                    beepInterval = nil
                 }
+            case .port, .stbd:
+                // we're outside tolerance, send urgent feedback
+                let degrees = Double(abs(correction.amount))
+                let numerator = Double(model.diffTolerance) * slowest_interval_secs
+                var intervalSecs: TimeInterval = max(fastest_interval_secs, numerator/degrees)
+                if intervalSecs < 0.05 {
+                    intervalSecs = 0.05
+                }
+                beepInterval = intervalSecs
+                nextFeedbackSound = .correction
             }
         }
         else {
-            // we're navigating and outside tolerance, send urgent feedback
-            let degrees = Double(abs(correction!.amount))
-            let numerator = Double(model.diffTolerance) * slowest_interval_secs
-            var intervalSecs: TimeInterval = max(fastest_interval_secs, numerator/degrees)
-            if intervalSecs < 0.05 {
-                intervalSecs = 0.05
-            }
-            beepInterval = intervalSecs
-            nextFeedbackSound = .correction
+            // no correction object available, not navigating
+            beepInterval = nil
         }
-        beepMaybe()
     }
     
     @objc func beepMaybe() {
@@ -249,10 +248,9 @@ class ViewController: UIViewController {
             if correction == nil { return }
             if correction!.required {
                 switch (correction!.direction) {
-                case Turn.stbd:
-                    AudioServicesPlaySystemSound(sndHigh)
-                case Turn.port:
-                    AudioServicesPlaySystemSound(sndLow)
+                case Turn.stbd: AudioServicesPlaySystemSound(sndHigh)
+                case Turn.port: AudioServicesPlaySystemSound(sndLow)
+                case Turn.none: break
                 }
             }
         default:
