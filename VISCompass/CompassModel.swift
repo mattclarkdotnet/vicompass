@@ -29,7 +29,6 @@ class CompassModel: NSObject, CLLocationManagerDelegate {
     fileprivate let headingFilter: CLLocationDegrees = 1.0
     fileprivate var responsivenessIndex = 2
     fileprivate let responsivenessWindows: [Double] = [10.0, 6.0, 3.0, 1.5, 0.75]
-    fileprivate let tackDegrees = 100.0
     fileprivate let headingUpdates: ObservationHistory = ObservationHistory(deltaFunc: CompassModel.correctionDegrees, window_secs: 10)
     
     override init() {
@@ -79,14 +78,6 @@ class CompassModel: NSObject, CLLocationManagerDelegate {
         if headingTarget != nil {
             headingTarget = (headingTarget! + delta).truncatingRemainder(dividingBy: 360.0)
         }
-    }
-    
-    func tackPort() {
-        modifyTarget(-tackDegrees)
-    }
-    
-    func tackStbd() {
-        modifyTarget(tackDegrees)
     }
     
     //CLLocationManagerDelegate

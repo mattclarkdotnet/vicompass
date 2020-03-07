@@ -51,6 +51,7 @@ class ViewController: UIViewController {
     let touchRepeatInterval = 0.2
     let speechSynthesiser: AVSpeechSynthesizer = AVSpeechSynthesizer()
     
+    var tackDegrees = 100.0
     var model: CompassModel = CompassModel()
     var touchTimer: Timer?
     var beepTimer: Timer?
@@ -146,9 +147,9 @@ class ViewController: UIViewController {
                     arrowPort.textColor = UIColor.red
                 }
             } else {
-                txtDifference.textColor = UIColor.white
-                arrowPort.textColor = UIColor.white
-                arrowStbd.textColor = UIColor.white
+                txtDifference.textColor = UIColor.label
+                arrowPort.textColor = UIColor.label
+                arrowStbd.textColor = UIColor.label
             }
         } else {
             // There is no correction available
@@ -330,16 +331,6 @@ class ViewController: UIViewController {
         touchTimer!.fire()
     }
     
-    @IBAction func swipeStbd(_ sender: UISwipeGestureRecognizer) {
-        model.tackStbd()
-        updateUI()
-    }
-    
-    @IBAction func swipePort(_ sender: UISwipeGestureRecognizer) {
-        model.tackPort()
-        updateUI()
-    }
-    
     @IBAction func touchTargetStop(_ sender: UIButton) {
         if touchTimer != nil {
             touchTimer!.invalidate()
@@ -371,6 +362,18 @@ class ViewController: UIViewController {
         model.modifyTarget(1)
         updateUI()
     }
+    
+    @IBAction func swipeStbd(_ sender: UISwipeGestureRecognizer) {
+        model.modifyTarget(tackDegrees)
+        updateUI()
+    }
+    
+    @IBAction func swipePort(_ sender: UISwipeGestureRecognizer) {
+        model.modifyTarget(-tackDegrees)
+        updateUI()
+    }
+    
+    
 }
 
 
