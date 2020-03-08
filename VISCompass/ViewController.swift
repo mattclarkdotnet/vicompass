@@ -8,22 +8,6 @@
 
 import UIKit
 import CoreLocation
-import AudioToolbox
-import AVFoundation
-
-func createSound(_ fileName: String, fileExt: String) -> SystemSoundID {
-    var soundID: SystemSoundID = 0
-    let soundURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), fileName as CFString, fileExt as CFString, nil)
-    AudioServicesCreateSystemSoundID(soundURL!, &soundID)
-    return soundID
-}
-
-enum feedbackSound {
-    case drum
-    case heading
-    case off
-    case correction
-}
 
 class ViewController: UIViewController {
 
@@ -40,26 +24,21 @@ class ViewController: UIViewController {
     @IBOutlet weak var feedbackAudioChoice: UISegmentedControl!
     @IBOutlet weak var segTolerance: UISegmentedControl!
     
-    let sndHigh: SystemSoundID = createSound("click_high", fileExt: "wav")
-    let sndLow: SystemSoundID = createSound("click_low", fileExt: "wav")
-    let sndNeutral: SystemSoundID = createSound("drum200", fileExt: "wav")
+    // helper objects
+    let model: CompassModel = CompassModel()
+    let audioFeedbackController: AudioFeedbackController = AudioFeedbackController()
+    
+    // static parameters and resources for screen UI
     let noDataText = "---"
-    let slowest_interval_secs = 2.0
-    let fastest_interval_secs = 0.1
     let defaultResponsivenessIndex = 2 // M
     let defaultToleranceIndex = 1 // 10 degrees
+    let defaultFeedbackAudioChoice = 0 // .drum, be sure to change the default for feedbackSoundSelected in the AudioFeedbackController class if you change this
     let touchRepeatInterval = 0.2
-    let speechSynthesiser: AVSpeechSynthesizer = AVSpeechSynthesizer()
+    let tackDegrees = 100.0
     
-    var tackDegrees = 100.0
-    var model: CompassModel = CompassModel()
+    // debouce timer object for screen presses
     var touchTimer: Timer?
-    var beepTimer: Timer?
-    var beepInterval: TimeInterval?
-    var lastBeepTime: Date?
-    var feedbackSoundSelected: feedbackSound = .drum
-    var nextFeedbackSound: feedbackSound = .off
-
+    
     //
     // ViewController overrides
     //
@@ -87,7 +66,7 @@ class ViewController: UIViewController {
         segResponsiveness.selectedSegmentIndex = defaultResponsivenessIndex
         model.setResponsiveness(defaultResponsivenessIndex)
         segTolerance.selectedSegmentIndex = defaultToleranceIndex // 10 degrees
-        model.diffTolerance = 10
+        feedbackAudioChoice.selectedSegmentIndex = defaultFeedbackAudioChoice
         arrowPort.isHidden = true
         arrowStbd.isHidden = true
         btnPort.layer.borderWidth = 0.8
@@ -104,12 +83,10 @@ class ViewController: UIViewController {
     
     @objc func updateUI() {
         updateScreenUI()
-        updateBeepUI()
-        beepMaybe()
+        audioFeedbackController.updateAudioFeedback(maybeCorrection: model.correction(), heading: model.headingCurrent, tolerance: model.diffTolerance)
     }
     
     func updateScreenUI() {
-        // Display the current tolerance
         // Display the current heading
         if let headingCurrent = model.smoothedHeading() {
             txtHeading.text = Int(headingCurrent).description
@@ -160,101 +137,6 @@ class ViewController: UIViewController {
             arrowStbd.isHidden = true
         }
     }
-    
-    //
-    // Manage the audio UI
-    //
-    
-    func updateBeepUI() {
-        if let correction = model.correction() {
-            // we're navigating
-            switch correction.direction {
-            case .none:
-                // we're within tolerance, send comforting feedback
-                switch feedbackSoundSelected {
-                case .drum:
-                    beepInterval = 5
-                    nextFeedbackSound = .drum
-                case .heading:
-                    beepInterval = 15
-                    nextFeedbackSound = .heading
-                default:
-                    beepInterval = nil
-                }
-            case .port, .stbd:
-                // we're outside tolerance, send urgent feedback
-                let degrees = Double(abs(correction.amount))
-                let numerator = Double(model.diffTolerance) * slowest_interval_secs
-                var intervalSecs: TimeInterval = max(fastest_interval_secs, numerator/degrees)
-                if intervalSecs < 0.05 {
-                    intervalSecs = 0.05
-                }
-                beepInterval = intervalSecs
-                nextFeedbackSound = .correction
-            }
-        }
-        else {
-            // no correction object available, not navigating
-            beepInterval = nil
-        }
-    }
-    
-    @objc func beepMaybe() {
-        //
-        // This method really should be reentrant but is not, so races certainly exist.  Implement locking ASAP.
-        //
-        if beepInterval == nil {
-            return
-        }
-        if beepTimer == nil || !beepTimer!.isValid || lastBeepTime == nil {
-            // No timer exists, or one exists but it is invalidated, or no last beep time is recorded, so go ahead and emit
-            // our beep then schedule another beep in beepInterval seconds
-            lastBeepTime = Date()
-            beepTimer = Timer.scheduledTimer(timeInterval: beepInterval!, target: self, selector: #selector(ViewController.beepMaybe), userInfo: nil, repeats: false)
-            playFeedbackSound()
-        }
-        else {
-            // A timer exists and is valid, and we know when the last beep happened, so we need to decide whether to adjust
-            // the timer and whether to emit a sound now
-            let timeSinceLastBeep = abs(lastBeepTime!.timeIntervalSinceNow)
-            if beepInterval! <= timeSinceLastBeep {
-                // The new beep interval must be less than the old one so hurry up and beep now, then schedule another one in
-                // beepInterval seconds
-                beepTimer!.invalidate()
-                lastBeepTime = Date()
-                beepTimer = Timer.scheduledTimer(timeInterval: beepInterval!, target: self, selector: #selector(ViewController.beepMaybe), userInfo: nil, repeats: false)
-                playFeedbackSound()
-            }
-            else {
-                // The new beep interval is longer then the time since the last beep.  We need to wait a bit before beeping
-                // so schedule a new timer for beepInterval - timeSinceLastBeep seconds
-                beepTimer!.invalidate()
-                beepTimer = Timer.scheduledTimer(timeInterval: beepInterval! - timeSinceLastBeep, target: self, selector: #selector(ViewController.beepMaybe), userInfo: nil, repeats: false)
-            }
-        }
-    }
-    
-    func playFeedbackSound() {
-        switch nextFeedbackSound {
-        case .off:
-            break
-        case .drum:
-            AudioServicesPlaySystemSound(sndNeutral)
-        case .heading:
-            let headingStr = String(Int(model.headingCurrent!)) // e.g. '130'
-            let headingDigits = headingStr.map({"\($0) "})
-            let u = AVSpeechUtterance(string: "heading \(headingDigits)")
-            speechSynthesiser.speak(u)
-        case .correction:
-            if let correction = model.correction() {
-                switch (correction.direction) {
-                case Turn.stbd: AudioServicesPlaySystemSound(sndHigh)
-                case Turn.port: AudioServicesPlaySystemSound(sndLow)
-                case Turn.none: break
-                }
-            }
-        }
-    }
         
     //
     // Handle changes in heading
@@ -296,6 +178,7 @@ class ViewController: UIViewController {
         default:
             model.diffTolerance = 5
         }
+        updateUI()
     }
     //
     // Change the responsiveness of the heading detection given changing compass input
@@ -338,13 +221,13 @@ class ViewController: UIViewController {
         switch sender.selectedSegmentIndex {
         case 0:
             log.debug("Drumming feedback selected")
-            feedbackSoundSelected = feedbackSound.drum
+            audioFeedbackController.feedbackSoundSelected = feedbackSound.drum
         case 1:
             log.debug("Heading feedback selected")
-            feedbackSoundSelected = feedbackSound.heading
+            audioFeedbackController.feedbackSoundSelected = feedbackSound.heading
         default:
             log.debug("Audio feedback off")
-            feedbackSoundSelected = feedbackSound.off
+            audioFeedbackController.feedbackSoundSelected = feedbackSound.off
         }
         updateUI()
     }
