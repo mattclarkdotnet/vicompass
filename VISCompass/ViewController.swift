@@ -135,7 +135,7 @@ class ViewController: UIViewController {
                 arrowPort.isHidden = true
                 arrowStbd.isHidden = false
             }
-            else if correction.amount <= 2 {
+            else if correction.amount <= -2 {
                 arrowPort.isHidden = false
                 arrowStbd.isHidden = true
             }
