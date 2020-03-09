@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C90602F21BECC56E004BBD66 /* ObservationHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90602F11BECC56E004BBD66 /* ObservationHistory.swift */; };
 		C90602F31BECC56E004BBD66 /* ObservationHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90602F11BECC56E004BBD66 /* ObservationHistory.swift */; };
+		C906FBA32414CA850020C6B0 /* AudioFeedbackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C906FBA22414CA850020C6B0 /* AudioFeedbackController.swift */; };
 		C91E73DF1F6AC792005A9BB8 /* side-drum-icon-27836.png in Resources */ = {isa = PBXBuildFile; fileRef = C91E73DE1F6AC792005A9BB8 /* side-drum-icon-27836.png */; };
 		C948DADA1CE3219300D7C1DE /* CompassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96274691C2808A20030C09F /* CompassModel.swift */; };
 		C960885E1B986D2B00F500A4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB6581B77786B00D57D3F /* ViewController.swift */; };
@@ -63,6 +64,7 @@
 
 /* Begin PBXFileReference section */
 		C90602F11BECC56E004BBD66 /* ObservationHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservationHistory.swift; sourceTree = "<group>"; };
+		C906FBA22414CA850020C6B0 /* AudioFeedbackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFeedbackController.swift; sourceTree = "<group>"; };
 		C91E73DE1F6AC792005A9BB8 /* side-drum-icon-27836.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "side-drum-icon-27836.png"; path = "Assets/side-drum-icon-27836.png"; sourceTree = "<group>"; };
 		C96274671C25A52C0030C09F /* Compass_512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Compass_512.png; sourceTree = "<group>"; };
 		C96274691C2808A20030C09F /* CompassModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompassModel.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				C9BBB6621B77786B00D57D3F /* Info.plist */,
 				C90602F11BECC56E004BBD66 /* ObservationHistory.swift */,
 				C96274691C2808A20030C09F /* CompassModel.swift */,
+				C906FBA22414CA850020C6B0 /* AudioFeedbackController.swift */,
 			);
 			path = VISCompass;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				C90602F21BECC56E004BBD66 /* ObservationHistory.swift in Sources */,
 				C9BBB6571B77786B00D57D3F /* AppDelegate.swift in Sources */,
 				C962746A1C2808A20030C09F /* CompassModel.swift in Sources */,
+				C906FBA32414CA850020C6B0 /* AudioFeedbackController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
