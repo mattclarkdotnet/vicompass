@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var btnStbd: UIButton!
     @IBOutlet weak var feedbackAudioChoice: UISegmentedControl!
     @IBOutlet weak var segTolerance: UISegmentedControl!
-
+    
     // helper objects
     let model: CompassModel = CompassModel()
     let audioFeedbackController: AudioFeedbackController = AudioFeedbackController()
@@ -254,5 +254,10 @@ class ViewController: UIViewController {
     @IBAction func swipePort(_ sender: UISwipeGestureRecognizer) {
         model.modifyTarget(-tackDegrees)
         updateUI()
+    }
+    
+    @IBAction func helpButtonPressed(_ sender: Any) {
+        guard let docsURL = URL(string: "https://mattclarkdotnet.github.com/viscompass/") else { return }
+        UIApplication.shared.open(docsURL)
     }
 }

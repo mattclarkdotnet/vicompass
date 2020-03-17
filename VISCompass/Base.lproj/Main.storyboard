@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,11 +15,11 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-155" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcA-fh-U2D">
-                                <rect key="frame" x="84.5" y="276.5" width="206" height="114"/>
+                                <rect key="frame" x="104" y="391" width="206" height="114"/>
                                 <accessibility key="accessibilityConfiguration" label="deviation from target">
                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                 </accessibility>
@@ -31,7 +31,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="180" minValue="0.0" maxValue="359" translatesAutoresizingMaskIntoConstraints="NO" id="6AS-UM-OJr">
-                                <rect key="frame" x="24" y="629" width="327" height="31"/>
+                                <rect key="frame" x="28" y="824" width="358" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="ywA-he-9ka"/>
                                 </constraints>
@@ -40,7 +40,7 @@
                                 </connections>
                             </slider>
                             <segmentedControl opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Alj-Ug-qma">
-                                <rect key="frame" x="26" y="591" width="323" height="29"/>
+                                <rect key="frame" x="30" y="786" width="354" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="F5C-Ob-Jo4"/>
                                 </constraints>
@@ -56,7 +56,7 @@
                                 </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="150" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e8B-cm-lKX">
-                                <rect key="frame" x="135" y="34" width="105" height="76.5"/>
+                                <rect key="frame" x="154.5" y="78" width="105" height="76.5"/>
                                 <accessibility key="accessibilityConfiguration" hint="real time readout of actual heading" label="heading">
                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                 </accessibility>
@@ -68,7 +68,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="150" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMv-De-KI3">
-                                <rect key="frame" x="127.5" y="209.5" width="120" height="51"/>
+                                <rect key="frame" x="147" y="289" width="120" height="51"/>
                                 <accessibility key="accessibilityConfiguration" hint="helm should be aiming for this heading" label="target heading">
                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                 </accessibility>
@@ -81,7 +81,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TbD-W7-09r">
-                                <rect key="frame" x="75" y="211" width="38" height="48"/>
+                                <rect key="frame" x="94.5" y="255" width="38" height="118.5"/>
                                 <accessibility key="accessibilityConfiguration" label="change target to port"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="40"/>
@@ -97,7 +97,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vP0-ex-90u">
-                                <rect key="frame" x="253" y="211" width="46" height="48"/>
+                                <rect key="frame" x="272.5" y="255" width="61.5" height="118.5"/>
                                 <accessibility key="accessibilityConfiguration" label="change target to starboard"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="40"/>
@@ -114,7 +114,7 @@
                                 </connections>
                             </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fVa-jm-K33">
-                                <rect key="frame" x="163" y="125.5" width="51" height="31"/>
+                                <rect key="frame" x="182.5" y="169.5" width="51" height="31"/>
                                 <accessibility key="accessibilityConfiguration" hint="when app is off no feedback is given" label="app on off switch"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="upZ-xx-9SA"/>
@@ -124,7 +124,7 @@
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1U-LY-2Si">
-                                <rect key="frame" x="16" y="247.5" width="94" height="172"/>
+                                <rect key="frame" x="20" y="362" width="94" height="172"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <bool key="isElement" value="NO"/>
                                 </accessibility>
@@ -136,7 +136,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ji-CF-gnJ">
-                                <rect key="frame" x="281" y="247.5" width="93" height="172"/>
+                                <rect key="frame" x="316" y="362" width="93" height="172"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <bool key="isElement" value="NO"/>
                                 </accessibility>
@@ -145,7 +145,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="qce-Q2-x8T">
-                                <rect key="frame" x="26" y="452" width="323" height="32"/>
+                                <rect key="frame" x="30" y="647" width="354" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="Zko-Dq-XNn"/>
                                 </constraints>
@@ -159,7 +159,7 @@
                                 </connections>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="XjG-VP-8Ye">
-                                <rect key="frame" x="26" y="519" width="323" height="32"/>
+                                <rect key="frame" x="30" y="714" width="354" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="DNs-FG-juI"/>
                                 </constraints>
@@ -174,7 +174,7 @@
                                 </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Responsiveness" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TKi-0T-cvm">
-                                <rect key="frame" x="26" y="565" width="124" height="21"/>
+                                <rect key="frame" x="30" y="760" width="124" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="e9H-CL-eIX"/>
                                 </constraints>
@@ -183,13 +183,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tolerance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICs-qj-3Qk">
-                                <rect key="frame" x="26" y="493" width="75" height="21"/>
+                                <rect key="frame" x="30" y="688" width="75" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Heading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NbC-WS-Mdw">
-                                <rect key="frame" x="155.5" y="8" width="64" height="21"/>
+                                <rect key="frame" x="175" y="52" width="64" height="21"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <bool key="isElement" value="NO"/>
                                 </accessibility>
@@ -201,13 +201,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On-course feedback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AJW-Pe-uzB">
-                                <rect key="frame" x="26" y="426" width="158" height="21"/>
+                                <rect key="frame" x="30" y="621" width="158" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l8s-3y-ATc">
-                                <rect key="frame" x="163" y="184" width="49" height="20.5"/>
+                                <rect key="frame" x="182.5" y="263.5" width="49" height="20.5"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <bool key="isElement" value="NO"/>
                                 </accessibility>
@@ -215,6 +215,15 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7yE-Lw-IYE">
+                                <rect key="frame" x="30" y="47.5" width="32" height="30"/>
+                                <state key="normal" title="Help">
+                                    <color key="titleColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="helpButtonPressed:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="bX5-ve-ZTd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <gestureRecognizers/>
@@ -242,6 +251,7 @@
                             <constraint firstItem="vcA-fh-U2D" firstAttribute="top" secondItem="vP0-ex-90u" secondAttribute="bottom" constant="17.5" id="RAa-OM-k6J"/>
                             <constraint firstItem="EMv-De-KI3" firstAttribute="centerY" secondItem="vP0-ex-90u" secondAttribute="centerY" id="RuT-J6-47A"/>
                             <constraint firstItem="Alj-Ug-qma" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="SIZ-Oc-rni"/>
+                            <constraint firstItem="7yE-Lw-IYE" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="UWa-cb-njz"/>
                             <constraint firstItem="EMv-De-KI3" firstAttribute="top" secondItem="l8s-3y-ATc" secondAttribute="bottom" constant="5" id="YdU-Iw-aJI"/>
                             <constraint firstItem="e8B-cm-lKX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Z22-LX-LHX"/>
                             <constraint firstItem="l8s-3y-ATc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZDw-YC-qSG"/>
@@ -261,6 +271,7 @@
                             <constraint firstItem="XjG-VP-8Ye" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="r4O-29-hj0"/>
                             <constraint firstItem="XjG-VP-8Ye" firstAttribute="top" secondItem="ICs-qj-3Qk" secondAttribute="bottom" constant="5" id="sNV-lx-c6V"/>
                             <constraint firstAttribute="trailingMargin" secondItem="vP0-ex-90u" secondAttribute="trailing" constant="60" id="szV-if-UWI"/>
+                            <constraint firstItem="NbC-WS-Mdw" firstAttribute="centerY" secondItem="7yE-Lw-IYE" secondAttribute="centerY" id="tKw-cd-hjx"/>
                             <constraint firstItem="vP0-ex-90u" firstAttribute="leading" secondItem="EMv-De-KI3" secondAttribute="trailing" constant="5.3333333333333144" id="te9-GE-8DE"/>
                             <constraint firstItem="qce-Q2-x8T" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="wYz-WD-AHn"/>
                             <constraint firstItem="Alj-Ug-qma" firstAttribute="top" secondItem="TKi-0T-cvm" secondAttribute="bottom" constant="5" id="x4I-8F-g5t"/>
