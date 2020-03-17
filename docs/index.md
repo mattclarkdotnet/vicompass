@@ -1,6 +1,6 @@
 # Welcome to VISCompass
 
-_A spoken version of this guide is [available here](./audioguide.m4a)_
+_A spoken version of this guide is [available here](http://mattclarkdotnet.github.io/viscompass/audioguide.m4a)_
 
 VISCompass is a free app that turns your smartphone into an audio-compass. It aims to empower visually impaired crew to helm a boat on a pre-set course or turn or tack it in moderate coastal sailing conditions under the guidance of a qualified sighted skipper.  
 
