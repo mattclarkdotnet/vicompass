@@ -85,7 +85,7 @@
                                 <accessibility key="accessibilityConfiguration" label="change target to port"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="40"/>
-                                <color key="tintColor" red="1" green="0.010280532767171335" blue="0.1191782699270908" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                 <state key="normal" title="-"/>
                                 <connections>

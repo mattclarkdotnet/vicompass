@@ -69,12 +69,6 @@ class ViewController: UIViewController {
         feedbackAudioChoice.selectedSegmentIndex = defaultFeedbackAudioChoice
         arrowPort.isHidden = true
         arrowStbd.isHidden = true
-        btnPort.layer.borderWidth = 0.8
-        btnPort.layer.borderColor = UIColor.red.cgColor
-        btnPort.layer.cornerRadius = 4.0
-        btnStbd.layer.borderWidth = 0.8
-        btnStbd.layer.borderColor = UIColor.green.cgColor
-        btnStbd.layer.cornerRadius = 4.0
     }
 
     //
@@ -257,7 +251,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func helpButtonPressed(_ sender: Any) {
-        guard let docsURL = URL(string: "https://mattclarkdotnet.github.com/viscompass/") else { return }
+        guard let docsURL = URL(string: "https://viscompass.org/") else { return }
         UIApplication.shared.open(docsURL)
     }
 }
