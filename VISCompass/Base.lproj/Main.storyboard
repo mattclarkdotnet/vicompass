@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,7 +20,7 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-155" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcA-fh-U2D">
                                 <rect key="frame" x="104" y="391" width="206" height="114"/>
-                                <accessibility key="accessibilityConfiguration" label="deviation from target">
+                                <accessibility key="accessibilityConfiguration" hint="change course by this much to be on target" label="correction">
                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                 </accessibility>
                                 <constraints>
@@ -39,7 +39,7 @@
                                     <action selector="sldrHeadingOverrideValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="xMH-xC-art"/>
                                 </connections>
                             </slider>
-                            <segmentedControl opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Alj-Ug-qma">
+                            <segmentedControl opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Alj-Ug-qma" customClass="UISegmentedResponsivenessControl" customModule="VISCompass" customModuleProvider="target">
                                 <rect key="frame" x="30" y="786" width="354" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="F5C-Ob-Jo4"/>
@@ -69,7 +69,7 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="150" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMv-De-KI3">
                                 <rect key="frame" x="147" y="289" width="120" height="51"/>
-                                <accessibility key="accessibilityConfiguration" hint="helm should be aiming for this heading" label="target heading">
+                                <accessibility key="accessibilityConfiguration" hint="helm should be aiming for this heading" label="target">
                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                 </accessibility>
                                 <constraints>
@@ -115,7 +115,7 @@
                             </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fVa-jm-K33">
                                 <rect key="frame" x="182.5" y="169.5" width="51" height="31"/>
-                                <accessibility key="accessibilityConfiguration" hint="when app is off no feedback is given" label="app on off switch"/>
+                                <accessibility key="accessibilityConfiguration" hint="when app is off no target is set" label="navigation enabled"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="upZ-xx-9SA"/>
                                 </constraints>
@@ -144,7 +144,7 @@
                                 <color key="textColor" red="0.024309365489999998" green="1" blue="0.26582127020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="qce-Q2-x8T">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="qce-Q2-x8T" customClass="UISegmentedFeedbackControl" customModule="VISCompass" customModuleProvider="target">
                                 <rect key="frame" x="30" y="647" width="354" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="Zko-Dq-XNn"/>
@@ -152,13 +152,13 @@
                                 <segments>
                                     <segment title="Drum"/>
                                     <segment title="Heading"/>
-                                    <segment title="Off"/>
+                                    <segment title="None"/>
                                 </segments>
                                 <connections>
                                     <action selector="steadyFeedBackAudioChoiceChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="GsD-gS-3cR"/>
                                 </connections>
                             </segmentedControl>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="XjG-VP-8Ye">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="XjG-VP-8Ye" customClass="UISegmentedToleranceControl" customModule="VISCompass" customModuleProvider="target">
                                 <rect key="frame" x="30" y="714" width="354" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="DNs-FG-juI"/>
@@ -175,6 +175,9 @@
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Responsiveness" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TKi-0T-cvm">
                                 <rect key="frame" x="30" y="760" width="124" height="21"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="e9H-CL-eIX"/>
                                 </constraints>
@@ -184,6 +187,9 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tolerance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICs-qj-3Qk">
                                 <rect key="frame" x="30" y="688" width="75" height="21"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -202,6 +208,9 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On-course feedback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AJW-Pe-uzB">
                                 <rect key="frame" x="30" y="621" width="158" height="21"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -285,7 +294,7 @@
                         <outlet property="arrowStbd" destination="5Ji-CF-gnJ" id="x0L-K0-364"/>
                         <outlet property="btnPort" destination="TbD-W7-09r" id="DQg-L0-NlK"/>
                         <outlet property="btnStbd" destination="vP0-ex-90u" id="2Ax-RN-xlq"/>
-                        <outlet property="feedbackAudioChoice" destination="qce-Q2-x8T" id="6yg-2g-bgB"/>
+                        <outlet property="segFeedback" destination="qce-Q2-x8T" id="6yg-2g-bgB"/>
                         <outlet property="segResponsiveness" destination="Alj-Ug-qma" id="j2p-nc-uYT"/>
                         <outlet property="segTolerance" destination="XjG-VP-8Ye" id="tN9-pm-Nu3"/>
                         <outlet property="sldrHeadingOverride" destination="6AS-UM-OJr" id="VEI-vV-5Zb"/>
