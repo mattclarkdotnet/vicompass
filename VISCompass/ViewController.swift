@@ -271,11 +271,14 @@ class ViewController: UIViewController {
 
 class ConfigurableUISegmentedControl: UISegmentedControl {
     func configure(defaultSegmentIndex: Int, labelSwaps: [String : String]) {
-        self.selectedSegmentIndex = defaultSegmentIndex
+        if self.numberOfSegments > defaultSegmentIndex {
+            self.selectedSegmentIndex = defaultSegmentIndex
+        }
         for segment in self.subviews {
-            log.debug([segment, segment.accessibilityLabel!])
             if let currentLabel = segment.accessibilityLabel {
-                segment.accessibilityLabel = labelSwaps[currentLabel]
+                if let newLabel = labelSwaps[currentLabel] {
+                    segment.accessibilityLabel = newLabel
+                }
             }
         }
     }
