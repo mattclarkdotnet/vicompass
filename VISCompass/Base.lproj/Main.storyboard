@@ -39,7 +39,7 @@
                                     <action selector="sldrHeadingOverrideValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="xMH-xC-art"/>
                                 </connections>
                             </slider>
-                            <segmentedControl opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Alj-Ug-qma" customClass="UISegmentedResponsivenessControl" customModule="VISCompass" customModuleProvider="target">
+                            <segmentedControl opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Alj-Ug-qma" userLabel="responsiveness" customClass="ConfigurableUISegmentedControl" customModule="VISCompass" customModuleProvider="target">
                                 <rect key="frame" x="30" y="786" width="354" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="F5C-Ob-Jo4"/>
@@ -144,7 +144,7 @@
                                 <color key="textColor" red="0.024309365489999998" green="1" blue="0.26582127020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="qce-Q2-x8T" customClass="UISegmentedFeedbackControl" customModule="VISCompass" customModuleProvider="target">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="qce-Q2-x8T" userLabel="feedback" customClass="ConfigurableUISegmentedControl" customModule="VISCompass" customModuleProvider="target">
                                 <rect key="frame" x="30" y="647" width="354" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="Zko-Dq-XNn"/>
@@ -158,7 +158,7 @@
                                     <action selector="steadyFeedBackAudioChoiceChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="GsD-gS-3cR"/>
                                 </connections>
                             </segmentedControl>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="XjG-VP-8Ye" customClass="UISegmentedToleranceControl" customModule="VISCompass" customModuleProvider="target">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="XjG-VP-8Ye" userLabel="tolerance" customClass="ConfigurableUISegmentedControl" customModule="VISCompass" customModuleProvider="target">
                                 <rect key="frame" x="30" y="714" width="354" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="DNs-FG-juI"/>

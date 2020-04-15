@@ -20,9 +20,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var arrowStbd: UILabel!
     @IBOutlet weak var btnPort: UIButton!
     @IBOutlet weak var btnStbd: UIButton!
-    @IBOutlet weak var segFeedback: UISegmentedFeedbackControl!
-    @IBOutlet weak var segTolerance: UISegmentedToleranceControl!
-    @IBOutlet weak var segResponsiveness: UISegmentedResponsivenessControl!
+    @IBOutlet weak var segFeedback: ConfigurableUISegmentedControl!
+    @IBOutlet weak var segTolerance: ConfigurableUISegmentedControl!
+    @IBOutlet weak var segResponsiveness: ConfigurableUISegmentedControl!
 
     // helper objects
     let model: CompassModel = CompassModel()
@@ -59,10 +59,19 @@ class ViewController: UIViewController {
             // hide the manual heading slider
             sldrHeadingOverride.isHidden = true
         }
-        segTolerance.configure()
-        segFeedback.configure()
-        segResponsiveness.configure()
-        model.setResponsiveness(segResponsiveness.defaultResponsivenessIndex)
+        segTolerance.configure(defaultSegmentIndex: 1, labelSwaps: ["5°": "tolerance 5 degrees",
+                                   "10°": "tolerance 10 degrees",
+                                   "15°": "tolerance 10 degrees",
+                                   "20°": "tolerance 20 degrees"])
+        segFeedback.configure(defaultSegmentIndex: 0, labelSwaps: ["Drum": "drumming audio feedback",
+                                  "Heading": "heading audio feedback",
+                                  "None": "audio feedback off"])
+        segResponsiveness.configure(defaultSegmentIndex: 2, labelSwaps: ["SS": "very slow responsiveness",
+                                        "S": "slow responsiveness",
+                                        "M": "medium responsiveness",
+                                        "Q": "quick responsiveness",
+                                        "QQ": "very quick responsiveness"])
+        model.setResponsiveness(segResponsiveness.selectedSegmentIndex)
         arrowPort.isHidden = true
         arrowStbd.isHidden = true
     }
@@ -259,36 +268,15 @@ class ViewController: UIViewController {
 }
 
 
-class UISegmentedToleranceControl: UISegmentedControl {
-    let defaultToleranceIndex = 1 // 10 degrees
-    func configure() {
-        self.selectedSegmentIndex = defaultToleranceIndex
-        (self.accessibilityElement(at: 0) as? UIView)?.accessibilityLabel = "tolerance 5 degrees"
-        (self.accessibilityElement(at: 1) as? UIView)?.accessibilityLabel = "tolerance 10 degrees"
-        (self.accessibilityElement(at: 2) as? UIView)?.accessibilityLabel = "tolerance 15 degrees"
-        (self.accessibilityElement(at: 3) as? UIView)?.accessibilityLabel = "tolerance 20 degrees"
+
+class ConfigurableUISegmentedControl: UISegmentedControl {
+    func configure(defaultSegmentIndex: Int, labelSwaps: [String : String]) {
+        self.selectedSegmentIndex = defaultSegmentIndex
+        for segment in self.subviews {
+            log.debug([segment, segment.accessibilityLabel!])
+            if let currentLabel = segment.accessibilityLabel {
+                segment.accessibilityLabel = labelSwaps[currentLabel]
+            }
+        }
     }
 }
-
-class UISegmentedFeedbackControl: UISegmentedControl {
-    let defaultFeedbackIndex = 0 // Drumming
-    func configure() {
-        self.selectedSegmentIndex = defaultFeedbackIndex
-        (self.accessibilityElement(at: 0) as? UIView)?.accessibilityLabel = "drumming audio feedback"
-        (self.accessibilityElement(at: 1) as? UIView)?.accessibilityLabel = "heading audio feedback"
-        (self.accessibilityElement(at: 2) as? UIView)?.accessibilityLabel = "audio feedback off"
-    }
-}
-
-class UISegmentedResponsivenessControl: UISegmentedControl {
-    let defaultResponsivenessIndex = 2 // Medium
-    func configure() {
-        self.selectedSegmentIndex = defaultResponsivenessIndex
-        (self.accessibilityElement(at: 0) as? UIView)?.accessibilityLabel = "very slow responsiveness"
-        (self.accessibilityElement(at: 1) as? UIView)?.accessibilityLabel = "slow responsiveness"
-        (self.accessibilityElement(at: 2) as? UIView)?.accessibilityLabel = "medium responsiveness"
-        (self.accessibilityElement(at: 3) as? UIView)?.accessibilityLabel = "quick responsiveness"
-        (self.accessibilityElement(at: 4) as? UIView)?.accessibilityLabel = "very quick responsiveness"
-    }
-}
-
