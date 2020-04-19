@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,7 +20,7 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-155" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcA-fh-U2D">
                                 <rect key="frame" x="104" y="391" width="206" height="114"/>
-                                <accessibility key="accessibilityConfiguration" hint="change course by this much to be on target" label="correction">
+                                <accessibility key="accessibilityConfiguration" label="correction">
                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                 </accessibility>
                                 <constraints>
@@ -57,7 +57,7 @@
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="150" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e8B-cm-lKX">
                                 <rect key="frame" x="154.5" y="78" width="105" height="76.5"/>
-                                <accessibility key="accessibilityConfiguration" hint="real time readout of actual heading" label="heading">
+                                <accessibility key="accessibilityConfiguration" label="heading">
                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                 </accessibility>
                                 <constraints>
@@ -69,7 +69,7 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="150" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMv-De-KI3">
                                 <rect key="frame" x="147" y="289" width="120" height="51"/>
-                                <accessibility key="accessibilityConfiguration" hint="helm should be aiming for this heading" label="target">
+                                <accessibility key="accessibilityConfiguration" label="target">
                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                 </accessibility>
                                 <constraints>
@@ -115,7 +115,7 @@
                             </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fVa-jm-K33">
                                 <rect key="frame" x="182.5" y="169.5" width="51" height="31"/>
-                                <accessibility key="accessibilityConfiguration" hint="when app is off no target is set" label="navigation enabled"/>
+                                <accessibility key="accessibilityConfiguration" label="navigation enabled"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="upZ-xx-9SA"/>
                                 </constraints>
@@ -164,10 +164,10 @@
                                     <constraint firstAttribute="height" constant="31" id="DNs-FG-juI"/>
                                 </constraints>
                                 <segments>
-                                    <segment title="5°"/>
-                                    <segment title="10°"/>
-                                    <segment title="15°"/>
-                                    <segment title="20°"/>
+                                    <segment title="5"/>
+                                    <segment title="10"/>
+                                    <segment title="15"/>
+                                    <segment title="20"/>
                                 </segments>
                                 <connections>
                                     <action selector="segToleranceChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="0WO-uU-8Ci"/>
@@ -206,8 +206,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Audio feedback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AJW-Pe-uzB">
-                                <rect key="frame" x="30" y="621" width="119.5" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On course feedback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AJW-Pe-uzB">
+                                <rect key="frame" x="30" y="621" width="155" height="21"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <bool key="isElement" value="NO"/>
                                 </accessibility>

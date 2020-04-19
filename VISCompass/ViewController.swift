@@ -59,13 +59,13 @@ class ViewController: UIViewController {
             // hide the manual heading slider
             sldrHeadingOverride.isHidden = true
         }
-        segTolerance.configure(defaultSegmentIndex: 1, labelSwaps: ["5°": "tolerance 5 degrees",
-                                   "10°": "tolerance 10 degrees",
-                                   "15°": "tolerance 10 degrees",
-                                   "20°": "tolerance 20 degrees"])
-        segFeedback.configure(defaultSegmentIndex: 0, labelSwaps: ["Drum": "drumming audio feedback",
-                                  "Heading": "heading audio feedback",
-                                  "None": "audio feedback off"])
+        segTolerance.configure(defaultSegmentIndex: 1, labelSwaps: ["5": "tolerance 5 degrees",
+                                   "10": "tolerance 10 degrees",
+                                   "15": "tolerance 10 degrees",
+                                   "20": "tolerance 20 degrees"])
+        segFeedback.configure(defaultSegmentIndex: 0, labelSwaps: ["Drum": "drumming on course feedback",
+                                  "Heading": "heading on course feedback",
+                                  "None": "on course feedback off"])
         segResponsiveness.configure(defaultSegmentIndex: 2, labelSwaps: ["SS": "very slow responsiveness",
                                         "S": "slow responsiveness",
                                         "M": "medium responsiveness",
