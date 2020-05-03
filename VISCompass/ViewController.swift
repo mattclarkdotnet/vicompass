@@ -61,7 +61,7 @@ class ViewController: UIViewController {
         }
         segTolerance.configure(defaultSegmentIndex: 1, labelSwaps: ["5": "tolerance 5 degrees",
                                    "10": "tolerance 10 degrees",
-                                   "15": "tolerance 10 degrees",
+                                   "15": "tolerance 15 degrees",
                                    "20": "tolerance 20 degrees"])
         segFeedback.configure(defaultSegmentIndex: 0, labelSwaps: ["Drum": "drumming on course feedback",
                                   "Heading": "heading on course feedback",
@@ -103,7 +103,7 @@ class ViewController: UIViewController {
             txtTarget.accessibilityLabel = "target " + txtTarget.text! + " degrees"
         } else {
             txtTarget.text = noDataText
-            txtTarget.accessibilityValue = "no target set"
+            txtTarget.accessibilityLabel = "no target set"
         }
         
         // Update difference text, and colour and visibility of indicators
@@ -242,12 +242,12 @@ class ViewController: UIViewController {
     }
 
     @objc func changeTargetToPort() {
-        model.modifyTarget(-1)
+        model.modifyTarget(-model.diffTolerance / 2)
         updateUI()
     }
 
     @objc func changeTargetToStbd() {
-        model.modifyTarget(1)
+        model.modifyTarget(model.diffTolerance / 2)
         updateUI()
     }
 
@@ -275,8 +275,11 @@ class ConfigurableUISegmentedControl: UISegmentedControl {
             self.selectedSegmentIndex = defaultSegmentIndex
         }
         for segment in self.subviews {
+            log.debug("swapping labels maybe")
             if let currentLabel = segment.accessibilityLabel {
+                log.debug("swapping labels for \(currentLabel)")
                 if let newLabel = labelSwaps[currentLabel] {
+                    log.debug("swapped label \(currentLabel) for \(newLabel)")
                     segment.accessibilityLabel = newLabel
                 }
             }
