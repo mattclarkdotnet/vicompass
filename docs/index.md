@@ -11,7 +11,9 @@ All of the instructions and functions below apply to VISCompass use on iPhone, s
 
 VISCompass is now compatible with Apple’s well-established VoiceOver system. So if you turn this function on in your iPhone, Voice Over can help visually impaired crew to explore and understand the position and functions of the buttons on the VISCompass screen. VoiceOver can also read out this User Guide as an alternative to using the audio link above. When VoiceOver is activated, it changes the way the iphone receives instructions, in ways which will be familiar to visually impaired regular VO users – for example the way in which touching the screen first identifies and then activates buttons.  A sighted skipper unfamiliar with VoiceOver may therefore find adjusting VISCompass’ control buttons  (for example to change the desired target) confusing, and may therefore find that his / her initial familiarisation with the app easier with VoiceOver off, and “normal” touchscreen functioning restored at first.
 
-Voice Control - Will to edit text here
+
+Apple's newer VoiceControl system can also be used with VISCompass – preferably by users already familiar with the system and its command structure and vocabulary. This requires familiarisation, clarity and precision of speech by the user. Enabling this facility at sea in no way replaces the role of the sighted skipper who should be fully aware if its use is envisaged. 
+
 
 ## Walk Around VISCompass’ Functions
 
