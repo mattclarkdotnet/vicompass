@@ -15,25 +15,21 @@ class ViewController: UIViewController {
     @IBOutlet weak var txtTarget: UILabel!
     @IBOutlet weak var txtHeading: UILabel!
     @IBOutlet weak var sldrHeadingOverride: UISlider!
-    @IBOutlet weak var segResponsiveness: UISegmentedControl!
     @IBOutlet weak var switchTargetOn: UISwitch!
     @IBOutlet weak var arrowPort: UILabel!
     @IBOutlet weak var arrowStbd: UILabel!
     @IBOutlet weak var btnPort: UIButton!
     @IBOutlet weak var btnStbd: UIButton!
-    @IBOutlet weak var feedbackAudioChoice: UISegmentedControl!
-    @IBOutlet weak var segTolerance: UISegmentedControl!
-    
+    @IBOutlet weak var segFeedback: ConfigurableUISegmentedControl!
+    @IBOutlet weak var segTolerance: ConfigurableUISegmentedControl!
+    @IBOutlet weak var segResponsiveness: ConfigurableUISegmentedControl!
+
     // helper objects
     let model: CompassModel = CompassModel()
     let audioFeedbackController: AudioFeedbackController = AudioFeedbackController()
     
     // static parameters and resources for screen UI
     let noDataText = "---"
-    let defaultResponsivenessIndex = 2 // M
-    let defaultToleranceIndex = 1 // 10 degrees
-    let defaultFeedbackAudioChoice = 0 // .drum, be sure to change the default for feedbackSoundSelected in the
-                                       // AudioFeedbackController class if you change this
     let touchRepeatInterval = 0.2
     let tackDegrees = 100.0
     
@@ -63,10 +59,19 @@ class ViewController: UIViewController {
             // hide the manual heading slider
             sldrHeadingOverride.isHidden = true
         }
-        segResponsiveness.selectedSegmentIndex = defaultResponsivenessIndex
-        model.setResponsiveness(defaultResponsivenessIndex)
-        segTolerance.selectedSegmentIndex = defaultToleranceIndex // 10 degrees
-        feedbackAudioChoice.selectedSegmentIndex = defaultFeedbackAudioChoice
+        segTolerance.configure(defaultSegmentIndex: 1, labelSwaps: ["5": "tolerance 5 degrees",
+                                   "10": "tolerance 10 degrees",
+                                   "15": "tolerance 15 degrees",
+                                   "20": "tolerance 20 degrees"])
+        segFeedback.configure(defaultSegmentIndex: 0, labelSwaps: ["Drum": "drumming on course feedback",
+                                  "Heading": "heading on course feedback",
+                                  "None": "on course feedback off"])
+        segResponsiveness.configure(defaultSegmentIndex: 2, labelSwaps: ["SS": "very slow responsiveness",
+                                        "S": "slow responsiveness",
+                                        "M": "medium responsiveness",
+                                        "Q": "quick responsiveness",
+                                        "QQ": "very quick responsiveness"])
+        model.setResponsiveness(segResponsiveness.selectedSegmentIndex)
         arrowPort.isHidden = true
         arrowStbd.isHidden = true
     }
@@ -86,21 +91,26 @@ class ViewController: UIViewController {
         // Set the current heading text description
         if let headingCurrent = model.smoothedHeading() {
             txtHeading.text = Int(headingCurrent).description
+            txtHeading.accessibilityLabel = "heading " + txtHeading.text! + " degrees"
         } else {
             txtHeading.text = noDataText
+            txtHeading.accessibilityLabel = "no heading available"
         }
 
         // Set the target heading text description
         if let headingTarget = model.headingTarget {
             txtTarget.text = Int(headingTarget).description
+            txtTarget.accessibilityLabel = "target " + txtTarget.text! + " degrees"
         } else {
             txtTarget.text = noDataText
+            txtTarget.accessibilityLabel = "no target set"
         }
         
         // Update difference text, and colour and visibility of indicators
         if let correction = model.correction() {
             // show the correction as whole numbers
             txtDifference.text = abs(Int(correction.amount)).description
+            txtDifference.accessibilityLabel = "correction " + txtDifference.text! + "degrees"
             let margin = 2.0
             if abs(correction.amount) < margin {
                 arrowPort.isHidden = true
@@ -124,6 +134,7 @@ class ViewController: UIViewController {
         } else {
             // There is no correction available
             txtDifference.text = noDataText
+            txtDifference.accessibilityLabel = "no correction necessary"
             arrowPort.isHidden = true
             arrowStbd.isHidden = true
         }
@@ -231,12 +242,12 @@ class ViewController: UIViewController {
     }
 
     @objc func changeTargetToPort() {
-        model.modifyTarget(-1)
+        model.modifyTarget(-model.diffTolerance / 2)
         updateUI()
     }
 
     @objc func changeTargetToStbd() {
-        model.modifyTarget(1)
+        model.modifyTarget(model.diffTolerance / 2)
         updateUI()
     }
 
@@ -253,5 +264,25 @@ class ViewController: UIViewController {
     @IBAction func helpButtonPressed(_ sender: Any) {
         guard let docsURL = URL(string: "https://viscompass.org/") else { return }
         UIApplication.shared.open(docsURL)
+    }
+}
+
+
+
+class ConfigurableUISegmentedControl: UISegmentedControl {
+    func configure(defaultSegmentIndex: Int, labelSwaps: [String : String]) {
+        if self.numberOfSegments > defaultSegmentIndex {
+            self.selectedSegmentIndex = defaultSegmentIndex
+        }
+        for segment in self.subviews {
+            log.debug("swapping labels maybe")
+            if let currentLabel = segment.accessibilityLabel {
+                log.debug("swapping labels for \(currentLabel)")
+                if let newLabel = labelSwaps[currentLabel] {
+                    log.debug("swapped label \(currentLabel) for \(newLabel)")
+                    segment.accessibilityLabel = newLabel
+                }
+            }
+        }
     }
 }
