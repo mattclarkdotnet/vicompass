@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -17,8 +17,8 @@
         android:text=" + "
         android:textColor="#fff"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="@+id/btnMinus"
-        app:layout_constraintStart_toEndOf="@+id/btnMinus" />
+        app:layout_constraintTop_toTopOf="@+id/btnMinus"
+        app:layout_constraintEnd_toStartOf="@+id/btnMinus" />
 
     <TextView
         android:id="@+id/tvCorrection"
@@ -287,8 +287,8 @@
         android:layout_marginTop="8dp"
         android:clickable="true"
         android:onClick="imgViewDrumOnClick"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/side_drum_icon_27836" />
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
