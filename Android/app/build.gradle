@@ -5,7 +5,7 @@ android {
     defaultConfig {
         applicationId "com.viscompass.visompass"
         minSdkVersion 23
-        targetSdkVersion 25
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -22,6 +22,7 @@ android {
         abortOnError false
         checkReleaseBuilds false
     }
+    namespace 'com.viscompass.visompass'
 }
 
 dependencies {
