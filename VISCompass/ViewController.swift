@@ -126,6 +126,8 @@ class ViewController: UIViewController {
             // There is no correction available
             txtDifference.text = noDataText
             txtDifference.accessibilityLabel = "no correction necessary"
+            arrowPort.textColor = UIColor.gray
+            arrowStbd.textColor = UIColor.gray
         }
     }
 
