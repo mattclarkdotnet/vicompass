@@ -22,10 +22,15 @@ public class CompassModel implements SensorEventListener{
     ObservationHistory oh;
     private SensorManager sensorManager;
     private Float tackDegrees = 100.0f;
+    private final float[] accelerometerReading = new float[3];
+    private final float[] magnetometerReading = new float[3];
+
+    private final float[] rotationMatrix = new float[9];
+    private final float[] orientationAngles = new float[3];
 
     public CompassModel(SensorManager sM){
         sensorManager = sM;
-        sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),SensorManager.SENSOR_DELAY_GAME);
+        sensorManager.registerListener(this, sensorManager.getOrientation();
         oh = new ObservationHistory(3000);
 
     }

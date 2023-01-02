@@ -23,15 +23,13 @@ enum feedbackSound {
     case drum
     case heading
     case off
-    case correction
+    case to_stbd
+    case to_port
 }
 
+let feedbackIntervals = [2.0, 1.0, 0.5]
+
 class AudioFeedbackController {
-    // static parameters
-    let slowest_interval_secs = 2.0
-    let fastest_interval_secs = 0.1
-    
-    // static resources
     // static parameters and resources for sound interface
     let speechSynthesiser: AVSpeechSynthesizer = AVSpeechSynthesizer()
     let sndHigh: SystemSoundID = createSound("click_high", fileExt: "wav")
@@ -41,21 +39,20 @@ class AudioFeedbackController {
     // variables needed to manage sound UI
     var beepTimer: Timer?
     var beepInterval: TimeInterval?
-    var lastBeepTime: Date?
-    var feedbackSoundSelected: feedbackSound = .drum // awkwardly needs coordination with defaultFeedbackAudioChoice in the view controller
+    
     var nextFeedbackSound: feedbackSound = .off
-    var nextTurn: Turn = .none
+    var lastFeedbackSound: feedbackSound = .off
+    
     var nextHeading: CLLocationDegrees?
 
-    func updateAudioFeedback(maybeCorrection: Correction?, heading: CLLocationDegrees?, tolerance: CLLocationDegrees) {
+    func updateAudioFeedback(maybeCorrection: Correction?, heading: CLLocationDegrees?, tolerance: CLLocationDegrees, feedbackTypeSelected: feedbackSound) {
         nextHeading = heading
         if let correction = maybeCorrection {
             // we're navigating
-            nextTurn = correction.direction
-            switch correction.direction {
-            case .none:
+            let error = Int(abs(correction.amount) / tolerance)
+            if error == 0 {
                 // we're within tolerance, send comforting feedback
-                switch feedbackSoundSelected {
+                switch feedbackTypeSelected {
                 case .drum:
                     beepInterval = 5
                     nextFeedbackSound = .drum
@@ -64,65 +61,42 @@ class AudioFeedbackController {
                     nextFeedbackSound = .heading
                 default:
                     beepInterval = nil
+                    nextFeedbackSound = .off
                 }
-            case .port, .stbd:
-                // we're outside tolerance, send urgent feedback
-                let degrees = Double(abs(correction.amount))
-                let numerator = Double(tolerance) * slowest_interval_secs
-                var intervalSecs: TimeInterval = max(fastest_interval_secs, numerator/degrees)
-                if intervalSecs < 0.05 {
-                    intervalSecs = 0.05
-                }
-                beepInterval = intervalSecs
-                nextFeedbackSound = .correction
-            }
-        }
-        else {
-            // no correction object available, not navigating
-            beepInterval = nil
-            nextTurn = .none
-            nextFeedbackSound = .off
-        }
-        // don't wait for any current timer to expire, make a quick decision on the next feedback to play
-        decideNextAudioFeedback()
-    }
-    
-    @objc func decideNextAudioFeedback() {
-        //
-        // This method really should be reentrant but is not, so races certainly exist.  Implement locking ASAP.
-        //
-        if beepInterval == nil {
-            return
-        }
-        if beepTimer == nil || !beepTimer!.isValid || lastBeepTime == nil {
-            // No timer exists, or one exists but it is invalidated, or no last beep time is recorded, so go ahead and emit
-            // our beep then schedule another beep in beepInterval seconds
-            lastBeepTime = Date()
-            beepTimer = Timer.scheduledTimer(timeInterval: beepInterval!, target: self, selector: #selector(AudioFeedbackController.decideNextAudioFeedback), userInfo: nil, repeats: false)
-            playAudioFeedbackSound()
-        }
-        else {
-            // A timer exists and is valid, and we know when the last beep happened, so we need to decide whether to adjust
-            // the timer and whether to emit a sound now
-            let timeSinceLastBeep = abs(lastBeepTime!.timeIntervalSinceNow)
-            if beepInterval! <= timeSinceLastBeep {
-                // The new beep interval must be less than the old one so hurry up and beep now, then schedule another one in
-                // beepInterval seconds
-                beepTimer!.invalidate()
-                lastBeepTime = Date()
-                beepTimer = Timer.scheduledTimer(timeInterval: beepInterval!, target: self, selector: #selector(AudioFeedbackController.decideNextAudioFeedback), userInfo: nil, repeats: false)
-                playAudioFeedbackSound()
             }
             else {
-                // The new beep interval is longer then the time since the last beep.  We need to wait a bit before beeping
-                // so schedule a new timer for beepInterval - timeSinceLastBeep seconds
-                beepTimer!.invalidate()
-                beepTimer = Timer.scheduledTimer(timeInterval: beepInterval! - timeSinceLastBeep, target: self, selector: #selector(AudioFeedbackController.decideNextAudioFeedback), userInfo: nil, repeats: false)
+                // we're outside tolerance, send correction feedback, with frequency related to the amount of variation
+                if correction.direction == .port {
+                    nextFeedbackSound = .to_port
+                }
+                else {
+                    nextFeedbackSound = .to_stbd
+                }
+                if error >= feedbackIntervals.count {
+                    beepInterval = feedbackIntervals.last
+                }
+                else {
+                    beepInterval = feedbackIntervals[error-1]
+                }
+                
             }
+        }
+        else {
+            // no correction object available, not navigating, suppress all feedback sounds
+            beepInterval = nil
+            nextFeedbackSound = .off
+        }
+        // If the feedback type has changed, don't wait for any current timer to expire, invalidate it and play the new feedback sound immediately
+        if nextFeedbackSound != lastFeedbackSound {
+            if beepTimer != nil {
+                beepTimer?.invalidate()
+            }
+            playAudioFeedbackSound()
         }
     }
     
-    func playAudioFeedbackSound() {
+    @objc func playAudioFeedbackSound() {
+        lastFeedbackSound = nextFeedbackSound
         switch nextFeedbackSound {
         case .off:
             break
@@ -135,12 +109,13 @@ class AudioFeedbackController {
                 let u = AVSpeechUtterance(string: "heading \(headingDigits)")
                 speechSynthesiser.speak(u)
             }
-        case .correction:
-            switch (nextTurn) {
-            case .stbd: AudioServicesPlaySystemSound(sndHigh)
-            case .port: AudioServicesPlaySystemSound(sndLow)
-            case .none: break
-            }
+        case .to_stbd:
+            AudioServicesPlaySystemSound(sndHigh)
+        case .to_port:
+            AudioServicesPlaySystemSound(sndLow)
+        }
+        if beepInterval != nil {
+            beepTimer = Timer.scheduledTimer(timeInterval: beepInterval!, target: self, selector: #selector(AudioFeedbackController.playAudioFeedbackSound), userInfo: nil, repeats: false)
         }
     }
 

@@ -36,6 +36,9 @@ class ViewController: UIViewController {
     // debouce timer object for screen presses
     var touchTimer: Timer?
     
+    // track the selected feedback sound
+    var feedbackTypeSelected: feedbackSound = .drum
+    
     override func viewDidLoad() {
         setupUI()
         super.viewDidLoad()
@@ -84,7 +87,8 @@ class ViewController: UIViewController {
         updateScreenUI()
         audioFeedbackController.updateAudioFeedback(maybeCorrection: model.correction(),
                                                     heading: model.headingCurrent,
-                                                    tolerance: model.diffTolerance)
+                                                    tolerance: model.diffTolerance,
+                                                    feedbackTypeSelected: feedbackTypeSelected)
     }
     
     func updateScreenUI() {
@@ -221,13 +225,13 @@ class ViewController: UIViewController {
         switch sender.selectedSegmentIndex {
         case 0:
             log.debug("Drumming feedback selected")
-            audioFeedbackController.feedbackSoundSelected = feedbackSound.drum
+            feedbackTypeSelected = .drum
         case 1:
             log.debug("Heading feedback selected")
-            audioFeedbackController.feedbackSoundSelected = feedbackSound.heading
+            feedbackTypeSelected = .heading
         default:
             log.debug("Audio feedback off")
-            audioFeedbackController.feedbackSoundSelected = feedbackSound.off
+            feedbackTypeSelected = .off
         }
         updateUI()
     }
