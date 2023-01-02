@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,7 +19,6 @@
 		C964F4C31D94DE85000B0750 /* click_high.wav in Resources */ = {isa = PBXBuildFile; fileRef = C964F4C11D94DE85000B0750 /* click_high.wav */; };
 		C964F4C41D94DE85000B0750 /* click_low.wav in Resources */ = {isa = PBXBuildFile; fileRef = C964F4C21D94DE85000B0750 /* click_low.wav */; };
 		C964F4C61D94E117000B0750 /* drum200.wav in Resources */ = {isa = PBXBuildFile; fileRef = C964F4C51D94E117000B0750 /* drum200.wav */; };
-		C99D6D9623FA9BCF0046873C /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = C99D6D9523FA9BCF0046873C /* SwiftyBeaver */; };
 		C9BBB6571B77786B00D57D3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB6561B77786B00D57D3F /* AppDelegate.swift */; };
 		C9BBB6591B77786B00D57D3F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BBB6581B77786B00D57D3F /* ViewController.swift */; };
 		C9BBB65C1B77786B00D57D3F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9BBB65A1B77786B00D57D3F /* Main.storyboard */; };
@@ -31,6 +30,7 @@
 		C9D8B2F423FE8A2F0010A2CC /* Compass_1024.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D8B2F323FE8A2F0010A2CC /* Compass_1024.png */; };
 		C9D8B2F92402798E0010A2CC /* Compass_1024_noalpha.png in Resources */ = {isa = PBXBuildFile; fileRef = C9D8B2F82402798D0010A2CC /* Compass_1024_noalpha.png */; };
 		C9E99979242062A900BA2C49 /* AudioFeedbackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C906FBA22414CA850020C6B0 /* AudioFeedbackController.swift */; };
+		C9F5323A2962A665009503E4 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = C9F532392962A665009503E4 /* SwiftyBeaver */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,7 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C99D6D9623FA9BCF0046873C /* SwiftyBeaver in Frameworks */,
+				C9F5323A2962A665009503E4 /* SwiftyBeaver in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +131,7 @@
 				C9BBB66A1B77786C00D57D3F /* VISCompassTests */,
 				C9BBB6751B77786C00D57D3F /* VISCompassUITests */,
 				C9BBB6541B77786B00D57D3F /* Products */,
+				C9F532382962A665009503E4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -178,6 +179,13 @@
 			path = VISCompassUITests;
 			sourceTree = "<group>";
 		};
+		C9F532382962A665009503E4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -196,7 +204,7 @@
 			);
 			name = VISCompass;
 			packageProductDependencies = (
-				C99D6D9523FA9BCF0046873C /* SwiftyBeaver */,
+				C9F532392962A665009503E4 /* SwiftyBeaver */,
 			);
 			productName = VISCompass;
 			productReference = C9BBB6531B77786B00D57D3F /* VISCompass.app */;
@@ -266,7 +274,7 @@
 				};
 			};
 			buildConfigurationList = C9BBB64E1B77786B00D57D3F /* Build configuration list for PBXProject "VISCompass" */;
-			compatibilityVersion = "Xcode 11.0";
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -674,7 +682,7 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C99D6D9523FA9BCF0046873C /* SwiftyBeaver */ = {
+		C9F532392962A665009503E4 /* SwiftyBeaver */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C99D6D9423FA9BCF0046873C /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
 			productName = SwiftyBeaver;
