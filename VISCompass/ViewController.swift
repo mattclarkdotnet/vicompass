@@ -36,6 +36,9 @@ class ViewController: UIViewController {
     // debouce timer object for screen presses
     var touchTimer: Timer?
     
+    // track the selected feedback sound
+    var feedbackTypeSelected: feedbackSound = .drum
+    
     override func viewDidLoad() {
         setupUI()
         super.viewDidLoad()
@@ -59,6 +62,8 @@ class ViewController: UIViewController {
             // hide the manual heading slider
             sldrHeadingOverride.isHidden = true
         }
+        arrowPort.textColor = UIColor.gray
+        arrowStbd.textColor = UIColor.gray
         segTolerance.configure(defaultSegmentIndex: 1, labelSwaps: ["5": "tolerance 5 degrees",
                                    "10": "tolerance 10 degrees",
                                    "15": "tolerance 15 degrees",
@@ -72,8 +77,6 @@ class ViewController: UIViewController {
                                         "Q": "quick responsiveness",
                                         "QQ": "very quick responsiveness"])
         model.setResponsiveness(segResponsiveness.selectedSegmentIndex)
-        arrowPort.isHidden = true
-        arrowStbd.isHidden = true
     }
 
     //
@@ -84,7 +87,8 @@ class ViewController: UIViewController {
         updateScreenUI()
         audioFeedbackController.updateAudioFeedback(maybeCorrection: model.correction(),
                                                     heading: model.headingCurrent,
-                                                    tolerance: model.diffTolerance)
+                                                    tolerance: model.diffTolerance,
+                                                    feedbackTypeSelected: feedbackTypeSelected)
     }
     
     func updateScreenUI() {
@@ -111,32 +115,23 @@ class ViewController: UIViewController {
             // show the correction as whole numbers
             txtDifference.text = abs(Int(correction.amount)).description
             txtDifference.accessibilityLabel = "correction " + txtDifference.text! + "degrees"
-            let margin = 2.0
-            if abs(correction.amount) < margin {
-                arrowPort.isHidden = true
-                arrowStbd.isHidden = true
-            } else if correction.amount >= margin {
-                arrowPort.isHidden = true
-                arrowStbd.isHidden = false
-            } else if correction.amount <= -margin {
-                arrowPort.isHidden = false
-                arrowStbd.isHidden = true
-            }
             switch correction.direction {
             case Turn.stbd:
+                arrowPort.textColor = UIColor.gray
                 arrowStbd.textColor = UIColor.green
             case Turn.port:
                 arrowPort.textColor = UIColor.red
+                arrowStbd.textColor = UIColor.gray
             case Turn.none:
-                arrowPort.textColor = UIColor.label
-                arrowStbd.textColor = UIColor.label
+                arrowPort.textColor = UIColor.gray
+                arrowStbd.textColor = UIColor.gray
             }
         } else {
             // There is no correction available
             txtDifference.text = noDataText
             txtDifference.accessibilityLabel = "no correction necessary"
-            arrowPort.isHidden = true
-            arrowStbd.isHidden = true
+            arrowPort.textColor = UIColor.gray
+            arrowStbd.textColor = UIColor.gray
         }
     }
 
@@ -230,13 +225,13 @@ class ViewController: UIViewController {
         switch sender.selectedSegmentIndex {
         case 0:
             log.debug("Drumming feedback selected")
-            audioFeedbackController.feedbackSoundSelected = feedbackSound.drum
+            feedbackTypeSelected = .drum
         case 1:
             log.debug("Heading feedback selected")
-            audioFeedbackController.feedbackSoundSelected = feedbackSound.heading
+            feedbackTypeSelected = .heading
         default:
             log.debug("Audio feedback off")
-            audioFeedbackController.feedbackSoundSelected = feedbackSound.off
+            feedbackTypeSelected = .off
         }
         updateUI()
     }

@@ -1,13 +1,12 @@
 package com.viscompass.visompass;
 
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.hardware.SensorManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Context;
 import android.view.View;
@@ -23,7 +22,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import static android.content.Context.SENSOR_SERVICE;
-import static java.util.Objects.isNull;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     CompassModel model;
