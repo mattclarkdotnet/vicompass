@@ -43,7 +43,7 @@ class ViewController: UIViewController {
         setupUI()
         super.viewDidLoad()
         // Update the UI every second to show heading changes
-        let _ = Timer.scheduledTimer(timeInterval: 1, target: self,
+        let _ = Timer.scheduledTimer(timeInterval: 0.25, target: self,
                                      selector: #selector(ViewController.updateUI),
                                      userInfo: nil,
                                      repeats: true)

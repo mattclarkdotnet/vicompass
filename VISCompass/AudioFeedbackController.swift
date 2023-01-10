@@ -27,7 +27,9 @@ enum feedbackSound {
     case to_port
 }
 
-let feedbackIntervals = [2.0, 1.0, 0.5]
+// First element is 0 to avoid an even odder looking fix to the computed gross error later
+let correctionFeedbackIntervals = [0, 2.0, 1.0, 0.5]
+let maxCorrectionFeedbackIntervalsIndex = correctionFeedbackIntervals.count - 1
 
 class AudioFeedbackController {
     // static parameters and resources for sound interface
@@ -60,30 +62,24 @@ class AudioFeedbackController {
                     beepInterval = 15
                     nextFeedbackSound = .heading
                 default:
-                    beepInterval = nil
+                    beepInterval = 0
                     nextFeedbackSound = .off
                 }
             }
             else {
                 // we're outside tolerance, send correction feedback, with frequency related to the amount of variation
+                beepInterval = correctionFeedbackIntervals[min(error, maxCorrectionFeedbackIntervalsIndex)]
                 if correction.direction == .port {
                     nextFeedbackSound = .to_port
                 }
                 else {
                     nextFeedbackSound = .to_stbd
                 }
-                if error >= feedbackIntervals.count {
-                    beepInterval = feedbackIntervals.last
-                }
-                else {
-                    beepInterval = feedbackIntervals[error-1]
-                }
-                
             }
         }
         else {
             // no correction object available, not navigating, suppress all feedback sounds
-            beepInterval = nil
+            beepInterval = 0
             nextFeedbackSound = .off
         }
         // If the feedback type has changed, don't wait for any current timer to expire, invalidate it and play the new feedback sound immediately
@@ -114,8 +110,12 @@ class AudioFeedbackController {
         case .to_port:
             AudioServicesPlaySystemSound(sndLow)
         }
-        if beepInterval != nil {
-            beepTimer = Timer.scheduledTimer(timeInterval: beepInterval!, target: self, selector: #selector(AudioFeedbackController.playAudioFeedbackSound), userInfo: nil, repeats: false)
+        if beepInterval != 0 {
+            beepTimer = Timer.scheduledTimer(timeInterval: beepInterval!,
+                                             target: self,
+                                             selector: #selector(AudioFeedbackController.playAudioFeedbackSound),
+                                             userInfo: nil,
+                                             repeats: false)
         }
     }
 
