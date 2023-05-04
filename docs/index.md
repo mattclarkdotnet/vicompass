@@ -33,10 +33,11 @@ Apple VoiceOver is a screen reader which been helping visually impaired people u
   - Go to the iPhone’s “Settings” and select Bluetooth  
   - On its Bluetooth page check Bluetooth is switched on
   - If it isn’t already showing as “connected”, touch the line showing the name of your speaker or earbud(eg  “Sony SRS”) which should then show “connected”.
-4. Touch the circled i on the same line which should open a new page 
-5. If the "device type" option is available, touch that label, and on the page that opens up select “headphone” if not already.
- 6. Open VISCompass on your iPhone and check that its drumbeat, duck and chicken noises now emerge from your bluetooth device.
-7. Reverse this process when you want your loudspeaker just to deliver iPhone music again. 
+4. iPhones default to only playing music thruogh speakers, not other sounds.  If you are using using a speaker you will need to change the "device type" so that the sounds emitted by VISCompass are played properly.  
+  - Touch the circled i to the right of the device name in Bluetooth settings 
+  - If the "device type" option is available, touch that label, and on the page that opens up select “headphone” if not already selected.
+  - Open VISCompass on your iPhone and check that its drumbeat, duck and chicken noises now emerge from your bluetooth device.
+  - Reverse this process when you want your loudspeaker just to deliver iPhone music again. 
 
 ## VISCompass Status
 
